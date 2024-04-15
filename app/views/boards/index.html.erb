@@ -6,9 +6,9 @@
   <% @boards.each do |board| %>
     <%= render board %>
     <p>
-      <%= link_to "Show this board", board %>
+      <%= link_to "Show this board", user_board_path(current_user,board) %>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New board", new_board_path %>
+<%= link_to "New board", new_user_board_path(current_user) %>

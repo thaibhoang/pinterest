@@ -3,8 +3,8 @@
 <%= render @board %>
 
 <div>
-  <%= link_to "Edit this board", edit_board_path(@board) %> |
-  <%= link_to "Back to boards", boards_path %>
+  <%= link_to "Edit this board", edit_user_board_path(current_user, @board) %> |
+  <%= link_to "Back to boards", user_boards_path(current_user) %>
 
-  <%= button_to "Destroy this board", @board, method: :delete %>
+  <%= button_to "Destroy this board", user_board_path(current_user, @board), method: :delete %>
 </div>

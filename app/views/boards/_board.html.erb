@@ -1,7 +1,9 @@
 <div id="<%= dom_id board %>">
   <p>
     <strong>Cover:</strong>
-    <%= link_to board.cover.filename, board.cover if board.cover.attached? %>
+    <%= link_to image_tag(board.resize_img(board.cover, 300)), board.cover if board.cover.attached? do %>
+      <%= %>
+    <% end %>
   </p>
 
   <p>
@@ -19,9 +21,5 @@
     <%= board.keep_secret %>
   </p>
 
-  <p>
-    <strong>User:</strong>
-    <%= board.user_id %>
-  </p>
 
 </div>

@@ -1,0 +1,32 @@
+<div id="<%= dom_id pin %>">
+  <p>
+    <strong>Image:</strong>
+    <%= link_to pin.image.filename, pin.image if pin.image.attached? %>
+  </p>
+
+  <p>
+    <strong>Title:</strong>
+    <%= pin.title %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= pin.description %>
+  </p>
+
+  <p>
+    <strong>Link:</strong>
+    <%= pin.link %>
+  </p>
+
+  <p>
+    <strong>User:</strong>
+    <%= pin.user_id %>
+  </p>
+
+  <p>
+    <strong>Board:</strong>
+    <%= pin.board_id %>
+  </p>
+
+</div>
