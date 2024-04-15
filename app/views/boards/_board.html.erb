@@ -1,0 +1,27 @@
+<div id="<%= dom_id board %>">
+  <p>
+    <strong>Cover:</strong>
+    <%= link_to board.cover.filename, board.cover if board.cover.attached? %>
+  </p>
+
+  <p>
+    <strong>Name:</strong>
+    <%= board.name %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= board.description %>
+  </p>
+
+  <p>
+    <strong>Keep secret:</strong>
+    <%= board.keep_secret %>
+  </p>
+
+  <p>
+    <strong>User:</strong>
+    <%= board.user_id %>
+  </p>
+
+</div>
