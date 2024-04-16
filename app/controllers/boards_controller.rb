@@ -24,9 +24,12 @@ class BoardsController < ApplicationController
   # POST /boards or /boards.json
   def create
     @board = current_user.boards.build(board_params)
-
+    @options = current_user.boards.pluck(:name, :id)
     respond_to do |format|
       if @board.save
+        @new_board_id = @board.id
+        @new_board_name = @board.name        
+        format.turbo_stream
         format.html { redirect_to user_board_url(current_user, @board), notice: "Board was successfully created." }
         format.json { render :show, status: :created, location: @board }
       else
@@ -51,6 +54,7 @@ class BoardsController < ApplicationController
 
   # DELETE /boards/1 or /boards/1.json
   def destroy
+    @board.unboard_pin
     @board.destroy!
 
     respond_to do |format|

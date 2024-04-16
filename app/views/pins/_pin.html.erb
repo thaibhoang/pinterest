@@ -1,7 +1,7 @@
 <div id="<%= dom_id pin %>">
   <p>
     <strong>Image:</strong>
-    <%= link_to pin.image.filename, pin.image if pin.image.attached? %>
+    <%= link_to image_tag(pin.resize_img(pin.image, 750)), pin.image if pin.image.attached? %>
   </p>
 
   <p>
@@ -19,14 +19,20 @@
     <%= pin.link %>
   </p>
 
+  <% if pin.board.present? %>
+    <p>
+      <strong>Board:</strong>
+      <%= link_to pin.board.name, user_board_path(pin.board.user, pin.board) %>
+    </p>
+  <% end %>
+
   <p>
-    <strong>User:</strong>
-    <%= pin.user_id %>
+    <strong>Creator:</strong>
+    <%= link_to pin.user, user_path(pin.user) %>
   </p>
 
   <p>
-    <strong>Board:</strong>
-    <%= pin.board_id %>
+    <strong>Creator:</strong>
+    <%= link_to pin.user, user_path(pin.user) %>
   </p>
-
 </div>

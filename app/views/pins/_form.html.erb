@@ -32,14 +32,14 @@
   </div>
 
   <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.text_field :user_id %>
+    <%= form.label :board_id, style: "display: block" %>
+    <%= render partial: "pins/select_tag", locals: { options: @boards.pluck(:name, :id), new_board_id: nil, new_board_name: nil } %>
+
+    <div><%= link_to "Or Create New Board", new_user_board_path(current_user), data: { turbo_frame: "new_board" } %></div>
+
+    <div id="new_board_form"><%= turbo_frame_tag "new_board" %></div>
   </div>
 
-  <div>
-    <%= form.label :board_id, style: "display: block" %>
-    <%= form.text_field :board_id %>
-  </div>
 
   <div>
     <%= form.submit %>

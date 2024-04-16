@@ -1,0 +1,13 @@
+<select name="pin[board_id]" id="pin_board_id">
+  <% if not new_board_id %>
+    <option value="" disabled selected>Choose a board</option>
+  <% else %>
+    <option value="" disabled >Choose a board</option>
+    <option value=<%= new_board_id %> selected><%= new_board_name %></option>
+  <% end %>
+  <% options.each do |name, id| %>
+    <option value=<%= id %>>
+      <%= name %>
+    </option>
+  <% end %>
+</select>
