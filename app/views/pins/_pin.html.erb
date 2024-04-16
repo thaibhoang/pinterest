@@ -25,11 +25,8 @@
       <%= link_to pin.board.name, user_board_path(pin.board.user, pin.board) %>
     </p>
   <% end %>
-
-
-  <% if pin.user == current_user %>
     
-    <%= render partial: "pins/note", locals: {pin: pin} %>
-    <%= turbo_frame_tag "note" %>
-  <% end %>
+  <%= render partial: "pins/note", locals: {pin: pin, note: note} %>
+  <%= turbo_frame_tag "note" %>
+
 </div>

@@ -9,6 +9,7 @@ class PinsController < ApplicationController
 
   # GET /pins/1 or /pins/1.json
   def show
+    @note = @pin.notes.find_by(user_id: current_user.id)
   end
 
   # GET /pins/new

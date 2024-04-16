@@ -1,5 +1,5 @@
 <%= turbo_stream.replace "note_content" do %>
-  <%= render partial: "pins/note", locals: {pin: @pin} %>
+  <%= render partial: "pins/note", locals: {pin: @pin, note: nil} %>
 <% end %>
 
 <%= turbo_stream.replace "note" do %>

@@ -1,5 +1,5 @@
-class NoteController < ApplicationController
-  before_action :authenticate_user!, :check_owner 
+class NotesController < ApplicationController
+  before_action :authenticate_user! 
   before_action :set_pin, only: %i[ new create ]
   before_action :set_note, only: %i[ edit update destroy ]
   
@@ -7,7 +7,7 @@ class NoteController < ApplicationController
 
   # GET /notes/new
   def new
-    @note = @pin.build_note    
+    @note = @pin.notes.build    
   end
 
   # GET /notes/1/edit
@@ -16,8 +16,8 @@ class NoteController < ApplicationController
 
   # POST /notes or /notes.json
   def create
-    @note = @pin.build_note(note_params)
-    @note.user_id = @pin.user_id
+    @note = @pin.notes.build(note_params)
+    @note.user_id = current_user.id
     respond_to do |format|
       if @note.save
         format.turbo_stream
@@ -64,7 +64,7 @@ class NoteController < ApplicationController
     
     def set_note
       set_pin
-      @note = @pin.note
+      @note = @pin.notes.find_by(user_id: current_user.id)
     end
 
     # Only allow a list of trusted parameters through.
@@ -72,10 +72,4 @@ class NoteController < ApplicationController
       params.require(:note).permit(:content)
     end
 
-    def check_owner
-      set_pin
-      if @pin.user != current_user 
-        redirect_to pin_path(@pin), notice: "You are not the onwer of this pin."
-      end
-    end
 end

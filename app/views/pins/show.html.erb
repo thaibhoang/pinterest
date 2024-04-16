@@ -1,6 +1,6 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @pin %>
+<%= render partial: "pins/pin", locals: {pin: @pin, note: @note} %>
 
 <div>
   <%= link_to "Edit this pin", edit_pin_path(@pin) %> |
