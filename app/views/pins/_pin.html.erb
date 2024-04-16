@@ -26,13 +26,10 @@
     </p>
   <% end %>
 
-  <p>
-    <strong>Creator:</strong>
-    <%= link_to pin.user, user_path(pin.user) %>
-  </p>
 
-  <p>
-    <strong>Creator:</strong>
-    <%= link_to pin.user, user_path(pin.user) %>
-  </p>
+  <% if pin.user == current_user %>
+    
+    <%= render partial: "pins/note", locals: {pin: pin} %>
+    <%= turbo_frame_tag "note" %>
+  <% end %>
 </div>

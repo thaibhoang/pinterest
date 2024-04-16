@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :pins
+  resources :pins do
+    resources :note, except: %i[index show]
+  end
   
   devise_for :users
 
