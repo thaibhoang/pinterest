@@ -1,0 +1,32 @@
+<%= form_with(model: saved_pin) do |form| %>
+  <% if saved_pin.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(saved_pin.errors.count, "error") %> prohibited this saved_pin from being saved:</h2>
+
+      <ul>
+        <% saved_pin.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :pin_id, style: "display: block" %>
+    <%= form.text_field :pin_id %>
+  </div>
+
+  <div>
+    <%= form.label :user_id, style: "display: block" %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div>
+    <%= form.label :board_id, style: "display: block" %>
+    <%= form.text_field :board_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

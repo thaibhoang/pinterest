@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Saved pins</h1>
+
+<div id="saved_pins">
+  <% @saved_pins.each do |saved_pin| %>
+    <%= render saved_pin %>
+    <p>
+      <%= link_to "Show this saved pin", saved_pin %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New saved pin", new_saved_pin_path %>

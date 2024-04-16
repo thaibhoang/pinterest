@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :saved_pins
   resources :pins do
     resources :notes, except: %i[index show]
   end
