@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_16_155709) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_16_162141) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -67,10 +67,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_16_155709) do
     t.text "description"
     t.text "link"
     t.bigint "user_id", null: false
-    t.bigint "board_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["board_id"], name: "index_pins_on_board_id"
     t.index ["user_id"], name: "index_pins_on_user_id"
   end
 
@@ -102,7 +100,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_16_155709) do
   add_foreign_key "boards", "users"
   add_foreign_key "notes", "pins"
   add_foreign_key "notes", "users"
-  add_foreign_key "pins", "boards"
   add_foreign_key "pins", "users"
   add_foreign_key "saved_pins", "boards"
   add_foreign_key "saved_pins", "pins"
