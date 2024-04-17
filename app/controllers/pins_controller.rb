@@ -25,13 +25,15 @@ class PinsController < ApplicationController
 
   # POST /pins or /pins.json
   def create
+    puts params.inspect
     @pin = Pin.new(pin_params)
     @boards = current_user.boards.all
     @pin.user_id = current_user.id
     respond_to do |format|
       if @pin.save
-        if params[:board_id] 
-          current_boad = Board.find(params[:board_id])
+        # if user fill in board_id, then create the saved_pin for user
+        if @pin.persisted? && !params[:board_id].nil?
+          @pin.saved_pins.create(user_id: current_user.id, board_id: params[:board_id])
         end
         format.html { redirect_to pin_url(@pin), notice: "Pin was successfully created." }
         format.json { render :show, status: :created, location: @pin }
@@ -80,6 +82,6 @@ class PinsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def pin_params
-      params.require(:pin).permit(:image, :title, :description, :link, :board_id)
+      params.require(:pin).permit(:image, :title, :description, :link)
     end
 end
