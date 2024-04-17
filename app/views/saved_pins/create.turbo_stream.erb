@@ -1,0 +1,3 @@
+<%= turbo_stream.replace dom_id(@pin) do %>
+  <%= render partial: "shared/seved_pin_form_layout", locals: {pin: @pin} %>
+<% end %>

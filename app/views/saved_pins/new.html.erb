@@ -1,9 +1,5 @@
 <h1>New saved pin</h1>
 
-<%= render "form", saved_pin: @saved_pin %>
-
-<br>
-
-<div>
-  <%= link_to "Back to saved pins", saved_pins_path %>
-</div>
+<%= turbo_frame_tag("#{dom_id(@pin)}_new_saved_pin") do %>
+  <%= render partial: "saved_pins/form", locals: {pin: @pin, saved_pin: @saved_pin} %>
+<% end %>

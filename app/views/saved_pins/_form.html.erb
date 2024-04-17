@@ -1,4 +1,4 @@
-<%= form_with(model: saved_pin) do |form| %>
+<%= form_with(model: [pin, saved_pin]) do |form| %>
   <% if saved_pin.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(saved_pin.errors.count, "error") %> prohibited this saved_pin from being saved:</h2>
@@ -11,22 +11,9 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :pin_id, style: "display: block" %>
-    <%= form.text_field :pin_id %>
-  </div>
+  <%= render partial: "shared/select_a_board" %>
 
   <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.text_field :user_id %>
-  </div>
-
-  <div>
-    <%= form.label :board_id, style: "display: block" %>
-    <%= form.text_field :board_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+    <%= form.submit "Save on Board" %>
   </div>
 <% end %>

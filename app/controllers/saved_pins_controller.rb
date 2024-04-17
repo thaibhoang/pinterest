@@ -1,20 +1,9 @@
 class SavedPinsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_user
+  before_action :authenticate_user!, :set_pin
   before_action :set_saved_pin, only: %i[ show edit update destroy ]
 
-  # GET /saved_pins or /saved_pins.json
-  def index
-    @saved_pins = SavedPin.all
-  end
-
-  # GET /saved_pins/1 or /saved_pins/1.json
-  def show
-  end
-
-  # GET /saved_pins/new
   def new
-    @saved_pin = SavedPin.new
+    @saved_pin = @pin.saved_pins.build
   end
 
   # GET /saved_pins/1/edit
@@ -23,10 +12,14 @@ class SavedPinsController < ApplicationController
 
   # POST /saved_pins or /saved_pins.json
   def create
-    @saved_pin = SavedPin.new(saved_pin_params)
-
+    @saved_pin = @pin.saved_pins.build
+    if params[:board_id]
+      @saved_pin.board_id = params[:board_id].to_i
+    end
+    @saved_pin.user_id = current_user.id
     respond_to do |format|
       if @saved_pin.save
+        format.turbo_stream
         format.html { redirect_to saved_pin_url(@saved_pin), notice: "Saved pin was successfully created." }
         format.json { render :show, status: :created, location: @saved_pin }
       else
@@ -38,8 +31,9 @@ class SavedPinsController < ApplicationController
 
   # PATCH/PUT /saved_pins/1 or /saved_pins/1.json
   def update
+    @saved_pin.board_id = params[:board_id]
     respond_to do |format|
-      if @saved_pin.update(saved_pin_params)
+      if @saved_pin.update
         format.html { redirect_to saved_pin_url(@saved_pin), notice: "Saved pin was successfully updated." }
         format.json { render :show, status: :ok, location: @saved_pin }
       else
@@ -61,12 +55,13 @@ class SavedPinsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_pin 
+      @pin = Pin.find(params[:pin_id])
+    end
+
     def set_saved_pin
       @saved_pin = SavedPin.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
-    def saved_pin_params
-      params.require(:saved_pin).permit(:pin_id, :user_id, :board_id)
-    end
+
 end

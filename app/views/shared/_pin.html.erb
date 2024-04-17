@@ -1,7 +1,10 @@
 <% if pin.image.attached? %>
   <div class="box">
     <%= link_to image_tag(pin.resize_img(pin.image, 236, 760)), pin , data: { turbo_frame: "_top" } %>
-      
+
+    <%= turbo_frame_tag(dom_id(pin)) do %>
+      <%= render partial: "shared/seved_pin_form_layout", locals: {pin: pin} %>
+    <% end %>
   </div>
 <% end %>
   
