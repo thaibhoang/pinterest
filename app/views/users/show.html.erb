@@ -1,16 +1,4 @@
-<div class="information">
-  <div><%= @user.email %></div>
-  <div>following count</div>
-  <div>Edit Profile</div>
-</div>
-<div class="middle-nav">
-  <div>Created</div>
-  <div>Saved</div> 
-</div>
-<div class="main">
-  <%= turbo_frame_tag "created-pin" do %>
-    <%= render partial: "users/pin", locals: {pins: @pins} %>
-  <% end %>
+<%= render partial: "shared/profile", locals: { user: @user } %>
 
-  <%= turbo_frame_tag "saved-pin" %>
-</div>
+<%= turbo_frame_tag "content", src: user__created_index_path(@user), loading: "lazy" %>
+

@@ -6,4 +6,5 @@ class User < ApplicationRecord
   has_many :boards, dependent: :destroy
   has_many :pins, dependent: :destroy
   has_many :notes, dependent: :destroy
+  has_many :saved_pins, dependent: :destroy
 end

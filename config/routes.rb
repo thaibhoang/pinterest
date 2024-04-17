@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :saved_pins
   resources :pins do
     resources :notes, except: %i[index show]
   end
@@ -8,6 +7,8 @@ Rails.application.routes.draw do
 
   resources :users, only: :show do
     resources :boards
+    resources :_saved, only: :index
+    resources :_created, only: :index
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

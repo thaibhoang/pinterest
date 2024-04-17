@@ -33,6 +33,12 @@
   max-width: 100%;
   border-radius: 15px;
 }
+.img_place_holder{
+  border-radius: 15px;
+  height: 157px;
+  width: 157px;
+  background-color: rgb(214, 210, 203);
+}
 @media (max-width: 1812px)
 {
   .container{
@@ -74,4 +80,14 @@
     width: 236px;
     columns: 1;
   }
+}
+#board_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1rem;
+}
+#board_grid .board_box {
+  width: 157px;
+  margin-bottom: 10px;
+  break-inside: avoid;
 }
