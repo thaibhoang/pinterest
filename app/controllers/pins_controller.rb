@@ -1,4 +1,5 @@
 class PinsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_pin, only: %i[ show edit update destroy ]
   before_action :check_user, only: %i[ edit update destroy ]
 
@@ -20,7 +21,6 @@ class PinsController < ApplicationController
 
   # GET /pins/1/edit
   def edit
-    @boards = current_user.boards.all
   end
 
   # POST /pins or /pins.json
@@ -30,6 +30,9 @@ class PinsController < ApplicationController
     @pin.user_id = current_user.id
     respond_to do |format|
       if @pin.save
+        if params[:board_id] 
+          current_boad = Board.find(params[:board_id])
+        end
         format.html { redirect_to pin_url(@pin), notice: "Pin was successfully created." }
         format.json { render :show, status: :created, location: @pin }
       else

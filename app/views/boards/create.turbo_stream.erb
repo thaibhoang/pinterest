@@ -1,4 +1,4 @@
-<%= turbo_stream.replace "pin_board_id" do %>
+<%= turbo_stream.replace "board_id" do %>
   <%= render partial: "pins/select_tag", locals: { options: @options, new_board_id: @new_board_id, new_board_name: @new_board_name } %>
 <% end %>
 

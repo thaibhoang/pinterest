@@ -32,16 +32,6 @@
   </div>
 
   <div>
-    <label for="board_id" style="display: block;">Board</label>
-    <%= render partial: "pins/select_tag", locals: { options: @boards.pluck(:name, :id), new_board_id: nil, new_board_name: nil } %>
-
-    <div><%= link_to "Or Create New Board", new_user_board_path(current_user), data: { turbo_frame: "new_board" } %></div>
-
-    <div id="new_board_form"><%= turbo_frame_tag "new_board" %></div>
-  </div>
-
-
-  <div>
     <%= form.submit %>
   </div>
 <% end %>
