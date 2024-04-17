@@ -1,0 +1,4 @@
+<% if user == current_user %>
+  <%= link_to "New Board", new_user_board_path(user), data: { turbo_frame: "new_board" } %>
+  <div id="new_board_form"><%= turbo_frame_tag "new_board" %></div>
+<% end %>

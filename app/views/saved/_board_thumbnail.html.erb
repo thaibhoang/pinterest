@@ -3,11 +3,16 @@
   <%= link_to user_board_path(user, board), data: { turbo_frame: "_top" } do %>
     <div class="box">
       <% if board.cover.attached? %>
-        <%= image_tag(board.resize_img(board.cover, 157, 157)) %>
+        <%= image_tag(board.resize_img(board.cover, 157, 157), class: "board-thumbnail") %>
       <% else %>
         <div class="img_place_holder"></div>
       <% end %>
       <div><%= board.name %></div>
+      <% if board.saved_pins.count > 0 %>
+        <div><%= pluralize(board.saved_pins.count, "pin") %></div>
+      <% else %>
+        <div>Currently empty</div>
+      <% end %>
     </div>
   <% end %>
 </div>

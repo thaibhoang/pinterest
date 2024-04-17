@@ -1,12 +1,5 @@
 <h1>Boards</h1>
+<%= render partial: "shared/new_board_link", locals: {user: @user} %>
+<hr>
 
-<div id="boards">
-  <% @boards.each do |board| %>
-    <%= render board %>
-    <p>
-      <%= link_to "Show this board", user_board_path(current_user,board) %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New board", new_user_board_path(current_user) %>
+<div id="all-boards"><%= render partial: "shared/all_boards", locals: {boards: @boards, user: @user} %></div>

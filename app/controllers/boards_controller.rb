@@ -1,15 +1,17 @@
 class BoardsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, :set_user
+  before_action :validate_owner, only: %i[ new create edit update destroy ]
   before_action :set_board, only: %i[ show edit update destroy ]
-
+  
 
   # GET /boards or /boards.json
   def index
-    @boards = current_user.boards.all
+    @boards = @user.boards
   end
 
   # GET /boards/1 or /boards/1.json
   def show
+    @saved_pins = @board.saved_pins
   end
 
   # GET /boards/new
@@ -28,7 +30,8 @@ class BoardsController < ApplicationController
     respond_to do |format|
       if @board.save
         @new_board_id = @board.id
-        @new_board_name = @board.name        
+        @new_board_name = @board.name  
+        @boards = current_user.boards
         format.turbo_stream
         format.html { redirect_to user_board_url(current_user, @board), notice: "Board was successfully created." }
         format.json { render :show, status: :created, location: @board }
@@ -54,7 +57,6 @@ class BoardsController < ApplicationController
 
   # DELETE /boards/1 or /boards/1.json
   def destroy
-    @board.unboard_pin
     @board.destroy!
 
     respond_to do |format|
@@ -65,12 +67,23 @@ class BoardsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_user
+      @user = User.find(params[:user_id])
+    end
+
     def set_board
-      @board = current_user.boards.find(params[:id])
+      set_user
+      @board = @user.boards.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def board_params
       params.require(:board).permit(:cover, :name, :description, :keep_secret, :user_id)
+    end
+
+    def validate_owner
+      if current_user != @user
+        redicrect_to user_boards_path(@user), notice: "You are not authorized to make change to this user's boards"
+      end
     end
 end

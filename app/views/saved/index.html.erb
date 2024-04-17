@@ -1,21 +1,13 @@
 <%= render partial: "shared/profile", locals: { user: @user } %>
 
 <%= turbo_frame_tag "content" do %>
-  <div id="board_grid">
-    <% @boards.each do |board| %>
-      <%= render partial: "board_thumbnail", locals: {board: board, user: @user} %>
-    <% end %>
-  </div>
+  <%= render partial: "shared/new_board_link", locals: {user: @user} %>
+  <hr>
+  <div id="all-boards"><%= render partial: "shared/all_boards", locals: {boards: @boards, user: @user} %></div>
 
   <hr>
 
-  <div class="container">
-    <% cache @unorganized_saved_pins do %>
-      <% @unorganized_saved_pins.each do |saved_pin| %>
-        <% cache saved_pin do %>
-          <%= render partial: "shared/pin", locals: {pin: saved_pin.pin } %>
-        <% end %>
-      <% end %>
-    <% end %>
-  </div>
+  <div>Unorganized Ideas</div>
+  <%= render partial: "shared/show_saved_pins", locals: {saved_pins: @unorganized_saved_pins} %>
+
 <% end %>

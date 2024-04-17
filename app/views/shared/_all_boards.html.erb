@@ -1,0 +1,5 @@
+<div id="board_grid">
+  <% boards.each do |board| %>
+    <%= render partial: "saved/board_thumbnail", locals: {board: board, user: user} %>
+  <% end %>
+</div>
