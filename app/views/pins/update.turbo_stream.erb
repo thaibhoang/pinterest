@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "original_box_#{dom_id(@pin)}" do %>
+  <%= render partial: "shared/pin", locals: {pin: @pin, edit_pin: true} %>
+<% end %>

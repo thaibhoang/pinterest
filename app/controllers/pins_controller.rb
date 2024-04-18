@@ -50,6 +50,7 @@ class PinsController < ApplicationController
       if @pin.update(pin_params)
         format.html { redirect_to pin_url(@pin), notice: "Pin was successfully updated." }
         format.json { render :show, status: :ok, location: @pin }
+        format.turbo_stream
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @pin.errors, status: :unprocessable_entity }
