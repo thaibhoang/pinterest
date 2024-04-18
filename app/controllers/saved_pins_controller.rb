@@ -14,7 +14,7 @@ class SavedPinsController < ApplicationController
   def create
     @saved_pin = @pin.saved_pins.build
     if params[:board_id]
-      @saved_pin.board_id = params[:board_id].to_i
+      @saved_pin.board_id = params[:board_id]
     end
     @saved_pin.user_id = current_user.id
     respond_to do |format|
@@ -46,11 +46,13 @@ class SavedPinsController < ApplicationController
 
   # DELETE /saved_pins/1 or /saved_pins/1.json
   def destroy
+    @removed_from_profile = @saved_pin.board_id == nil ? true : false
     @saved_pin.destroy!
 
     respond_to do |format|
       format.html { redirect_to saved_pins_url, notice: "Saved pin was successfully destroyed." }
       format.json { head :no_content }
+      format.turbo_stream
     end
   end
 

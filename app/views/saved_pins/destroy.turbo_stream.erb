@@ -1,0 +1,13 @@
+<% if not @removed_from_profile %>
+  <%= turbo_stream.remove "box_#{dom_id(@pin)}" %>
+<% end %>
+
+<% if @removed_from_profile %>
+  <%= turbo_stream.replace "#{dom_id(@pin)}_save_pin_form_mini" do %>
+    <%= render partial: "shared/saved_pin_form_layout", locals: {pin: @pin} %>
+  <% end %>
+<% end %>
+
+<%= turbo_stream.replace "original_box_#{dom_id(@pin)}" do %>
+  <%= render partial: "shared/pin", locals: {pin: @pin} %>
+<% end %>

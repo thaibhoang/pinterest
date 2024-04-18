@@ -1,3 +1,9 @@
-<%= turbo_stream.replace dom_id(@pin) do %>
-  <%= render partial: "shared/saved_pin_form_layout", locals: {pin: @pin} %>
+<%= turbo_stream.replace "box_#{dom_id(@pin)}" do %>
+  <%= render partial: "shared/pin", locals: {pin: @pin, saved_pin: @saved_pin} %>
 <% end %>
+
+<%= turbo_stream.replace "original_box_#{dom_id(@pin)}" do %>
+  <%= render partial: "shared/pin", locals: {pin: @pin} %>
+<% end %>
+
+

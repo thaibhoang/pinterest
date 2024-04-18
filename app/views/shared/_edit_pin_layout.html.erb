@@ -1,1 +1,2 @@
-some space for edit pin
+<%= link_to "Edit this pin", edit_pin_path(pin) %>
+<%= turbo_frame_tag [dom_id(pin), "_edit_layout"] %>

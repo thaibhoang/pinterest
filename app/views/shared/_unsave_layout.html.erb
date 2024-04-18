@@ -1,0 +1,6 @@
+<% destination = board_id.nil? ? user__saved_index_path(current_user) : user_board_path(current_user, Board.find(board_id)) %>
+<% name = board_id.nil? ? "Profile" : Board.find(board_id).name %>
+<% name_prettier = "Been saved to #{name}" %>
+<%= link_to name_prettier, destination, data: {turbo_frame: "_top"} %>
+<% saved_pin = SavedPin.find_by(user: current_user, pin: pin, board_id: board_id) %>
+<%= button_to "Unsave", pin_saved_pin_path(pin, saved_pin), method: :delete %>
