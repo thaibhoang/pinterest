@@ -1,4 +1,5 @@
 <%= turbo_frame_tag "new_board" do %>
+  <%= render "shared/flash" %>
   <%= form_with(model: [current_user, board]) do |form| %>
     <% if board.errors.any? %>
       <div style="color: red">
@@ -11,6 +12,8 @@
         </ul>
       </div>
     <% end %>
+
+    <%= hidden_field_tag :pin_id, pin_id %>
 
     <div>
       <%= form.label :cover, style: "display: block" %>

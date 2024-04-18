@@ -31,11 +31,12 @@ class SavedPinsController < ApplicationController
 
   # PATCH/PUT /saved_pins/1 or /saved_pins/1.json
   def update
-    @saved_pin.board_id = params[:board_id]
     respond_to do |format|
-      if @saved_pin.update
-        format.html { redirect_to saved_pin_url(@saved_pin), notice: "Saved pin was successfully updated." }
+      if @saved_pin.update(board_id: params[:board_id])
+        @pin = @saved_pin.pin
+        format.html { redirect_to user_board_url(current_user, old_board), notice: "Saved pin was successfully updated." }
         format.json { render :show, status: :ok, location: @saved_pin }
+        format.turbo_stream
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @saved_pin.errors, status: :unprocessable_entity }

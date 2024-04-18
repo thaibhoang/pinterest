@@ -1,7 +1,6 @@
 <%= render partial: "shared/profile", locals: { user: @user } %>
 
 <%= turbo_frame_tag "content" do %>
-  <%= render partial: "shared/new_board_link", locals: {user: @user} %>
   <hr>
   <div id="all-boards"><%= render partial: "shared/all_boards", locals: {boards: @boards, user: @user} %></div>
 

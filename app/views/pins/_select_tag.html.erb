@@ -5,9 +5,14 @@
     <option value="" disabled >Choose a board</option>
     <option value=<%= new_board_id %> selected><%= new_board_name %></option>
   <% end %>
-  <% options.each do |name, id| %>
+  <% open_boards.each do |name, id| %>
     <option value=<%= id %>>
       <%= name %>
+    </option>
+  <% end %>
+  <% closed_boards.each do |name, id| %>
+    <option value=<%= id %> disabled>
+      <%= name.truncate(20) %>: Copied here already
     </option>
   <% end %>
 </select>

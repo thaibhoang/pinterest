@@ -14,7 +14,8 @@
     <nav>      
       <% if user_signed_in? %>
         <%= link_to "Home ", root_path %>
-        <%= link_to "Create ", new_pin_path %>
+        <%= link_to "Create Pin ", new_pin_path %>
+        <%= link_to "Create Board ", new_user_board_path(current_user) %>
         <%= link_to "Profile ", user_path(current_user) %>
         <%= link_to "Log out ", destroy_user_session_path, data: {turbo_method: :delete} %>
       <% else %>

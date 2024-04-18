@@ -3,7 +3,7 @@
     <% cache @pins do %>
       <% @pins.each do |pin| %>
         <% cache pin do %>
-          <%= render partial: "shared/pin", locals: {pin: pin } %>
+          <%= render partial: "shared/pin", locals: {pin: pin} %>
         <% end %>
       <% end %>
     <% end %>

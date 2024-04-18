@@ -17,6 +17,9 @@ class BoardsController < ApplicationController
   # GET /boards/new
   def new
     @board = current_user.boards.build
+    if params[:pin_id]
+      @pin_id = params[:pin_id]
+    end
   end
 
   # GET /boards/1/edit
@@ -25,10 +28,18 @@ class BoardsController < ApplicationController
 
   # POST /boards or /boards.json
   def create
+    if params[:pin_id]
+      @pin = Pin.find(params[:pin_id])
+    end
+    names_used = current_user.boards.pluck(:name)
     @board = current_user.boards.build(board_params)
     @options = current_user.boards.pluck(:name, :id)
     respond_to do |format|
-      if @board.save
+      if names_used.include?(params[:board][:name])
+        flash[:error] = "Name already used"
+        format.html { render :new }
+        format.json { render json: { error: "Name already used" }, status: :unprocessable_entity }
+      elsif @board.save
         @new_board_id = @board.id
         @new_board_name = @board.name  
         @boards = current_user.boards
@@ -44,8 +55,13 @@ class BoardsController < ApplicationController
 
   # PATCH/PUT /boards/1 or /boards/1.json
   def update
+    names_used = current_user.boards.pluck(:name)
     respond_to do |format|
-      if @board.update(board_params)
+      if names_used.include?(params[:board][:name])
+        flash[:error] = "Name already used"
+        format.html { render :edit }
+        format.json { render json: { error: "Name already used" }, status: :unprocessable_entity }
+      elsif @board.update(board_params)
         format.html { redirect_to user_board_url(current_user, @board), notice: "Board was successfully updated." }
         format.json { render :show, status: :ok, location: @board }
       else

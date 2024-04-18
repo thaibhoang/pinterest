@@ -4,5 +4,7 @@
   <%= button_to "Destroy this board", user_board_path(current_user, @board), method: :delete %>
 </div>
 <%= render @board %>
+<hr>
 
-<%= render partial: "shared/show_saved_pins", locals: {saved_pins: @saved_pins} %>
+
+<div id="pins-container"><%= render partial: "shared/show_saved_pins", locals: {saved_pins: @saved_pins} %></div>

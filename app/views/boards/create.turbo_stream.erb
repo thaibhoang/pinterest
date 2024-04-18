@@ -1,5 +1,6 @@
+<% open_boards, closed_boards = filter_options(@pin, current_user, current_user.boards) %>
 <%= turbo_stream.replace "board_id" do %>
-  <%= render partial: "pins/select_tag", locals: { options: @options, new_board_id: @new_board_id, new_board_name: @new_board_name } %>
+  <%= render partial: "pins/select_tag", locals: { open_boards: open_boards, closed_boards: closed_boards, new_board_id: @new_board_id, new_board_name: @new_board_name } %>
 <% end %>
 
 <%= turbo_stream.replace "new_board" do %>
