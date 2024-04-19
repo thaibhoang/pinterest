@@ -12,7 +12,7 @@
   <% end %>
 
   <div>
-    <%= form.label :image, style: "display: block" %>
+    <%= form.label :image, "Upload Image", class: "custom-file-upload" %>
     <%= form.file_field :image %>
   </div>
 
@@ -31,7 +31,7 @@
     <%= form.text_area :link %>
   </div>
 
-  <%= render partial: "shared/select_a_board" %>
+  <%= render partial: "shared/select_a_board", locals: {pin: pin} %>
 
   <div>
     <%= form.submit %>

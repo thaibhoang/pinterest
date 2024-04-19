@@ -1,9 +1,14 @@
-<div>
-  <%= link_to "Edit this board", edit_user_board_path(current_user, @board) %> |
-  <%= link_to "Board & Saved Pins", user__saved_index_path(current_user) %>
-  <%= button_to "Destroy this board", user_board_path(current_user, @board), method: :delete %>
+<div class="middle-container">
+  <div>
+    <% if @board.user == current_user %>
+      <div class="middle-one-line-container">
+        <%= link_to "Edit this board", edit_user_board_path(current_user, @board), class: "bold" %>
+        <%= link_to "Destroy this board", user_board_path(current_user, @board), data: {turbo_confirm: "Are you sure?", turbo_method: :delete}, class: "bold" %>
+      </div>
+    <% end %>
+    <%= render @board %>
+  </div>
 </div>
-<%= render @board %>
 <hr>
 
 

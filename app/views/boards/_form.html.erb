@@ -13,10 +13,13 @@
       </div>
     <% end %>
 
-    <%= hidden_field_tag :pin_id, pin_id %>
-
+    <% if defined?(pin_id) %>
+      <%= hidden_field_tag :pin_id, pin_id %>
+      <%# pin_id is for the case of createing new board in "save pin process" %>
+    <% end %>
+    
     <div>
-      <%= form.label :cover, style: "display: block" %>
+      <%= form.label :cover, "Upload Cover", class: "custom-file-upload" %>
       <%= form.file_field :cover %>
     </div>
 

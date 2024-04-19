@@ -7,7 +7,7 @@
       <% else %>
         <div class="img_place_holder"></div>
       <% end %>
-      <div><%= board.name %></div>
+      <div class="bold"><%= board.name.strip.truncate(18) %></div>
       <% if board.saved_pins.count > 0 %>
         <div><%= pluralize(board.saved_pins.count, "pin") %></div>
       <% else %>

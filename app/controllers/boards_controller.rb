@@ -43,7 +43,7 @@ class BoardsController < ApplicationController
         @new_board_id = @board.id
         @new_board_name = @board.name  
         @boards = current_user.boards
-        format.turbo_stream
+        format.turbo_stream { flash.now[:notice] = "Board was successfully created." }
         format.html { redirect_to user_board_url(current_user, @board), notice: "Board was successfully created." }
         format.json { render :show, status: :created, location: @board }
       else

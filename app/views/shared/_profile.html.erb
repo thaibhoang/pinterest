@@ -1,9 +1,14 @@
-<div class="information">
-  <div><%= user.email %></div>
-  <div>following count</div>
-  <div>Edit Profile</div>
-</div>
-<div class="middle-nav">
-  <div><%= link_to "Created", user__created_index_path(@user)  %></div>
-  <div><%= link_to "Saved", user__saved_index_path(@user)  %></div>
+<div class="middle-container">
+  <div>
+    <div class="information">
+      <div><%= user.email %></div>
+      <div>following count</div>
+    </div>
+    <div class="middle-nav">
+      <div class="middle-one-line-container">
+        <div class="m1 big"><%= link_to "Created", user__created_index_path(@user)  %></div>
+        <div class="m1 big"><%= link_to "Saved", user__saved_index_path(@user)  %></div>
+      </div>
+    </div>
+  </div>
 </div>

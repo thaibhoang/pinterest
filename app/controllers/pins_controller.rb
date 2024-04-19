@@ -5,7 +5,7 @@ class PinsController < ApplicationController
 
   # GET /pins or /pins.json
   def index
-    @pins = current_user.pins.all
+    @pins = Pin.all
   end
 
   # GET /pins/1 or /pins/1.json
@@ -50,7 +50,7 @@ class PinsController < ApplicationController
       if @pin.update(pin_params)
         format.html { redirect_to pin_url(@pin), notice: "Pin was successfully updated." }
         format.json { render :show, status: :ok, location: @pin }
-        format.turbo_stream
+        format.turbo_stream { flash.now[:notice] = "Pin was successfully updated." }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @pin.errors, status: :unprocessable_entity }

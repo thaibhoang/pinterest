@@ -1,5 +1,9 @@
-<h1>Boards</h1>
-<%= render partial: "shared/new_board_link", locals: {user: @user} %>
+<div class="middle-container">
+  <div>
+    <div class="md big m1">All Boards</div>
+    <%= render partial: "shared/new_board_link", locals: {user: @user}, class: "md m1" %>
+  </div>
+</div>
 <hr>
 
 <div id="all-boards"><%= render partial: "shared/all_boards", locals: {boards: @boards, user: @user} %></div>

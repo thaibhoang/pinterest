@@ -6,11 +6,11 @@
         <%= comment.body.strip %>
       </div>
     <% end %>
-    <%= link_to "Reply", new_pin_comment_path(pin, parent_id: comment.id), data: {turbo_frame: "#{dom_id(comment)}_new_reply"} %>
+    <%= link_to "Reply", new_pin_comment_path(pin, parent_id: comment.id), data: {turbo_frame: "#{dom_id(comment)}_new_reply"}, class: "bold blur" %>
     <%= turbo_frame_tag("#{dom_id(comment)}_new_reply") %>
     <% if comment.user == current_user %>
-      <%= link_to "Edit", edit_pin_comment_path(pin, comment), data: {turbo_frame: "#{dom_id(comment)}_body"} %>
-      <%= link_to "Delete", pin_comment_path(pin, comment), data: {turbo_method: :delete, turbo_comfirm: "Are you sure?"} %>
+      <%= link_to "Edit", edit_pin_comment_path(pin, comment), data: {turbo_frame: "#{dom_id(comment)}_body"}, class: "bold blur" %>
+      <%= link_to "Delete", pin_comment_path(pin, comment), data: {turbo_method: :delete, turbo_comfirm: "Are you sure?"}, class: "bold blur" %>
     <% end %>
     <%= turbo_frame_tag("#{dom_id(comment)}_show_replies") do %>
       <% count = comment.replies.count%>

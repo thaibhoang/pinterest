@@ -1,11 +1,11 @@
 <div id="note_content">
-  <div><strong>Note to self</strong></div>
+  <div><strong>Note to self:</strong></div>
   
   <% if note.present? %>
     <div><%= note.content %></div>
-    <%= link_to "Edit Note", edit_pin_note_path(pin, note), data: {turbo_frame: "note"} %>
+    <%= link_to "Edit Note", edit_pin_note_path(pin, note), data: {turbo_frame: "note"}, class: "bold" %>
   <% else %>
     <div>What do you want to remember about this Pin?</div>
-    <%= link_to "Add Note", new_pin_note_path(pin), data: {turbo_frame: "note"} %>
+    <%= link_to "Add a Note", new_pin_note_path(pin), data: {turbo_frame: "note"}, class: "bold" %>
   <% end %>
 </div>

@@ -17,7 +17,12 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  --color60: white;
+  --color30: #191645;
+  --color10: #43c64c; 
+  font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif
 }
+
 a {
   color: black;
 }
@@ -52,7 +57,7 @@ a:active {
   border-radius: 15px;
   height: 157px;
   width: 157px;
-  background-color: rgb(214, 210, 203);
+  background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
 }
 @media (max-width: 1812px)
 {
@@ -97,6 +102,7 @@ a:active {
   }
 }
 #board_grid {
+  padding: 0 1rem;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 1rem;
@@ -113,7 +119,127 @@ a:active {
   padding-left: 1rem;
   padding-top: 0.25rem;
 }
-.comments-section {
-  max-height: 60vh;
-  overflow: scroll;
+.middle-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+.middle-one-line-container {
+  gap: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.information {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+.pin_display {
+  padding: 1rem 0 1rem 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 1rem;
+}
+.pin_content {
+  max-height: 760px;
+  width: 508px;
+  overflow-y: scroll;
+}
+.pin_img {
+  max-height: 760px;
+  width: 508px;
+}
+.pin_img a {
+  display: flex;
+  justify-content: end;
+  margin-right: 0;
+}
+.pin_img img {
+  border-radius: 1rem;
+}
+input, textarea {
+  border: 2px solid grey;
+  width: 400px;
+  padding: 0.75rem;
+  height: auto;
+  border-radius: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.box input, .box textarea {
+  width: 90%;
+}
+input[type=file] {
+  display: none;
+}
+input[type=checkbox] {
+  width: auto;
+}
+button, input[type=button], input[type=submit], input[type=reset], .custom-file-upload { 
+  border: none;
+  width: auto;
+  color: white;
+  background-color: var(--color30);
+  padding: 0.4rem 1rem;
+  border-radius: 1rem;
+  margin: 0.25rem;
+  display: inline-block;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: medium;
+  font-weight: 555;
+}
+select:hover, button:hover, input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover, .custom-file-upload:hover {
+  cursor: pointer;
+}
+label {
+  margin: 0.25rem;
+}
+a {
+  display: inline-block;
+  padding: 0.25rem;
+}
+.m2 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.m1 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.md {
+  text-align: center;
+}
+.big {
+  font-weight: bold;
+  font-size: large;  
+}
+.bold {
+  font-weight: bold;
+}
+.blur {
+  color: rgb(133, 132, 132)
+}
+nav {
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+nav a {
+  padding: 1.25rem;
+}
+.home {
+  color: white;
+  background-color: var(--color30);
+  border-radius: 1.5rem;
+  padding: 0.75rem;
+  margin: 0.5rem;
+}
+
+.right-side {
+  margin-left: auto;
+}
+

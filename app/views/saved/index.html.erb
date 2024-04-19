@@ -2,11 +2,12 @@
 
 <%= turbo_frame_tag "content" do %>
   <hr>
+  <div class="m1 md big">All boards</div>
   <div id="all-boards"><%= render partial: "shared/all_boards", locals: {boards: @boards, user: @user} %></div>
 
   <hr>
 
-  <div>Unorganized Ideas</div>
+  <div class="md big m1">Unorganized Ideas</div>
   <%= render partial: "shared/show_saved_pins", locals: {saved_pins: @unorganized_saved_pins} %>
 
 <% end %>

@@ -19,7 +19,7 @@ class SavedPinsController < ApplicationController
     @saved_pin.user_id = current_user.id
     respond_to do |format|
       if @saved_pin.save
-        format.turbo_stream
+        format.turbo_stream { flash.now[:notice] = "Saved pin was successfully created." }
         format.html { redirect_to saved_pin_url(@saved_pin), notice: "Saved pin was successfully created." }
         format.json { render :show, status: :created, location: @saved_pin }
       else
@@ -36,7 +36,7 @@ class SavedPinsController < ApplicationController
         @pin = @saved_pin.pin
         format.html { redirect_to user_board_url(current_user, old_board), notice: "Saved pin was successfully updated." }
         format.json { render :show, status: :ok, location: @saved_pin }
-        format.turbo_stream
+        format.turbo_stream { flash.now[:notice] = "Saved pin was successfully updated." }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @saved_pin.errors, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class SavedPinsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to saved_pins_url, notice: "Saved pin was successfully destroyed." }
       format.json { head :no_content }
-      format.turbo_stream
+      format.turbo_stream { flash.now[:notice] = "Saved pin was successfully destroyed." }
     end
   end
 
