@@ -1,26 +1,26 @@
-<%= form_with(model: [pin, comment] ) do |form| %>
-  <% if comment.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
-
-      <ul>
-        <% comment.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<%= turbo_frame_tag "form-comment_#{comment.parent_id ? comment.parent_id : comment.id}" do %>
+  <%= form_with(model: [pin, comment] ) do |form| %>
+    <% if comment.errors.any? %>
+      <div >
+        <ul>
+          <% comment.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <div>
+      <% placeholder = comment.parent_id ? "Reply" : "Add a comment" %>
+      <%= form.text_area :body, placeholder: placeholder %>
+    </div>
+  
+      <div>
+        <%= form.hidden_field :parent_id, value: comment.parent_id %>
+      </div>
+  
+    <div>
+      <%= form.submit "Send" %>
     </div>
   <% end %>
-  
-  <div>
-    <% placeholder = comment.parent_id ? "Reply" : "Add a comment" %>
-    <%= form.text_area :body, placeholder: placeholder %>
-  </div>
-
-    <div>
-      <%= form.hidden_field :parent_id, value: comment.parent_id %>
-    </div>
-
-  <div>
-    <%= form.submit "Send" %>
-  </div>
 <% end %>
