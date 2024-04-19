@@ -1,0 +1,28 @@
+<%= turbo_frame_tag(dom_id(comment), class: "left-padding-1rem") do %>
+  <%= turbo_frame_tag("#{dom_id(comment)}_body") do %>
+    <div>
+      <strong><%= comment.user.email.truncate(20) %></strong>
+      <%= comment.body %>
+    </div>
+  <% end %>
+
+  <%= link_to "Reply", new_pin_comment_path(pin, parent_id: comment.id, data: {turbo_frame: "#{dom_id(comment)}_new_reply"}) %>
+  <%= turbo_frame_tag("#{dom_id(comment)}_new_reply") %>
+
+  <% if comment.user == current_user %>
+    <%= link_to "Edit", edit_pin_comment_path(pin, comment), data: {turbo_frame: "#{dom_id(comment)}_body"} %>
+    <%= link_to "Delete", pin_comment_path(pin, comment), data: {turbo_method: :delete, turbo_comfirm: "Are you sure?"} %>
+  <% end %>
+
+  <%= turbo_frame_tag("#{dom_id(comment)}_show_replies") do %>
+    <% count = comment.replies.count%>
+    <% if count > 0 %>
+      <%# this only show the newest reply, click link below to view all replies %>
+      <% if count > 1 %>
+        <%= link_to "View full #{pluralize(count, "reply")}", pin_comment_path(pin, comment) %>
+      <% end %>
+      <%# show the newsest reply %>
+      <%= render partial: "shared/comment_short", locals: {comment: comment.replies.newest_reply} %>
+    <% end %>
+  <% end %>
+<% end %>

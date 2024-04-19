@@ -109,3 +109,7 @@ a:active {
 .board-thumbnail {
   border-radius: 15px;
 }
+.left-padding-1rem {  
+  padding-left: 1rem;
+  padding-top: 0.25rem;
+}

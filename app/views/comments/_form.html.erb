@@ -1,0 +1,26 @@
+<%= form_with(model: [pin, comment]) do |form| %>
+  <% if comment.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+      <ul>
+        <% comment.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div>
+    <% place_holder = comment.parent_id ? "Reply" : "Add a comment" %>
+    <%= form.text_area :body, place_holder: place_holder %>
+  </div>
+
+  <div>
+    <%= form.hidden_field :parent_id, comment.parent_id %>
+  </div>
+
+  <div>
+    <%= form.submit "Save" %>
+  </div>
+<% end %>

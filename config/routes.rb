@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+
   resources :pins do
     resources :notes, except: %i[index show]
     resources :saved_pins, except: %i[index show]
+    resources :comments
   end
   
   devise_for :users
