@@ -113,3 +113,7 @@ a:active {
   padding-left: 1rem;
   padding-top: 0.25rem;
 }
+.comments-section {
+  max-height: 60vh;
+  overflow: scroll;
+}

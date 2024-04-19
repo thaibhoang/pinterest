@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_uer!, :set_pin
+  before_action :authenticate_user!, :set_pin
   before_action :set_comment, only: %i[ show edit update destroy ]
   before_action :check_owner, only: %i[ edit update destroy ]
 
@@ -8,8 +8,9 @@ class CommentsController < ApplicationController
   end
 
   # GET /comments/new
-  def new
+  def new    
     @comment = @pin.comments.build(parent_id: params[:parent_id])
+    @turbo_frame_id = params[:parent_id] ? "comment_#{params[:parent_id]}_new_reply" : "#{dom_id(@comment)}_new_reply"
   end
 
   # GET /comments/1/edit
@@ -69,7 +70,7 @@ class CommentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def comment_params
-      params.require(:comment).permit(:body, :comment_id)
+      params.require(:comment).permit(:body, :comment_id, :parent_id)
     end
 
     def check_owner

@@ -1,0 +1,22 @@
+<% if @comment.parent_id == nil %>
+  <%= turbo_stream.prepend "#{dom_id(@pin)}_show_all_comments" do %>
+    <%= render partial: "shared/comment_short", locals: {pin: @pin, comment: @comment} %>
+  <% end %>
+
+  <%= turbo_stream.update "comment-empty", "" %>
+
+  <%= turbo_stream.update "add-comment" do %>
+    <%= render partial: "comments/form", locals: {pin: @pin, comment: @pin.comments.build} %>
+  <% end %>
+
+<% end %>
+
+<% if @comment.parent_id != nil %>
+  <%= turbo_stream.update "#{dom_id(@comment.parent)}_show_replies" do %>
+    <% @comment.parent.replies.order(created_at: :desc).each do |reply| %>
+      <%= render partial: "shared/comment_short", locals: {pin: @pin, comment: reply} %>
+    <% end %>
+  <% end %>
+
+  <%= turbo_stream.update "#{dom_id(@comment.parent)}_new_reply", "" %>
+<% end %>

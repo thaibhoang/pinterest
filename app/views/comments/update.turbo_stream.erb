@@ -1,0 +1,6 @@
+<%= turbo_stream.update "#{dom_id(@comment)}_body" do %>
+  <div>
+    <strong><%= @comment.user.email.truncate(20) %></strong>
+    <%= @comment.body.strip %>
+  </div>
+<% end %>

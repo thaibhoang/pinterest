@@ -19,7 +19,25 @@
     <%= pin.link %>
   </p>
    
-  <%= render partial: "pins/note", locals: {pin: pin, note: note} %>
-  <%= turbo_frame_tag "note" %>
+  <p>
+    <%= render partial: "pins/note", locals: {pin: pin, note: note} %>
+    <%= turbo_frame_tag "note" %>
+  </p>
 
+  <p>
+    <div class="comments-section">
+      <%= turbo_frame_tag("#{dom_id(pin)}_comments") do %>
+        <div id="add-comment"><%= render partial: "comments/form", locals: {pin: pin, comment: pin.comments.build} %></div>
+        <div>Comments</div>
+        <%= turbo_frame_tag("#{dom_id(pin)}_show_all_comments") do %>
+          <% if pin.comments.count == 0 %>
+            <div id="comment-empty">No comments yet! Add one to start the conversation.</div>
+          <% end %>
+          <% pin.comments.is_root.order(created_at: :desc).each do |comment| %>
+            <%= render partial: "shared/comment_short", locals: {pin: pin, comment: comment} %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </p>
 </div>
