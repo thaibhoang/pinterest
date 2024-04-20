@@ -3,6 +3,14 @@
 <%= turbo_frame_tag "content" do %>
   <hr>
   <div class="m1 md big">All boards</div>
+
+  <% if @user.boards.count == 0 %>
+    <div class="m1 md">
+      <div>You haven't created any board yet.</div>
+      <div><%= link_to "Create One", new_user_board_path(@user), data: {turbo_frame: "_top"} %></div>
+    </div>
+  <% end %>
+  
   <div id="all-boards"><%= render partial: "shared/all_boards", locals: {boards: @boards, user: @user} %></div>
 
   <hr>
@@ -10,4 +18,10 @@
   <div class="md big m1">Unorganized Ideas</div>
   <%= render partial: "shared/show_saved_pins", locals: {saved_pins: @unorganized_saved_pins} %>
 
+  <% if @user.saved_pins.count == 0 %>
+    <div class="m1 md">
+      <div>You haven't saved any pin yet.</div>
+      <div><%= link_to "Browse for Ideas", root_path, data: {turbo_frame: "_top"} %></div>
+    </div>
+  <% end %>
 <% end %>

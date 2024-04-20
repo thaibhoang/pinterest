@@ -11,4 +11,13 @@
       <% end %>
     <% end %>
   </div>
+
+  <% if @user.pins.count == 0 %>
+    <div class="m1 md">
+      <div>You haven't created any pin yet.</div>
+      <div><%= link_to "Create One", new_pin_path, data: {turbo_frame: "_top"} %></div>
+    </div>
+  <% end %>
 <% end %>
+
+
