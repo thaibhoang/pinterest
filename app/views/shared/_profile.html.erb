@@ -2,7 +2,7 @@
   <div>
     <div class="information">
       <div><%= user.email %></div>
-      <div>following count</div>
+      <div><%= pluralize(current_user.followers.count, "follower") %></div>
     </div>
     <div class="middle-nav">
       <div class="middle-one-line-container">

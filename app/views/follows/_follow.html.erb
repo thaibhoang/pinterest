@@ -1,0 +1,4 @@
+<%= turbo_frame_tag("follow_frame") do %>
+  <% follow = current_user.given_follows.find_by(followee: pin.user) %>
+  <%= button_to "Following", follow_path(follow), method: :delete %>
+<% end %>

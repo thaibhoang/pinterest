@@ -1,0 +1,9 @@
+<%= turbo_stream.update "follow_frame" do %>
+  <%= button_to "Follow", follows_path(followee_id: @followee_id), class: "not-follow" %>
+<% end %>
+
+
+
+<%= turbo_stream.replace "creator-info" do %>
+  <%= render partial: "users/creator_info", locals: {user: User.find(@followee_id)}  %>
+<% end %>

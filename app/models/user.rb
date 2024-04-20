@@ -8,4 +8,10 @@ class User < ApplicationRecord
   has_many :notes, dependent: :destroy
   has_many :saved_pins, dependent: :destroy
   has_many :comments, dependent: :destroy
+  
+  has_many :received_follows, class_name: "Follow", foreign_key: :followee_id
+  has_many :followers, through: :received_follows, source: :follower
+
+  has_many :given_follows, class_name: "Follow", foreign_key: :follower_id
+  has_many :followings, through: :given_follows, source: :followee
 end

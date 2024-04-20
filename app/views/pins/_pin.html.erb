@@ -39,6 +39,23 @@
           <%= pin.link %>
         </p>
       <% end %>
+
+
+      <div class="follow-container">
+        <%= render partial: "users/creator_info", locals: {user: pin.user} %>
+        <%# creator of the pin will not be able to follow himself %>
+        <div class="follow-button">
+          <% if current_user != pin.user %>
+            <% followed = current_user.followings.find_by(id: pin.user.id) %>
+            <% if followed %>
+              <%= render partial: "follows/follow", locals: {pin: pin} %>
+            <% end %>
+            <% if not followed %>
+              <%= render partial: "follows/following", locals: {pin: pin} %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
   
       <p class="m1">
         <%= render partial: "pins/note", locals: {pin: pin, note: note} %>

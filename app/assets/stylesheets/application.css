@@ -175,7 +175,7 @@ button, input[type=button], input[type=submit], input[type=reset], .custom-file-
   width: auto;
   color: white;
   background-color: var(--color30);
-  padding: 0.4rem 1rem;
+  padding: 0.5rem 1rem 0.45rem;
   border-radius: 1rem;
   margin: 0.25rem;
   display: inline-block;
@@ -245,4 +245,12 @@ nav a:hover {
 .right-side {
   margin-left: auto;
 }
-
+.not-follow {
+  background-color: rgb(180, 180, 180);
+  color: var(--color30)
+}
+.follow-container {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
