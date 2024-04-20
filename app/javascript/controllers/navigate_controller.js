@@ -7,16 +7,18 @@ export default class extends Controller {
   connect() {
     let path = this.getPath()
     let button_id = this.pathToTarget(path)
-    if (button_id >= 0 && button_id < 3 ) {
-      this.highlight(this.navButtonTargets[button_id])
-    }
-    else if (button_id === 4 || button_id === 3 ){
-      this.highlight(this.navButtonTargets[3]);
-      this.highlightUnder(this.navButtonTargets[4]);
-    }
-    else if (button_id === 5){
-      this.highlight(this.navButtonTargets[3]);
-      this.highlightUnder(this.navButtonTargets[5]);
+    if (button_id !== null) {
+      if (button_id >= 0 && button_id < 3 ) {
+        this.highlight(this.navButtonTargets[button_id])
+      }
+      else if (button_id === 4 || button_id === 3 ){
+        this.highlight(this.navButtonTargets[3]);
+        this.highlightUnder(this.navButtonTargets[4]);
+      }
+      else if (button_id === 5){
+        this.highlight(this.navButtonTargets[3]);
+        this.highlightUnder(this.navButtonTargets[5]);
+      }
     }
   }
 

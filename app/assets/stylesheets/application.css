@@ -147,7 +147,7 @@ a:hover {
 }
 .pin_img a {
   display: flex;
-  justify-content: end;
+  justify-content: center;
   margin-right: 0;
 }
 .pin_img img {
