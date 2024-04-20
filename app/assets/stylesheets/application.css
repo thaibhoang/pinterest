@@ -24,19 +24,8 @@
 }
 
 a {
+  text-decoration: none;
   color: black;
-}
-a:link {
-  text-decoration: none;
-}
-a:visited {
-  text-decoration: none;
-}
-a:hover {
-  text-decoration: underline;
-}
-a:active {
-  text-decoration: underline;
 }
 .container {
   width: calc(236px * 7 + 20px * 6);
@@ -238,7 +227,13 @@ nav a {
   padding: 0.75rem;
   margin: 0.5rem;
 }
-
+.border-bottom {
+  border-bottom: 2px solid white;
+}
+.highlight-under {
+  display: inline-block;
+  border-bottom: 2px solid var(--color10);
+}
 .right-side {
   margin-left: auto;
 }

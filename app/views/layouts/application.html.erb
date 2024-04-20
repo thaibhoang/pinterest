@@ -10,8 +10,8 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <nav data-controller="navigate" data-navigate-target="link" data-path=<%= request.fullpath %> >      
+  <body data-controller="navigate" data-navigate-target="link" data-path=<%= request.fullpath %>>
+    <nav>      
       <% if user_signed_in? %>
         <%= link_to "Home ", root_path, class: "md big", "data-navigate-target": "navButton" %>
         <%= link_to "Create Pin ", new_pin_path, class: "md big", "data-navigate-target": "navButton" %>
