@@ -1,6 +1,14 @@
 <div class="middle-container">
   <div>
     <div class="information">
+      <% if user.profile.avatar.present? %>
+        <%= link_to user_profile_path(user, user.profile) do %>
+          <div class="circular-image"><%= image_tag(user.resize_img(user.profile.avatar, 128, 500)) %></div>
+        <% end %>
+      <% else %>
+        <% text = user == current_user ? "About yourself" : "About user" %>
+        <div><%= link_to text, user_profile_path(user, user.profile) %></div>
+      <% end %>
       <%= render partial: "users/creator_info", locals: {user: user} %>
       <div class="follow-button">
         <% if current_user != user %>

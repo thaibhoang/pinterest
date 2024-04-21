@@ -1,0 +1,35 @@
+<%= turbo_frame_tag "profile-frame-info" do %>
+
+  <%= form_with(model: [@user, @profile]) do |form| %>
+    <% if @profile.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this pin from being saved:</h2>
+
+        <ul>
+          <% @profile.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div>
+      <%= form.label :avatar, "Upload Avatar", style: "display: block" %>
+      <%= form.file_field :avatar %>
+    </div>
+
+    <div>
+      <%= form.label :username, style: "display: block" %>
+      <%= form.text_field :username %>
+    </div>
+
+    <div>
+      <%= form.label :about, style: "display: block" %>
+      <%= form.text_area :about %>
+    </div>
+
+    <div>
+      <%= form.submit %>
+    </div>
+  <% end %>
+<% end %>

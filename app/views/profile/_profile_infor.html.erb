@@ -1,0 +1,20 @@
+<% unless (profile.avatar.present? || profile.username? || profile.about?) %>
+  <div>You have not added information to your profile. Click Edit profile to add Avatar and share more about yourself.</div>
+<% end %>
+<% if profile.avatar.present? %>
+  <div class="circular-image"><%= image_tag(profile.resize_img(profile.avatar, 128, 500)) %></div>
+<% end %>
+
+<% if profile.username? %>
+  <div class="m1">
+    <div>Username: </div>
+    <div><%= profile.username %></div>
+  </div>
+<% end %>
+
+<% if profile.about? %>
+  <div class="m1">
+    <div>About:</div>
+    <div><%= profile.about %></div>
+  </div>
+<% end %>

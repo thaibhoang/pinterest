@@ -30,6 +30,9 @@ a {
 a:hover {
   text-decoration: underline;
 }
+img {
+  border-radius: 1rem;
+}
 .container {
   width: calc(236px * 7 + 20px * 6);
   margin: 20px auto;
@@ -262,4 +265,15 @@ nav a:hover {
 #board-infor-frame {
   max-width: 30rem;
   min-width: 20rem;
+}
+.circular-image {
+  display: inline-block;
+  border-radius: 50%; 
+  width: 7.5rem; 
+  height: 7.5rem;
+  overflow: hidden;
+}
+.circular-image img{
+  height: auto;
+  display: block;
 }

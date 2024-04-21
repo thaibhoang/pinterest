@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :users, only: :show do
+    resources :profile
     resources :boards
     resources :_saved, only: :index
     resources :_created, only: :index

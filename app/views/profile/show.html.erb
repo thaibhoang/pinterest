@@ -1,0 +1,13 @@
+<div class="middle-container">
+  <div>
+    <div id="profile-frame">
+      <%= turbo_frame_tag "profile-frame-info" do %>
+        <%= render partial: "profile/profile_infor", locals: {profile: @profile} %>
+      
+        <% if current_user == @user %>
+          <%= link_to "Edit profile", edit_user_profile_path(current_user, @profile), class: "bold" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
