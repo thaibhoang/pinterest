@@ -122,6 +122,11 @@ a:hover {
   justify-content: center;
   align-items: center;
 }
+.one-line-container {
+  gap: 1rem;
+  display: flex;
+  align-items: center;
+}
 .information {
   display: flex;
   flex-direction: column;
@@ -165,12 +170,12 @@ input, textarea {
   width: 90%;
 }
 input[type=file] {
-  display: none;
+
 }
 input[type=checkbox] {
   width: auto;
 }
-button, input[type=button], input[type=submit], input[type=reset], .custom-file-upload { 
+button, input[type=button], input[type=submit], input[type=reset] { 
   border: none;
   width: auto;
   color: white;

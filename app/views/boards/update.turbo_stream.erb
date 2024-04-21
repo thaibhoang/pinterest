@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "#{dom_id(@board)}_privacy_change" do %>
+  <%= render partial: "boards/privacy_change", locals: { board: @board } %>
+<% end %>

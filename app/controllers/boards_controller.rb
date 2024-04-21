@@ -64,15 +64,11 @@ class BoardsController < ApplicationController
 
   # PATCH/PUT /boards/1 or /boards/1.json
   def update
-    names_used = current_user.boards.pluck(:name)
     respond_to do |format|
-      if names_used.include?(params[:board][:name])
-        flash[:error] = "Name already used"
-        format.html { render :edit }
-        format.json { render json: { error: "Name already used" }, status: :unprocessable_entity }
-      elsif @board.update(board_params)
+      if @board.update(board_params)
         format.html { redirect_to user_board_url(current_user, @board), notice: "Board was successfully updated." }
         format.json { render :show, status: :ok, location: @board }
+        format.turbo_stream
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @board.errors, status: :unprocessable_entity }

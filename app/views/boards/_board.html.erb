@@ -8,5 +8,6 @@
   <p>
     <div><strong>Name: <%= board.name %></strong></div>
     <div><strong>Description:</strong> <%= board.description %></div>
+    <div><%= render partial: "boards/privacy_change", locals: { board: board } %></div>
   </p>
 </div>
