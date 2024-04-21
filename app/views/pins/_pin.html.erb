@@ -61,6 +61,16 @@
         <%= render partial: "pins/note", locals: {pin: pin, note: note} %>
         <%= turbo_frame_tag "note" %>
       </p>
+
+      <p class="m1">
+        <div>
+          <%= turbo_frame_tag("like_frame_#{dom_id(pin)}") do %>
+            <%= render partial: 'likes/like_icon', locals: {likeable: pin} %>
+            <%= render partial: 'likes/like_count', locals: {likeable: pin} %>
+          <% end %>
+        </div>
+      </p>
+
       <p class="m1">
         <div class="comments-section">
           <%= turbo_frame_tag("#{dom_id(pin)}_comments") do %>

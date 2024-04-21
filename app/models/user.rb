@@ -15,7 +15,7 @@ class User < ApplicationRecord
   has_many :given_follows, class_name: "Follow", foreign_key: :follower_id
   has_many :followings, through: :given_follows, source: :followee
   has_one :profile
-
+  has_many :likes
 
   after_create :generate_profile
 
