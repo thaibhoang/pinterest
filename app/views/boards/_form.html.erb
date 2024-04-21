@@ -13,7 +13,7 @@
       </div>
     <% end %>
 
-    <% if defined?(pin_id) %>
+    <% if defined?(pin_id) && pin_id != nil %>
       <%= hidden_field_tag :pin_id, pin_id %>
       <%# pin_id is for the case of createing new board in "save pin process" %>
     <% end %>
@@ -38,8 +38,16 @@
       <%= form.check_box :keep_secret %>
     </div>
 
-    <div>
-      <%= form.submit %>
-    </div>
+    <% if defined?(pin_id) && pin_id != nil %>
+      <div>
+        <%= form.submit  %>
+      </div>
+    <% end %>
+
+    <% if pin_id == nil %>
+      <div>
+        <%= form.submit "Submit", data: { turbo_frame: "_top" } %>
+      </div>
+    <% end %>
   <% end %>
 <% end %>

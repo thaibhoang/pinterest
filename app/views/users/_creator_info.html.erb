@@ -1,6 +1,11 @@
 <div id="creator-info">
   <%= link_to user_path(user) do %>
-    <div><%= user.email %></div>
-    <div><%= pluralize(user.followers.count, "follower") %></div>
+    <div><strong><%= user.email %></strong></div>
+    <% count = user.followers.count %>
+    <% if count < 1000 %>
+      <div class="md"><%= pluralize(user.followers.count, "follower") %></div>
+    <% else %>    
+      <div class="md"><%= "#{(count/1000.0).round(1)}K followers" %></div>
+    <% end %>
   <% end %>
 </div>

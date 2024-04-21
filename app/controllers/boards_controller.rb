@@ -6,11 +6,16 @@ class BoardsController < ApplicationController
 
   # GET /boards or /boards.json
   def index
-    @boards = @user.boards
+    if (@user != current_user)
+      @boards = @user.boards.where(keep_secret: false)
+    else
+      @boards = @user.boards
+    end
   end
 
   # GET /boards/1 or /boards/1.json
   def show
+    redirect_to user__saved_index_path(@user) if (@board.keep_secret && @board.user != current_user)
     @saved_pins = @board.saved_pins
   end
 
@@ -29,11 +34,15 @@ class BoardsController < ApplicationController
   # POST /boards or /boards.json
   def create
     if params[:pin_id]
-      @pin = Pin.find(params[:pin_id])
+      @pin = Pin.find_by(id: params[:pin_id])
     end
     names_used = current_user.boards.pluck(:name)
     @board = current_user.boards.build(board_params)
     @options = current_user.boards.pluck(:name, :id)
+    if params[:pin_id] == nil
+      @board.save
+      redirect_to user_board_url(current_user, @board), notice: "Board was successfully created."
+    end
     respond_to do |format|
       if names_used.include?(params[:board][:name])
         flash[:error] = "Name already used"
@@ -43,8 +52,8 @@ class BoardsController < ApplicationController
         @new_board_id = @board.id
         @new_board_name = @board.name  
         @boards = current_user.boards
+        
         format.turbo_stream { flash.now[:notice] = "Board was successfully created." }
-        format.html { redirect_to user_board_url(current_user, @board), notice: "Board was successfully created." }
         format.json { render :show, status: :created, location: @board }
       else
         format.html { render :new, status: :unprocessable_entity }
