@@ -2,7 +2,7 @@
   <div>
     <h1>Editing board</h1>
   
-    <%= render "form", board: @board %>
+    <%= render partial: "boards/form", locals: {board: @board, pin_id: defined?(@pin_id) ? @pin_id : nil}  %>
   
     <br>
   
