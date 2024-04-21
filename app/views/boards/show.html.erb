@@ -1,12 +1,10 @@
 <div class="middle-container">
   <div>
-    <%= render @board %>
-    <% if @board.user == current_user %>
-      <div class="middle-one-line-container">
-        <%= link_to "Edit this board", edit_user_board_path(current_user, @board), class: "bold" %>
-        <%= link_to "Destroy this board", user_board_path(current_user, @board), data: {turbo_confirm: "Are you sure?", turbo_method: :delete}, class: "bold" %>
-      </div>
-    <% end %>
+    <div id="board-infor-frame">
+      <%= render partial: "boards/board_infor", locals: {board: @board} %>
+    </div>
+
+    <%= link_to "Destroy this board", user_board_path(current_user, @board), data: {turbo_confirm: "Are you sure?", turbo_method: :delete}, class: "bold" %>
   </div>
 </div>
 <hr>
