@@ -1,9 +1,7 @@
 <div id="<%= dom_id board %>">
-  <p>
-    <%= link_to image_tag(board.resize_img(board.cover, 300, 300)), board.cover if board.cover.attached? do %>
-      <%= %>
-    <% end %>
-  </p>
+  <div class="middle-container">
+    <%= link_to image_tag(board.resize_img(board.cover, 300, 300), class: "board-img"), board.cover if board.cover.attached?  %>
+  </div>
 
   <p>
     <div><strong>Name: <%= board.name %></strong></div>

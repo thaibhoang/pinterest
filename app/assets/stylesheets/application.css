@@ -169,9 +169,6 @@ input, textarea {
 .box input, .box textarea {
   width: 90%;
 }
-input[type=file] {
-
-}
 input[type=checkbox] {
   width: auto;
 }
@@ -258,4 +255,11 @@ nav a:hover {
   display: flex;
   gap: 2rem;
   align-items: center;
+}
+.board-img {
+  border-radius: 1rem;
+}
+#board-infor-frame {
+  max-width: 30rem;
+  min-width: 20rem;
 }
