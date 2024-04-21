@@ -69,3 +69,4 @@ end
 gem "devise", "~> 4.9"
 
 gem 'pry-rails'
+gem "font-awesome-sass", "~> 6.5"

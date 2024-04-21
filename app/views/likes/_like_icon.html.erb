@@ -1,6 +1,10 @@
 <% like = current_user.likes.find_by(likeable: likeable) %>
 <% if like == nil %>
-  <%= button_to "Like", likes_path, params: { like: { likeable_id: likeable.id, likeable_type: likeable.class.to_s } } %>
+  <%= button_to likes_path, params: { like: { likeable_id: likeable.id, likeable_type: likeable.class.to_s } }, class: "like" do %>
+    <i class="fa-regular fa-heart" style="color:#B197FC;"></i>
+  <% end %>
 <% else %>
-  <%= button_to "Unlike", like_path(like), method: :delete, params: { like: { likeable_id: likeable.id, likeable_type: likeable.class.to_s } } %>
+  <%= button_to like_path(like), method: :delete, params: { like: { likeable_id: likeable.id, likeable_type: likeable.class.to_s } }, class: "like" do %>
+    <i class="fa-solid fa-heart" style="color: #B197FC;"></i>
+  <% end %>
 <% end %>

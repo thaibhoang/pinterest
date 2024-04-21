@@ -13,6 +13,7 @@
  *= require_tree .
  *= require_self
  */
+@import "font-awesome";
 * {
   margin: 0;
   padding: 0;
@@ -276,4 +277,9 @@ nav a:hover {
 .circular-image img{
   height: auto;
   display: block;
+}
+button.like {
+  color: var(--color30);
+  background-color: white;
+  padding: 0;
 }
