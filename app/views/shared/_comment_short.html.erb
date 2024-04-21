@@ -6,12 +6,27 @@
         <%= comment.body.strip %>
       </div>
     <% end %>
-    <%= link_to "Reply", new_pin_comment_path(pin, parent_id: comment.id), data: {turbo_frame: "#{dom_id(comment)}_new_reply"}, class: "bold blur" %>
+
+    <%# Like a comment %>
+    <div class="one-line-container">
+      <div>
+        <%= turbo_frame_tag("like_frame_#{dom_id(comment)}") do %>
+          <div class="one-line-container">
+            <%= render partial: 'likes/like_icon', locals: {likeable: comment} %>
+            <%= render partial: 'likes/like_count', locals: {likeable: comment} %>
+          </div>
+        <% end %>
+      </div>
+      <%= link_to "Reply", new_pin_comment_path(pin, parent_id: comment.id), data: {turbo_frame: "#{dom_id(comment)}_new_reply"}, class: "bold blur" %>
+      <% if comment.user == current_user %>
+        <%= link_to "Edit", edit_pin_comment_path(pin, comment), data: {turbo_frame: "#{dom_id(comment)}_body"}, class: "bold blur" %>
+        <%= link_to "Delete", pin_comment_path(pin, comment), data: {turbo_method: :delete, turbo_comfirm: "Are you sure?"}, class: "bold blur" %>
+      <% end %>
+    </div>
+
+
     <%= turbo_frame_tag("#{dom_id(comment)}_new_reply") %>
-    <% if comment.user == current_user %>
-      <%= link_to "Edit", edit_pin_comment_path(pin, comment), data: {turbo_frame: "#{dom_id(comment)}_body"}, class: "bold blur" %>
-      <%= link_to "Delete", pin_comment_path(pin, comment), data: {turbo_method: :delete, turbo_comfirm: "Are you sure?"}, class: "bold blur" %>
-    <% end %>
+
     <%= turbo_frame_tag("#{dom_id(comment)}_show_replies") do %>
       <% count = comment.replies.count%>
       <% if count > 0 %>

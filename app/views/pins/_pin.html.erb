@@ -65,8 +65,10 @@
       <p class="m1">
         <div>
           <%= turbo_frame_tag("like_frame_#{dom_id(pin)}") do %>
-            <%= render partial: 'likes/like_icon', locals: {likeable: pin} %>
-            <%= render partial: 'likes/like_count', locals: {likeable: pin} %>
+            <div class="one-line-container">
+              <%= render partial: 'likes/like_icon', locals: {likeable: pin} %>
+              <%= render partial: 'likes/like_count', locals: {likeable: pin} %>
+            </div>
           <% end %>
         </div>
       </p>
