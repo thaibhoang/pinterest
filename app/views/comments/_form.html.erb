@@ -1,26 +1,34 @@
-<%= turbo_frame_tag "form-comment_#{comment.parent_id ? comment.parent_id : comment.id}" do %>
-  <%= form_with(model: [pin, comment] ) do |form| %>
-    <% if comment.errors.any? %>
-      <div >
-        <ul>
-          <% comment.errors.each do |error| %>
-            <li><%= error.full_message %></li>
-          <% end %>
-        </ul>
+<% if defined?(cancel_form) && cancel_form %>
+  <%= turbo_frame_tag "form-comment_#{comment.parent_id ? comment.parent_id : comment.id}" %>
+<% else %>
+  <%= turbo_frame_tag "form-comment_#{comment.parent_id ? comment.parent_id : comment.id}" do %>
+    <%= form_with(model: [pin, comment] ) do |form| %>
+      <% if comment.errors.any? %>
+        <div >
+          <ul>
+            <% comment.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    
+      <div>
+        <% placeholder = comment.parent_id ? "Reply" : "Add a comment" %>
+        <%= form.text_area :body, placeholder: placeholder %>
       </div>
-    <% end %>
-  
-    <div>
-      <% placeholder = comment.parent_id ? "Reply" : "Add a comment" %>
-      <%= form.text_area :body, placeholder: placeholder %>
-    </div>
-  
+    
       <div>
         <%= form.hidden_field :parent_id, value: comment.parent_id %>
       </div>
-  
-    <div>
-      <%= form.submit "Send" %>
-    </div>
+    
+      <div>
+        <%= form.submit "Send" %>
+        <% unless defined?(not_show_cancel_button) %>
+          <%= link_to 'Cancel', new_pin_comment_path(pin, parent_id: comment.parent_id, cancel_form: true) %>
+        <% end %>
+      </div>
+      
+    <% end %>
   <% end %>
 <% end %>
