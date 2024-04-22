@@ -15,6 +15,7 @@
 
   <div>
     <%= form.submit "Save" %>
+    <%= link_to "Cancel", edit_pin_saved_pin_path(pin, saved_pin, cancel_form:true) %>
   </div>
 <% end %>
 <%= button_to "Delete", pin_saved_pin_path(pin, saved_pin), method: :delete %>

@@ -9,6 +9,7 @@ class SavedPinsController < ApplicationController
 
   # GET /saved_pins/1/edit
   def edit
+    @cancel_form = params[:cancel_form] ? true : false
   end
 
   # POST /saved_pins or /saved_pins.json
