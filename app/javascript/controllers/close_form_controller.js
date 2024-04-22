@@ -1,0 +1,14 @@
+import { Controller } from "@hotwired/stimulus"
+
+// Connects to data-controller="close-form"
+export default class extends Controller {
+  static targets = ["container", "button"]
+  connect() {
+    console.log(this.containerTarget, this.buttonTarget)
+    this.containerTarget.addEventListener('click', (event) => {
+      if (event.target === this.containerTarget) {
+        this.buttonTarget.click()
+      }
+    });
+  }
+}

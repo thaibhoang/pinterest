@@ -15,6 +15,6 @@
 
   <div>
     <%= form.submit "Save on Board" %>
-    <%= link_to "Cancel", new_pin_saved_pin_path(pin, cancel_form: true) %>
+    <%= link_to "Cancel", new_pin_saved_pin_path(pin, cancel_form: true), data: {close_form_target: "button"} %>
   </div>
 <% end %>
