@@ -16,6 +16,7 @@ class CommentsController < ApplicationController
 
   # GET /comments/1/edit
   def edit
+    @cancel_form = params[:cancel_form] ? true : false
   end
 
   # POST /comments or /comments.json
