@@ -21,6 +21,8 @@ class PinsController < ApplicationController
 
   # GET /pins/1/edit
   def edit
+    @in_frame_mode = params[:in_frame_mode] ? true : false
+    @cancel_form = params[:cancel_form] ? true : false
   end
 
   # POST /pins or /pins.json
