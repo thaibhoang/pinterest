@@ -113,7 +113,6 @@ img {
 }
 .left-padding-1rem {  
   padding-left: 1rem;
-  padding-top: 0.25rem;
 }
 .middle-container {
   display: flex;
@@ -207,6 +206,10 @@ a {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
+.m0_25 {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
 .md {
   text-align: center;
 }
@@ -257,7 +260,7 @@ nav a:hover {
 }
 .follow-container {
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
   align-items: center;
 }
 .board-img {
@@ -268,11 +271,13 @@ nav a:hover {
   min-width: 20rem;
 }
 .circular-image {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(201, 201, 201);
   border-radius: 50%; 
-  width: 7.5rem; 
-  height: 7.5rem;
   overflow: hidden;
+  font-weight: bold;
 }
 .circular-image img{
   height: auto;
@@ -282,4 +287,9 @@ button.like {
   color: var(--color30);
   background-color: white;
   padding: 0;
+}
+.align-items-center {
+  gap: 0.25rem;
+  display: flex;
+  align-items: center;
 }

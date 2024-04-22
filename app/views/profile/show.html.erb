@@ -5,7 +5,7 @@
         <%= render partial: "profile/profile_infor", locals: {profile: @profile} %>
       
         <% if current_user == @user %>
-          <%= link_to "Edit profile", edit_user_profile_path(current_user, @profile), class: "bold" %>
+          <div class="md"><%= link_to "Edit profile", edit_user_profile_path(current_user, @profile), class: "bold" %></div>
         <% end %>
       <% end %>
     </div>

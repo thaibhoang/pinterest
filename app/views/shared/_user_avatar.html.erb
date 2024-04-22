@@ -1,0 +1,5 @@
+<% if user.profile.avatar.present? %>
+  <div class="circular-image" style="width: <%=size%>px; height: <%=size%>px"><%= image_tag(user.resize_fill_img(user.profile.avatar, size, size)) %></div>
+<% else %>
+  <div class="circular-image" style="width: <%=size%>px; height: <%=size%>px"><%= user.email[0].upcase %></div>
+<% end %>

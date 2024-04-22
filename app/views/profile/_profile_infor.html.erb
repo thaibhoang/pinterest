@@ -1,9 +1,8 @@
 <% unless (profile.avatar.present? || profile.username? || profile.about?) %>
-  <div>You have not added information to your profile. Click Edit profile to add Avatar and share more about yourself.</div>
+  <div>Click Edit profile to add Avatar</div>
+  <div>and share more about yourself</div>
 <% end %>
-<% if profile.avatar.present? %>
-  <div class="circular-image"><%= image_tag(profile.resize_img(profile.avatar, 128, 500)) %></div>
-<% end %>
+<%= render partial: "shared/user_avatar", locals: {user: profile.user, size: 128} %>
 
 <% if profile.username? %>
   <div class="m1">

@@ -1,14 +1,17 @@
 <%= turbo_frame_tag(dom_id(comment)) do %>
   <div class="left-padding-1rem">
     <%= turbo_frame_tag("#{dom_id(comment)}_body") do %>
-      <div>
-        <strong><%= comment.user.email.truncate(20) %></strong>
+      <div class="align-items-center">
+        <%= link_to user_path(comment.user), data: {turbo_frame: "_top"}, class: "align-items-center" do %>
+          <%= render partial: "shared/user_avatar", locals: {user: comment.user, size: 32} %>
+          <strong><%= comment.user.email.truncate(15) %></strong>
+        <% end %>
         <%= comment.body.strip %>
       </div>
     <% end %>
 
     <%# Like a comment %>
-    <div class="one-line-container">
+    <div class="one-line-container left-padding-1rem">
       <div>
         <%= turbo_frame_tag("like_frame_#{dom_id(comment)}") do %>
           <div class="one-line-container">

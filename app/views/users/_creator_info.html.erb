@@ -1,6 +1,6 @@
 <div id="creator-info">
   <%= link_to user_path(user) do %>
-    <div><strong><%= user.email %></strong></div>
+    <div><strong><%= user.email.truncate(15) %></strong></div>
     <% count = user.followers.count %>
     <% if count < 1000 %>
       <div class="md"><%= pluralize(user.followers.count, "follower") %></div>

@@ -42,6 +42,7 @@
 
 
       <div class="follow-container">
+        <%= render partial: "shared/user_avatar", locals: {user: pin.user, size: 48} %>
         <%= render partial: "users/creator_info", locals: {user: pin.user} %>
         <%# creator of the pin will not be able to follow himself %>
         <div class="follow-button">
@@ -77,7 +78,7 @@
         <div class="comments-section">
           <%= turbo_frame_tag("#{dom_id(pin)}_comments") do %>
             <div id="add-comment"><%= render partial: "comments/form", locals: {pin: pin, comment: pin.comments.build} %></div>
-            <div class="bold">Comments</div>
+            <div class="bold m1">Comments</div>
             <%= turbo_frame_tag("#{dom_id(pin)}_show_all_comments") do %>
               <% if pin.comments.count == 0 %>
                 <div id="comment-empty">No comments yet! Add one to start the conversation.</div>
