@@ -8,7 +8,11 @@ Rails.application.routes.draw do
     resources :comments
   end
   
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: "users/registrations",
+    sessions: "users/sessions",
+    omniauth_callbacks: "users/omniauth_callbacks"
+  }
 
   resources :users, only: :show do
     resources :profile

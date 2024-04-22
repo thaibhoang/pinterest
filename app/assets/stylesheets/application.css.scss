@@ -172,6 +172,11 @@ input, textarea {
 .box input, .box textarea {
   width: 90%;
 }
+input[type=image] {
+  width: auto;
+  padding: 0;
+  border: none;
+}
 input[type=checkbox] {
   width: auto;
 }
