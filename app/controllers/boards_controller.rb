@@ -22,6 +22,8 @@ class BoardsController < ApplicationController
   # GET /boards/new
   def new
     @board = current_user.boards.build
+    @in_saved_pin_mode = params[:in_saved_pin_mode] ? true : false
+    @cancel_form = params[:cancel_form] ? true : false
     if params[:pin_id]
       @pin_id = params[:pin_id]
     end

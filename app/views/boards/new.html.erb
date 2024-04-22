@@ -2,7 +2,11 @@
   <div>
     <h1>New board</h1>
   
-    <%= render partial: "boards/form", locals: {board: @board, pin_id: defined?(@pin_id) ? @pin_id : nil} %>
+    <%= render partial: "boards/form", 
+      locals: {board: @board, 
+               pin_id: defined?(@pin_id) ? @pin_id : nil, 
+               in_saved_pin_mode: @in_saved_pin_mode,
+               cancel_form: @cancel_form} %>
   
     <br>
   

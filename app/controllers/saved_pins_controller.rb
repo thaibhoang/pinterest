@@ -4,6 +4,7 @@ class SavedPinsController < ApplicationController
 
   def new
     @saved_pin = @pin.saved_pins.build
+    @cancel_form = params[:cancel_form] ? true : false
   end
 
   # GET /saved_pins/1/edit
