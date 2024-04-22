@@ -32,9 +32,12 @@
   </div>
 
   <div>
-    <%= form.submit %>
+    
     <% if in_frame_mode %>
-      <%= link_to "Cancel", edit_pin_path(pin, cancel_form: true) %>
+      <%= form.submit %>
+      <%= link_to "Cancel", edit_pin_path(pin, cancel_form: true), data: {close_form_target: "button"} %>
+    <% else %>
+      <%= form.submit "Submit", data: {turbo: "false"} %>
     <% end %>
   </div>
 <% end %>

@@ -5,7 +5,15 @@
       <%= turbo_frame_tag [dom_id(@pin), "edit_layout"] %>
     <% else %>
       <%= turbo_frame_tag [dom_id(@pin), "edit_layout"] do %>
-        <%= render partial: "pins/edit_form", locals: {pin: @pin, in_frame_mode: @in_frame_mode} %>
+        <% if @in_frame_mode %>
+          <div class="modal" data-controller="close-form" data-close-form-target="container" >
+            <div class="modal-content">
+              <%= render partial: "pins/edit_form", locals: {pin: @pin, in_frame_mode: @in_frame_mode} %>
+            </div>
+          </div>
+        <% else %>
+          <%= render partial: "pins/edit_form", locals: {pin: @pin, in_frame_mode: @in_frame_mode} %>
+        <% end %>
       <% end %>
     <% end %>
   

@@ -4,7 +4,6 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ["container", "button"]
   connect() {
-    console.log(this.containerTarget, this.buttonTarget)
     this.containerTarget.addEventListener('click', (event) => {
       if (event.target === this.containerTarget) {
         this.buttonTarget.click()
