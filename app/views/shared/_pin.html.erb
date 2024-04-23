@@ -1,9 +1,13 @@
-<% if pin.image.attached? %>
+<% if pin.image.attached? || pin.image_url.present? %>
   <div class="relative-container">
     <% frame_tag_id = defined?(saved_pin) ? "box_#{dom_id(pin)}" : "original_box_#{dom_id(pin)}" %>
     <%= turbo_frame_tag(frame_tag_id) do %>
       <div class="box">
-        <div><%= link_to image_tag(pin.resize_img(pin.image, 236, 760)), pin , data: { turbo_frame: "_top" } %></div>
+        <% if pin.image_url.present? %>
+          <div style="width: 236px;"><%= link_to image_tag(pin.image_url, style: 'width: 100%; height: auto;'), pin , data: { turbo_frame: "_top" } %></div>
+        <% else %>
+          <div><%= link_to image_tag(pin.resize_img(pin.image, 236, 760)), pin , data: { turbo_frame: "_top" } %></div>
+        <% end %>
         <%= turbo_frame_tag(dom_id(pin)) do %>
 
           <% if frame_tag_id == "original_box_#{dom_id(pin)}" %>

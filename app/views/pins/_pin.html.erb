@@ -1,7 +1,11 @@
 <div class="middle-container">
   <div id="<%= dom_id pin %>" class= "pin_display">
     <p class = "pin_img">
-      <%= link_to image_tag(pin.resize_img(pin.image, 508, 760)), pin.image if pin.image.attached? %>
+      <% if pin.image_url.present? %>
+        <%= link_to image_tag(pin.image_url, style: 'width: 508px; height: auto;'), pin.image_url , data: { turbo_frame: "_top" } %>
+      <% else %>
+        <%= link_to image_tag(pin.resize_img(pin.image, 508, 760)), pin.image if pin.image.attached? %>
+      <% end %>
     </p>
     
     <div class = "pin_content">
