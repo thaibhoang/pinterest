@@ -1,7 +1,7 @@
 <%= turbo_frame_tag(dom_id(comment)) do %>
   <div class="left-padding-1rem">
     <%= turbo_frame_tag("#{dom_id(comment)}_body") do %>
-      <div class="align-items-center">
+      <div class="comment-body">
         <%= link_to user_path(comment.user), data: {turbo_frame: "_top"}, class: "align-items-center" do %>
           <%= render partial: "shared/user_avatar", locals: {user: comment.user, size: 32} %>
           <strong><%= comment.user.email.truncate(15) %></strong>

@@ -127,6 +127,7 @@ end
 def generate_5_boards(user)
   5.times do 
     user.boards.create(
+      cover_url: random_img_url,
       name: random_words(4),
       description: random_words(10))
   end
@@ -142,6 +143,45 @@ def generate_15_pins(user)
   end
 end
 
+def generate_avatar(user)
+  user.profile.update(
+    avatar_url: random_img_url
+  )
+end
+
+def generate_comment_for_user_pins(user)
+  User.all.each do |commenter|
+    user.pins.each do |pin|
+      commenter.comments.create(
+        pin: pin,
+        body: random_words(4)
+      )
+    end
+  end
+end
+
+def generate_like_for_user_pins(user)
+  User.all.each do |liker|
+    user.pins.each do |pin|
+      liker.likes.create(
+        pin: pin,
+        body: random_words(4)
+      )
+    end
+  end
+end
+
+def generate_follow_for_user(user)
+  User.all.each do |follower|
+    if follower != user
+      Follow.create(
+        follower: follower,
+        followee: user
+      )
+    end
+  end
+end
+
 (0..9).each do |i|
   user = User.find_or_initialize_by(email: "demo#{i}@example.com")
   unless user.persisted?
@@ -151,4 +191,7 @@ end
   end
   generate_5_boards(user)
   generate_15_pins(user)
+  generate_avatar(user)
+  generate_comment_for_user_pins(user)
+  generate_follow_for_user(user)
 end

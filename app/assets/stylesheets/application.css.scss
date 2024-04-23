@@ -303,6 +303,17 @@ button.like {
   display: flex;
   align-items: center;
 }
+.comment-body a {
+  display: inline-block;
+  position: relative;
+  padding-left: 1.5rem;
+}
+.comment-body a div {
+  position: absolute;
+  top: 50%;
+  left: -0.45rem;
+  transform: translateY(-50%);
+}
 .modal {
   position: fixed;
   top: 0;
@@ -364,4 +375,7 @@ button.like {
 input.save-button {
   background-color: var(--color10);
   color: var(--color30);
+}
+.inline-block {
+  display: inline-block;
 }
