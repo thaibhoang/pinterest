@@ -1,6 +1,11 @@
 <% destination = board_id.nil? ? user__saved_index_path(current_user) : user_board_path(current_user, Board.find(board_id)) %>
 <% name = board_id.nil? ? "Profile" : Board.find(board_id).name %>
-<% name_prettier = "Been saved to #{name}" %>
-<%= link_to name_prettier, destination, data: {turbo_frame: "_top"} %>
+<% name_prettier = "#{name.truncate(15)}" %>
+<div class="top-left bold">
+  <%= link_to destination, class: "white", data: {turbo_frame: "_top"} do %>
+    <span><%= name_prettier %></span> 
+    <i class="fa-solid fa-check"></i>
+  <% end %>
+</div>
 <% saved_pin = SavedPin.find_by(user: current_user, pin: pin, board_id: board_id) %>
-<%= button_to "Unsave", pin_saved_pin_path(pin, saved_pin), method: :delete %>
+<div class="bottom-left"><%= button_to "Saved", pin_saved_pin_path(pin, saved_pin), method: :delete %></div>

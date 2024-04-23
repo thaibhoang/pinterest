@@ -317,3 +317,46 @@ button.like {
   border-radius: 5px;
   z-index: 10;
 }
+.relative-container {
+  position: relative;  
+}
+.relative-container:hover img {
+  filter: brightness(75%);
+}
+.relative-container:hover .top-left, .relative-container:hover .bottom-left, .relative-container:hover .bottom-right  {
+  display: inline-block;
+}
+.top-left {
+  display: none;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  border-radius: 1rem;
+  padding: 0 0.35rem;
+  background-color: var(--color30);
+}
+.bottom-left {
+  display: none;
+  position: absolute;
+  bottom: 0.75rem;
+  left: 0.5rem;
+}
+.bottom-right {
+  display: none;
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  border-radius: 1rem;
+  padding: 0.1rem 0.35rem;
+  background-color: var(--color30);
+}
+.white {
+  color: white;
+}
+.grey-background {
+  color: rgb(194, 194, 194);
+}
+input.save-button {
+  background-color: var(--color10);
+  color: var(--color30);
+}

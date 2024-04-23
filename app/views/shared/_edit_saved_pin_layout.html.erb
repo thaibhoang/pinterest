@@ -1,4 +1,7 @@
-<div>
-  <%= link_to "Edit this Saved Pin" ,edit_pin_saved_pin_path(pin, saved_pin), data: { turbo_frame: "edit#{dom_id(saved_pin)}" } %>
+<div class="bottom-right">
+  <%= link_to edit_pin_saved_pin_path(pin, saved_pin), class: "bold white", data: { turbo_frame: "edit#{dom_id(saved_pin)}" } do %>
+    <span>Edit</span>
+    <i class="fa-solid fa-pen"></i>
+  <% end %>
   <%= turbo_frame_tag("edit#{dom_id(saved_pin)}") %>
 </div>

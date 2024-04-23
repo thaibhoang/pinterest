@@ -1,37 +1,36 @@
 <% if pin.image.attached? %>
-  <% frame_tag_id = defined?(saved_pin) ? "box_#{dom_id(pin)}" : "original_box_#{dom_id(pin)}" %>
-  <%= turbo_frame_tag(frame_tag_id) do %>
-    <div class="box">
-      <div><%= link_to image_tag(pin.resize_img(pin.image, 236, 760)), pin , data: { turbo_frame: "_top" } %></div>
+  <div class="relative-container">
+    <% frame_tag_id = defined?(saved_pin) ? "box_#{dom_id(pin)}" : "original_box_#{dom_id(pin)}" %>
+    <%= turbo_frame_tag(frame_tag_id) do %>
+      <div class="box">
+        <div><%= link_to image_tag(pin.resize_img(pin.image, 236, 760)), pin , data: { turbo_frame: "_top" } %></div>
+        <%= turbo_frame_tag(dom_id(pin)) do %>
 
-      <%= turbo_frame_tag(dom_id(pin)) do %>
+          <% if frame_tag_id == "original_box_#{dom_id(pin)}" %>
+            <% been_saved, saved_to = saved_to_board(pin, current_user) %>
+            <%# saved_to_board is a helper method %>
+            <% if been_saved == false %>
+              <%= render partial: "shared/saved_pin_form_layout", locals: {pin: pin} %>
+            <% end %>
+            <% if been_saved == true %>
+              <%= render partial: "shared/unsave_layout", locals: {pin: pin, board_id: saved_to} %>
+            <% end %>
+          <% end %>
 
-        <% if frame_tag_id == "original_box_#{dom_id(pin)}" %>
-          <% been_saved, saved_to = saved_to_board(pin, current_user) %>
-          <%# saved_to_board is a helper method %>   
-          <% if been_saved == false %>
+          <% if frame_tag_id == "box_#{dom_id(pin)}" %>
             <%= render partial: "shared/saved_pin_form_layout", locals: {pin: pin} %>
           <% end %>
-          <% if been_saved == true %>
-            <%= render partial: "shared/unsave_layout", locals: {pin: pin, board_id: saved_to} %>
+
+          <% if defined?(saved_pin) %>
+            <%= render partial: "shared/edit_saved_pin_layout", locals: {pin: pin, saved_pin: saved_pin} %>
           <% end %>
         <% end %>
-
-        <% if frame_tag_id == "box_#{dom_id(pin)}" %>
-          <%= render partial: "shared/saved_pin_form_layout", locals: {pin: pin} %>
-        <% end %>      
-
-        <% if defined?(saved_pin) %>
-          <%= render partial: "shared/edit_saved_pin_layout", locals: {pin: pin, saved_pin: saved_pin} %>
-        <% end %>
-      <% end %>
-
-        <% if defined?(edit_pin) %>
-          <%= render partial: "shared/edit_pin_layout", locals: {pin: pin} %>
-        <% end %>
-
-      
-    </div>
-  <% end %>
+    
+      </div>
+    <% end %>
+    <% if defined?(edit_pin) && edit_pin %>
+        <%= render partial: "shared/edit_pin_layout", locals: {pin: pin} %>
+    <% end %>
+  </div>
 <% end %>
   

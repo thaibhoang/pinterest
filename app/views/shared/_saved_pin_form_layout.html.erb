@@ -1,14 +1,20 @@
 <div id="<%= dom_id(pin) %>_save_pin_form_mini">
-  <% save_pin_profile = check_saved_to_profile(pin, current_user) %>
-  <% if save_pin_profile.nil? %>
-    <%= form_with model: [pin, pin.saved_pins.build] do |f| %>
-      <%= f.submit "Save to Profile" %>
+  <div class="bottom-left">
+    <% save_pin_profile = check_saved_to_profile(pin, current_user) %>
+    <% if save_pin_profile.nil? %>
+      <%= form_with model: [pin, pin.saved_pins.build] do |f| %>
+        <%= f.submit "Save", class: "save-button" %>
+      <% end %>
     <% end %>
-  <% end %>
-  <% if save_pin_profile %>
-    <%= button_to "Unsave from Profile", pin_saved_pin_path(pin, save_pin_profile), method: :delete %>
-  <% end %>
+    <% if save_pin_profile %>
+      <%= button_to "Saved", pin_saved_pin_path(pin, save_pin_profile), method: :delete %>
+    <% end %>
+  </div>
   
-  <%= link_to "Save to another Board" ,new_pin_saved_pin_path(pin), data: { turbo_frame: "#{dom_id(pin)}_new_saved_pin" } %>
-  <%= turbo_frame_tag("#{dom_id(pin)}_new_saved_pin") %>
+  <div class="top-left">
+    <%= link_to new_pin_saved_pin_path(pin), class: "bold white", data: { turbo_frame: "#{dom_id(pin)}_new_saved_pin" } do %>
+      <span>Choose Board</span> <i class="fa-solid fa-circle-chevron-down"></i>
+    <% end %>
+    <%= turbo_frame_tag("#{dom_id(pin)}_new_saved_pin") %>
+  </div>
 </div>
