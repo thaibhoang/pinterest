@@ -33,10 +33,11 @@ class SavedPinsController < ApplicationController
 
   # PATCH/PUT /saved_pins/1 or /saved_pins/1.json
   def update
-    respond_to do |format|
+    return if @saved_pin.user != current_user
+    respond_to do |format|  
       if @saved_pin.update(board_id: params[:board_id])
         @pin = @saved_pin.pin
-        format.html { redirect_to user_board_url(current_user, old_board), notice: "Saved pin was successfully updated." }
+        format.html { redirect_to root_path, notice: "Saved pin was successfully updated." }
         format.json { render :show, status: :ok, location: @saved_pin }
         format.turbo_stream { flash.now[:notice] = "Saved pin was successfully updated." }
       else
@@ -48,6 +49,7 @@ class SavedPinsController < ApplicationController
 
   # DELETE /saved_pins/1 or /saved_pins/1.json
   def destroy
+    return if @saved_pin.user != current_user
     @removed_from_profile = @saved_pin.board_id == nil ? true : false
     @saved_pin.destroy!
 
