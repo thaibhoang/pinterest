@@ -4,10 +4,11 @@
       <%= render partial: "boards/board_infor", locals: {board: @board} %>
     </div>
 
-    <%= link_to "Destroy this board", user_board_path(current_user, @board), data: {turbo_confirm: "Are you sure?", turbo_method: :delete}, class: "bold" %>
+    <% if current_user == @board.user %>
+      <%= link_to "Destroy this board", user_board_path(current_user, @board), data: {turbo_confirm: "Are you sure?", turbo_method: :delete}, class: "bold" %>
+    <% end %>
   </div>
 </div>
 <hr>
-
 
 <div id="pins-container"><%= render partial: "shared/show_saved_pins", locals: {saved_pins: @saved_pins} %></div>

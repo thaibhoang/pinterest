@@ -6,6 +6,8 @@
   <p>
     <div><strong>Name: <%= board.name %></strong></div>
     <div><strong>Description:</strong> <%= board.description %></div>
-    <div><%= render partial: "boards/privacy_change", locals: { board: board } %></div>
+    <% if current_user == @board.user %>
+      <div><%= render partial: "boards/privacy_change", locals: { board: board } %></div>
+    <% end %>
   </p>
 </div>
