@@ -9,5 +9,9 @@ export default class extends Controller {
         this.buttonTarget.click()
       }
     });
+    this.buttonTarget.addEventListener('click', (event) => {
+      event.preventDefault();
+      this.containerTarget.remove();
+    });
   }
 }
