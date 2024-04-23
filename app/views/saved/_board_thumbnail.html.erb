@@ -2,11 +2,18 @@
 <div class="board_box">
   <%= link_to user_board_path(user, board), data: { turbo_frame: "_top" } do %>
     <div class="box">
-      <% if board.cover.attached? %>
-        <%= image_tag(board.resize_img(board.cover, 157, 157), class: "board-thumbnail") %>
-      <% else %>
-        <div class="img_place_holder"></div>
-      <% end %>
+      <div class="board-cover">
+        <% if board.cover_url.present? %>
+          <%= image_tag(board.cover_url, style: 'height: 100%; width: 100%; object-fit: cover;', class: "board-thumbnail") %>
+        <% else %>
+          <% if board.cover.attached? %>
+            <%= image_tag(board.resize_fill_img(board.cover, 157, 157), class: "board-thumbnail") %>
+          <% else %>
+            <div class="img_place_holder"></div>
+          <% end %>
+        <% end %>
+      </div>
+
       <div class="bold"><%= board.name.strip.truncate(18) %></div>
       <% if board.saved_pins.count > 0 %>
         <div><%= pluralize(board.saved_pins.count, "pin") %></div>
@@ -16,3 +23,5 @@
     </div>
   <% end %>
 </div>
+
+    

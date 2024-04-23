@@ -1,6 +1,10 @@
 <div id="<%= dom_id board %>">
   <div class="middle-container">
-    <%= link_to image_tag(board.resize_img(board.cover, 300, 300), class: "board-img"), board.cover if board.cover.attached?  %>
+    <% if board.cover_url.present? %>
+      <%= link_to image_tag(board.cover_url, style: 'width: 300px; height: auto;', class: "board-img"), board.cover_url %>
+    <% else %>
+      <%= link_to image_tag(board.resize_img(board.cover, 300, 300), class: "board-img"), board.cover if board.cover.attached?  %>
+    <% end %>
   </div>
 
   <p>
@@ -11,3 +15,5 @@
     <% end %>
   </p>
 </div>
+
+
