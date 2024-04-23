@@ -1,5 +1,9 @@
-<h1>New note</h1>
-<%= turbo_frame_tag "note" do %>
-  <%= render partial: "form", locals: { pin: @pin, note: @note} %>
+<%= turbo_frame_tag "note" do %> 
+  <% if @cancel %>    
+    <div>What do you want to remember about this Pin?</div>
+    <%= link_to "Add a Note", new_pin_note_path(@pin), class: "bold" %>
+  <% else %>
+    <%= render partial: "form", locals: { pin: @pin, note: @note} %>
+    <%= link_to "Cancel", new_pin_note_path(@pin, cancel: true), class: "bold" %>
+  <% end %>
 <% end %>
-<br>

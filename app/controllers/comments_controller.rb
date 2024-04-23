@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
   # GET /comments/new
   def new    
     @comment = @pin.comments.build(parent_id: params[:parent_id])
-    @turbo_frame_id = params[:parent_id] ? "comment_#{params[:parent_id]}_new_reply" : "#{dom_id(@comment)}_new_reply"
+    @turbo_frame_id = params[:parent_id] ? "comment_#{params[:parent_id]}_new_reply" : "comment_#{@comment.id}_new_reply"
     @cancel_form = params[:cancel_form] ? true : false
   end
 

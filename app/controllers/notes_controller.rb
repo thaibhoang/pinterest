@@ -7,11 +7,13 @@ class NotesController < ApplicationController
 
   # GET /notes/new
   def new
-    @note = @pin.notes.build    
+    @note = @pin.notes.build   
+    @cancel = params[:cancel] ? true : false
   end
 
   # GET /notes/1/edit
   def edit
+    @cancel = params[:cancel] ? true : false
   end
 
   # POST /notes or /notes.json

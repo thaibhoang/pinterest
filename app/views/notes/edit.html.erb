@@ -1,11 +1,9 @@
-<h1>Editing note</h1>
-
 <%= turbo_frame_tag "note" do %>
-  <%= render partial: "form", locals: {pin: @pin, note: @note} %>
-
-  <div>
-    <%= link_to "Delete note", pin_note_path(@pin, @note), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
-  </div>
-
-  <br>
+  <% if @cancel %>
+    <%= link_to "Edit Note", edit_pin_note_path(@pin, @note), class: "bold" %>
+  <% else %>    
+    <%= render partial: "form", locals: {pin: @pin, note: @note} %>
+    <%= link_to "Cancel", edit_pin_note_path(@pin, @note, cancel: true), class: "bold" %> | 
+    <%= link_to "Delete note", pin_note_path(@pin, @note), class: "bold", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+  <% end %>
 <% end %>

@@ -6,7 +6,7 @@
   <%= turbo_stream.update "comment-empty", "" %>
 
   <%= turbo_stream.update "add-comment" do %>
-    <%= render partial: "comments/form", locals: {pin: @pin, comment: @pin.comments.build} %>
+    <%= render partial: "comments/form", locals: {pin: @pin, comment: @pin.comments.build, not_show_cancel_button: true} %>
   <% end %>
 
 <% end %>
