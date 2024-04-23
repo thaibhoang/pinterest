@@ -14,9 +14,15 @@
     <% end %>
 
     <div>
-      <%= form.label :avatar, "Upload Avatar", style: "display: block" %>
+      <%= form.label :avatar_url, "Avatar URL (recommended over uploaded avatar)", style: "display: block" %>
+      <%= form.text_field :avatar_url %>
+    </div>
+
+    <div>
+      <%= form.label :avatar, "Upload Avatar (optional)", style: "display: block" %>
       <%= form.file_field :avatar %>
     </div>
+    
 
     <div>
       <%= form.label :username, style: "display: block" %>

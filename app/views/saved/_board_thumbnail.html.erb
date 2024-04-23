@@ -4,7 +4,7 @@
     <div class="box">
       <div class="board-cover">
         <% if board.cover_url.present? %>
-          <%= image_tag(board.cover_url, style: 'height: 100%; width: 100%; object-fit: cover;', class: "board-thumbnail") %>
+          <%= image_tag(board.cover_url, style: 'height: 157px; width: 157px; object-fit: cover;', class: "board-thumbnail") %>
         <% else %>
           <% if board.cover.attached? %>
             <%= image_tag(board.resize_fill_img(board.cover, 157, 157), class: "board-thumbnail") %>
