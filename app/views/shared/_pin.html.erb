@@ -25,7 +25,7 @@
             <%= render partial: "shared/saved_pin_form_layout", locals: {pin: pin} %>
           <% end %>
 
-          <% if defined?(saved_pin) && pin.user == current_user  %>
+          <% if defined?(saved_pin) && saved_pin.user == current_user  %>
             <%= render partial: "shared/edit_saved_pin_layout", locals: {pin: pin, saved_pin: saved_pin} %>
           <% end %>
         <% end %>
