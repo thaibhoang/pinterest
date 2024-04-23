@@ -11,4 +11,17 @@
 </div>
 <hr>
 
-<div id="pins-container"><%= render partial: "shared/show_saved_pins", locals: {saved_pins: @saved_pins} %></div>
+
+<% if @user == current_user %>
+  <div id="pins-container"><%= render partial: "shared/show_saved_pins", locals: {saved_pins: @saved_pins} %></div>
+<% else %>
+  <div class="container">
+    <% cache @saved_pins do %>
+      <% @saved_pins.each do |saved_pin| %>
+        <% cache saved_pin do %>
+          <%= render partial: "shared/pin", locals: {pin: saved_pin.pin} %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
