@@ -1,6 +1,6 @@
 <div class="inline-block">
   <% if user.profile.avatar_url.present? %>
-    <div class="circular-image" style="width: <%=size%>px; height: <%=size%>px"><%= image_tag(user.profile.avatar_url, style: "width: #{size}px; height: #{size}px; object-fit: contain;" ) %></div>
+    <div class="circular-image" style="width: <%=size%>px; height: <%=size%>px"><%= image_tag(user.profile.avatar_url, style: "width: #{size}px; height: #{size}px; object-fit: cover;" ) %></div>
   <% elsif user.profile.avatar.present? %>
     <div class="circular-image" style="width: <%=size%>px; height: <%=size%>px"><%= image_tag(user.resize_fill_img(user.profile.avatar, size, size)) %></div>
   <% else %>
