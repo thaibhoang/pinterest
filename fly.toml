@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for pinterest-clone-bht-icy-hill-4719 on 2024-04-24T00:37:01+07:00
+# fly.toml app configuration file generated for pinterest-clone-bht-bold-silence-7354 on 2024-04-24T10:20:03+07:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'pinterest-clone-bht-icy-hill-4719'
+app = 'pinterest-clone-bht-bold-silence-7354'
 primary_region = 'sin'
 console_command = '/rails/bin/rails console'
 
