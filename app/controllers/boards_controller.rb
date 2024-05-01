@@ -32,11 +32,7 @@ class BoardsController < ApplicationController
     @board = current_user.boards.build(board_params)
     respond_to do |format|
       if @board.save
-        if params[:pin_id].nil?
-          redirect_to user_board_url(current_user, @board), notice: 'Board was successfully created.'
-          return
-        end
-        format.turbo_stream { flash.now[:notice] = 'Board was successfully created.' }
+        redirect_or_turbo_stream_saved_board(format, 'Board was successfully created')
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -47,7 +43,7 @@ class BoardsController < ApplicationController
   def update
     respond_to do |format|
       if @board.update(board_params)
-        format.html { redirect_to user_board_url(current_user, @board), notice: "Board was successfully updated." }
+        format.html { redirect_to user_board_url(current_user, @board), notice: 'Board was successfully updated.' }
         format.json { render :show, status: :ok, location: @board }
         format.turbo_stream
       else
@@ -62,7 +58,7 @@ class BoardsController < ApplicationController
     @board.destroy!
 
     respond_to do |format|
-      format.html { redirect_to user_boards_url(current_user), notice: "Board was successfully destroyed." }
+      format.html { redirect_to user_boards_url(current_user), notice: 'Board was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -89,12 +85,18 @@ class BoardsController < ApplicationController
   end
 
   def validate_owner
-    if current_user != @user
-      redicrect_to user_boards_path(@user), notice: "You are not authorized to make change to this user's boards"
-    end
+    redicrect_to user_boards_path(@user), notice: 'Action are not authorized' if current_user != @user
   end
 
   def set_options
     @options = current_user.boards.pluck(:name, :id)
+  end
+
+  def redirect_or_turbo_stream_saved_board(format, message)
+    if params[:pin_id].nil?
+      format.html { redirect_to user_board_url(current_user, @board), notice: message }
+    else
+      format.turbo_stream { flash.now[:notice] = message }
+    end
   end
 end
