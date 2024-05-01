@@ -2,7 +2,6 @@
   <%= turbo_frame_tag "new_board" %>
 <% else %>
   <%= turbo_frame_tag "new_board" do %>
-    <%= render "shared/flash" %>
     <%= form_with(model: [current_user, board]) do |form| %>
       <% if board.errors.any? %>
         <div style="color: red">

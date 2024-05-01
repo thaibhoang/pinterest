@@ -1,3 +1,4 @@
+# This controller show all the pins created by one user
 class CreatedController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user

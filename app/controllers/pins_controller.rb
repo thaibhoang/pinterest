@@ -16,7 +16,7 @@ class PinsController < ApplicationController
   # GET /pins/new
   def new
     @pin = Pin.new
-    @boards = current_user.boards.all
+    @boards = current_user.boards
   end
 
   # GET /pins/1/edit
@@ -27,14 +27,12 @@ class PinsController < ApplicationController
 
   # POST /pins or /pins.json
   def create
-    puts params.inspect
-    @pin = Pin.new(pin_params)
     @boards = current_user.boards.all
-    @pin.user_id = current_user.id
+    @pin = current_user.pins.create(pin_params)
     respond_to do |format|
       if @pin.save
         # if user fill in board_id, then create the saved_pin for user
-        if @pin.persisted? && !params[:board_id].nil?
+        if @pin.persisted? && params[:board_id].present?
           @pin.saved_pins.create(user_id: current_user.id, board_id: params[:board_id])
         end
         format.html { redirect_to pin_url(@pin), notice: "Pin was successfully created." }

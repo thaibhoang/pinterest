@@ -1,65 +1,44 @@
+# handling boards routing
 class BoardsController < ApplicationController
   before_action :authenticate_user!, :set_user
-  before_action :validate_owner, only: %i[ new create edit update destroy ]
-  before_action :set_board, only: %i[ show edit update destroy ]
-  
+  before_action :validate_owner, only: %i[new create edit update destroy]
+  before_action :set_board, only: %i[show edit update destroy]
+  before_action :set_pin, :set_options, only: %i[create]
 
   # GET /boards or /boards.json
   def index
-    if (@user != current_user)
-      @boards = @user.boards.where(keep_secret: false)
-    else
-      @boards = @user.boards
-    end
+    @boards = @user != current_user ? @user.boards.where(keep_secret: false) : @user.boards
   end
 
   # GET /boards/1 or /boards/1.json
   def show
-    redirect_to user__saved_index_path(@user) if (@board.keep_secret && @board.user != current_user)
+    redirect_to user__saved_index_path(@user) if @board.keep_secret && @board.user != current_user
     @saved_pins = @board.saved_pins
   end
 
   # GET /boards/new
   def new
     @board = current_user.boards.build
-    @in_saved_pin_mode = params[:in_saved_pin_mode] ? true : false
-    @cancel_form = params[:cancel_form] ? true : false
-    if params[:pin_id]
-      @pin_id = params[:pin_id]
-    end
+    @in_saved_pin_mode = params[:in_saved_pin_mode]
+    @cancel_form = params[:cancel_form]
+    @pin_id = params[:pin_id]
   end
 
   # GET /boards/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /boards or /boards.json
   def create
-    if params[:pin_id]
-      @pin = Pin.find_by(id: params[:pin_id])
-    end
-    names_used = current_user.boards.pluck(:name)
     @board = current_user.boards.build(board_params)
-    @options = current_user.boards.pluck(:name, :id)
-    if params[:pin_id] == nil
-      @board.save
-      redirect_to user_board_url(current_user, @board), notice: "Board was successfully created."
-    end
     respond_to do |format|
-      if names_used.include?(params[:board][:name])
-        flash[:error] = "Name already used"
-        format.html { render :new }
-        format.json { render json: { error: "Name already used" }, status: :unprocessable_entity }
-      elsif @board.save
-        @new_board_id = @board.id
-        @new_board_name = @board.name  
-        @boards = current_user.boards
-        
-        format.turbo_stream { flash.now[:notice] = "Board was successfully created." }
-        format.json { render :show, status: :created, location: @board }
+      if @board.save
+        if params[:pin_id].nil?
+          redirect_to user_board_url(current_user, @board), notice: 'Board was successfully created.'
+          return
+        end
+        format.turbo_stream { flash.now[:notice] = 'Board was successfully created.' }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @board.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -89,24 +68,33 @@ class BoardsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:user_id])
-    end
 
-    def set_board
-      set_user
-      @board = @user.boards.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find(params[:user_id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def board_params
-      params.require(:board).permit(:cover, :cover_url, :name, :description, :keep_secret, :user_id)
-    end
+  def set_board
+    set_user
+    @board = @user.boards.find(params[:id])
+  end
 
-    def validate_owner
-      if current_user != @user
-        redicrect_to user_boards_path(@user), notice: "You are not authorized to make change to this user's boards"
-      end
+  def set_pin
+    @pin = Pin.find_by(id: params[:pin_id]) if params[:pin_id]
+  end
+
+  # Only allow a list of trusted parameters through.
+  def board_params
+    params.require(:board).permit(:cover, :cover_url, :name, :description, :keep_secret, :user_id)
+  end
+
+  def validate_owner
+    if current_user != @user
+      redicrect_to user_boards_path(@user), notice: "You are not authorized to make change to this user's boards"
     end
+  end
+
+  def set_options
+    @options = current_user.boards.pluck(:name, :id)
+  end
 end
