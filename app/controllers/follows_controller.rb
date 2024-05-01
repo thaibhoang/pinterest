@@ -1,6 +1,7 @@
+#  handling follows
 class FollowsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_follow, only: %i[ destroy ]
+  before_action :set_follow, only: %i[destroy]
 
   # POST /follows or /follows.json
   def create
@@ -8,16 +9,12 @@ class FollowsController < ApplicationController
 
     respond_to do |format|
       if @follow.save
-        format.html { redirect_to follow_url(@follow), notice: "Followed" }
-        format.json { render :show, status: :created, location: @follow }
         format.turbo_stream
       else
-        format.html { redirect_to root_path, notice: "Follow failed to process" }
-        format.json { render json: @follow.errors, status: :unprocessable_entity }
+        format.html { redirect_to root_path, notice: 'Follow failed to process' }
       end
     end
   end
-
 
   # DELETE /follows/1 or /follows/1.json
   def destroy
@@ -26,18 +23,15 @@ class FollowsController < ApplicationController
     @follow.destroy!
 
     respond_to do |format|
-      format.html { redirect_to root_path, notice: "Unfollowed." }
-      format.json { head :no_content }
+      format.html { redirect_to root_path, notice: 'Unfollowed.' }
       format.turbo_stream
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_follow
-      @follow = Follow.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-
+  # Use callbacks to share common setup or constraints between actions.
+  def set_follow
+    @follow = Follow.find(params[:id])
+  end
 end
