@@ -16,19 +16,17 @@
   <hr>
 
   <div class="md big m1">Unorganized Ideas</div>
-  <% if @user == current_user %>
-    <%= render partial: "shared/show_saved_pins", locals: {saved_pins: @unorganized_saved_pins} %>
-  <% else %>
-    <div class="container">
-      <% cache @unorganized_saved_pins do %>
-        <% @unorganized_saved_pins.each do |saved_pin| %>
-          <% cache saved_pin do %>
-            <%= render partial: "shared/pin", locals: {pin: saved_pin.pin} %>
-          <% end %>
+
+  <div class="container">
+    <% cache @unorganized_saved_pins do %>
+      <% @unorganized_saved_pins.each do |saved_pin| %>
+        <% cache saved_pin do %>
+          <%= show_pin_or_saved_pin(saved_pin) %>
         <% end %>
       <% end %>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
+
 
   <% if @user == current_user && @user.saved_pins.count == 0 %>
     <div class="m1 md">

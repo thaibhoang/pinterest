@@ -1,9 +1,0 @@
-<div class="container">
-  <% cache saved_pins do %>
-    <% saved_pins.each do |saved_pin| %>
-      <% cache saved_pin do %>
-        <%= render partial: "shared/pin", locals: {pin: saved_pin.pin, saved_pin: saved_pin } %>
-      <% end %>
-    <% end %>
-  <% end %>
-</div>

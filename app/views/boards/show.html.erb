@@ -3,25 +3,16 @@
     <div id="board-infor-frame">
       <%= render partial: "boards/board_infor", locals: {board: @board} %>
     </div>
-
-    <% if current_user == @board.user %>
-      <%= link_to "Destroy this board", user_board_path(current_user, @board), data: {turbo_confirm: "Are you sure?", turbo_method: :delete}, class: "bold" %>
-    <% end %>
   </div>
 </div>
 <hr>
 
-
-<% if @user == current_user %>
-  <div id="pins-container"><%= render partial: "shared/show_saved_pins", locals: {saved_pins: @saved_pins} %></div>
-<% else %>
-  <div class="container">
-    <% cache @saved_pins do %>
-      <% @saved_pins.each do |saved_pin| %>
-        <% cache saved_pin do %>
-          <%= render partial: "shared/pin", locals: {pin: saved_pin.pin} %>
-        <% end %>
+<div class="container">
+  <% cache @saved_pins do %>
+    <% @saved_pins.each do |saved_pin| %>
+      <% cache saved_pin do %>
+        <%= show_pin_or_saved_pin(saved_pin) %>
       <% end %>
     <% end %>
-  </div>
-<% end %>
+  <% end %>
+</div>

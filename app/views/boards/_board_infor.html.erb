@@ -1,5 +1,7 @@
 <%= turbo_frame_tag "board-infor" do %>
   <%= render board %>
   <%= render_edit_board_link(board) if can_edit_board?(board) %>
+  <br>
+  <%= render_destroy_board_link(@board) if can_edit_board?(@board) %>
 <% end %>
 

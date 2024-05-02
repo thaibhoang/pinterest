@@ -1,52 +1,49 @@
-<div class="middle-container">
-  <div>
-    <%= turbo_frame_tag "board-infor" do %>
-      <h1>Editing board</h1>
-      <%= render "shared/flash" %>
-      <%= form_with(model: [current_user, @board]) do |form| %>
-        <% if @board.errors.any? %>
-          <div style="color: red">
-            <h2><%= pluralize(@board.errors.count, "error") %> prohibited this board from being saved:</h2>
+<%= turbo_frame_tag "board-infor" do %>
+  <h1>Editing board</h1>
+  <%= render "shared/flash" %>
 
-            <ul>
-              <% @board.errors.each do |error| %>
-                <li><%= error.full_message %></li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
-        
-        <div>
-          <%= form.label :cover, "Upload Cover",  style: "display: block"  %>
-          <%= form.file_field :cover %>
-        </div>
-
-        <div>
-          <%= form.label :cover_url, "Cover URL (recommended over uploaded cover)",  style: "display: block"  %>
-          <%= form.text_field :cover_url %>
-        </div>
-
-        <div>
-          <%= form.label :name, style: "display: block" %>
-          <%= form.text_field :name %>
-        </div>
-
-        <div>
-          <%= form.label :description, style: "display: block" %>
-          <%= form.text_area :description %>
-        </div>
-
-        <div>
-          <%= form.label :keep_secret, style: "display: block" %>
-          <%= form.check_box :keep_secret %>
-        </div>
-
-        <div>
-          <%= form.submit  %>
-        </div>
-      <% end %>
-      <%= link_to "Show this board", user_board_path(current_user, @board) %>
+  <%= form_with(model: [current_user, @board]) do |form| %>
+    <% if @board.errors.any? %>
+      <div class="errors">
+        <h2><%= pluralize(@board.errors.count, "error") %> prohibited this board from being saved:</h2>
+        <ul>
+          <% @board.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
     <% end %>
-    <br>
-  </div>
-</div>
+    
+    <div class="form-group">
+      <%= form.label :cover, "Upload Cover" %>
+      <%= form.file_field :cover %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :cover_url, "Cover URL (recommended over uploaded cover)" %>
+      <%= form.text_field :cover_url %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :description %>
+      <%= form.text_area :description %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :keep_secret %>
+      <%= form.check_box :keep_secret %>
+    </div>
+
+    <div>
+      <%= form.submit  %>
+    </div>
+  <% end %>
+  <%= link_to "Cancel", user_board_path(current_user, @board) %>
+<% end %>
+<br>
+

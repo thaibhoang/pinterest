@@ -4,11 +4,19 @@ module BoardsHelper
   end
 
   def render_edit_board_link(board)
-    link_to edit_board_text(board), edit_user_board_path(current_user, board), class: "bold"
+    link_to link_text("Edit", board), edit_user_board_path(current_user, board), class: "bold"
   end
 
-  def edit_board_text(board)
-    "Edit #{board.name.size < 20 ? board.name : 'board'}"
+  def render_destroy_board_link(board)
+    link_to link_text("Destroy", board), user_board_path(current_user, board),
+            data: { turbo_confirm: "Are you sure?",
+                    turbo_method: :delete,
+                    turbo_frame: "_top" },
+            class: "bold"
+  end
+
+  def link_text(action, board)
+    "#{action} #{board.name.size < 20 ? board.name : 'board'}"
   end
 
   def render_board_image(board)
