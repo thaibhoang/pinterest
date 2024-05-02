@@ -1,5 +1,5 @@
   
-<div class="board_box">
+<div class="board_box" id="<%= dom_id(board) %>">
   <%= link_to user_board_path(user, board), data: { turbo_frame: "_top" } do %>
     <div class="box">
       <div class="board-cover">
