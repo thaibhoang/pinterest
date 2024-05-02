@@ -1,17 +1,8 @@
-<% if defined?(cancel_form) && cancel_form %>
-  <%= turbo_frame_tag "form-comment_#{comment.parent_id ? comment.parent_id : comment.id}" %>
-<% else %>
-  <%= turbo_frame_tag "form-comment_#{comment.parent_id ? comment.parent_id : comment.id}" do %>
+<% form_id = "form_comment_#{comment.parent_id ? comment.parent_id : comment.id}" %>
+<%= turbo_frame_tag(form_id) do %>
+  <% unless cancel_form %>
     <%= form_with(model: [pin, comment] ) do |form| %>
-      <% if comment.errors.any? %>
-        <div >
-          <ul>
-            <% comment.errors.each do |error| %>
-              <li><%= error.full_message %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
+      <%= render partial: "shared/errors_notification", locals: { resource: comment } %>
     
       <div>
         <% placeholder = comment.parent_id ? "Reply" : "Add a comment" %>

@@ -1,15 +1,5 @@
 <%= form_with(model: [pin, note]) do |form| %>
-  <% if note.errors.any? %>
-    <div style="color: red">
-      <div><%= pluralize(note.errors.count, "error") %> prohibited this note from being saved:</div>
-
-      <ul>
-        <% note.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render partial: "shared/errors_notification", locals: { resource: note } %>
 
   <div>
     <%= form.label :content, "Note content", style: "display: block" %>

@@ -1,0 +1,10 @@
+<% if resource.errors.any? %>
+  <div class="errors">
+    <div class="bold"><%= pluralize(resource.errors.count, "error") %> prohibited this from being saved:</div>
+    <ul>
+      <% resource.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

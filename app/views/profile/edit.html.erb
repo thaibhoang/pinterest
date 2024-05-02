@@ -1,17 +1,7 @@
 <%= turbo_frame_tag "profile-frame-info" do %>
 
   <%= form_with(model: [@user, @profile]) do |form| %>
-    <% if @profile.errors.any? %>
-      <div style="color: red">
-        <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this pin from being saved:</h2>
-
-        <ul>
-          <% @profile.errors.each do |error| %>
-            <li><%= error.full_message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+    <%= render partial: "shared/errors_notification", locals: { resource: @profile } %>
 
     <div>
       <%= form.label :avatar_url, "Avatar URL (recommended over uploaded avatar)", style: "display: block" %>

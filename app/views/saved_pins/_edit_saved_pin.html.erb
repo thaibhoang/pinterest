@@ -1,15 +1,5 @@
 <%= form_with(model: [pin, saved_pin], method: :patch) do |form| %>
-  <% if saved_pin.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(saved_pin.errors.count, "error") %> prohibited this saved_pin from being saved:</h2>
-
-      <ul>
-        <% saved_pin.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render partial: "shared/errors_notification", locals: { resource: saved_pin } %>
 
   <%= render partial: "shared/select_a_board", locals: {pin: pin} %>
 

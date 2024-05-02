@@ -3,5 +3,5 @@ class Board < ApplicationRecord
   has_one_attached :cover
   has_many :saved_pins, dependent: :nullify
 
-  validates :name, uniqueness: true
+  validates :name, uniqueness: true, presence: true
 end
