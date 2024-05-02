@@ -1,19 +1,15 @@
 <div id="<%= dom_id board %>">
   <div class="middle-container">
-    <% if board.cover_url.present? %>
-      <%= link_to image_tag(board.cover_url, style: 'width: 300px; height: auto;', class: "board-img"), board.cover_url %>
-    <% else %>
-      <%= link_to image_tag(board.resize_img(board.cover, 300, 300), class: "board-img"), board.cover if board.cover.attached?  %>
-    <% end %>
+    <%= render_board_image(board) %>
   </div>
 
-  <p>
-    <div><strong>Name: <%= board.name %></strong></div>
-    <div><strong>Description:</strong> <%= board.description %></div>
-    <% if current_user == @board.user %>
-      <div><%= render partial: "boards/privacy_change", locals: { board: board } %></div>
+  <div>
+    <strong>Name: <%= board.name %></strong><br>
+    <strong>Description:</strong> <%= board.description %>
+    <% if can_edit_board?(board) %>
+      <%= render partial: "boards/privacy_change", locals: { board: board } %>
     <% end %>
-  </p>
+  </div>
 </div>
 
 
