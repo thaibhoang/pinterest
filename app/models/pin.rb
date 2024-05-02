@@ -6,6 +6,9 @@ class Pin < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, as: :likeable
 
+  validates :title, presence: true, length: { maximum: 200 }
+  validates :description, presence: true, length: { maximum: 500 }
+
   def self.get_random_pins(number)
     Pin.all.order(Arel.sql('RANDOM()')).limit(number)
   end
