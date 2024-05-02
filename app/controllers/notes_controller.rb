@@ -4,18 +4,15 @@ class NotesController < ApplicationController
   before_action :set_pin, only: %i[new create]
   before_action :set_note, only: %i[edit update destroy]
 
-  # GET /notes/new
   def new
     @note = @pin.notes.build
     @cancel = params[:cancel]
   end
 
-  # GET /notes/1/edit
   def edit
     @cancel = params[:cancel]
   end
 
-  # POST /notes or /notes.json
   def create
     @note = @pin.notes.build(note_params)
     @note.user_id = current_user.id
@@ -28,7 +25,6 @@ class NotesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /notes/1 or /notes/1.json
   def update
     respond_to do |format|
       if @note.update(note_params)
@@ -39,14 +35,13 @@ class NotesController < ApplicationController
     end
   end
 
-  # DELETE /notes/1 or /notes/1.json
   def destroy
     @note.destroy!
 
     respond_to do |format|
       @pin = Pin.find(params[:pin_id])
       format.turbo_stream
-      format.html { redirect_to pin_path(@pin), notice: "Note was successfully destroyed." }
+      format.html { redirect_to pin_path(@pin), notice: 'Note was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

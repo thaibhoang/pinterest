@@ -1,45 +1,40 @@
+# handle routing to pins
 class PinsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_pin, only: %i[ show edit update destroy ]
-  before_action :check_user, only: %i[ edit update destroy ]
+  before_action :set_pin, only: %i[show edit update destroy]
+  before_action :check_user, only: %i[edit update destroy]
+  before_action :set_boards, only: %i[new create]
 
   # GET /pins or /pins.json
   def index
-    @pins = Pin.all.order(Arel.sql("RANDOM()")).limit(100)
+    @pins = Pin.get_random_pins(50)
   end
 
   # GET /pins/1 or /pins/1.json
   def show
-    @note = @pin.notes.find_by(user_id: current_user.id)
+    @note = @pin.notes.find_by(user: current_user)
   end
 
   # GET /pins/new
   def new
     @pin = Pin.new
-    @boards = current_user.boards
   end
 
   # GET /pins/1/edit
   def edit
-    @in_frame_mode = params[:in_frame_mode] ? true : false
-    @cancel_form = params[:cancel_form] ? true : false
+    @in_frame_mode = params[:in_frame_mode]
+    @cancel_form = params[:cancel_form]
   end
 
   # POST /pins or /pins.json
   def create
-    @boards = current_user.boards.all
-    @pin = current_user.pins.create(pin_params)
+    @pin = current_user.pins.build(pin_params)
     respond_to do |format|
       if @pin.save
-        # if user fill in board_id, then create the saved_pin for user
-        if @pin.persisted? && params[:board_id].present?
-          @pin.saved_pins.create(user_id: current_user.id, board_id: params[:board_id])
-        end
-        format.html { redirect_to pin_url(@pin), notice: "Pin was successfully created." }
-        format.json { render :show, status: :created, location: @pin }
+        create_saved_pin_along_with_pin(@pin)
+        format.html { redirect_to pin_url(@pin), notice: 'Pin was successfully created.' }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @pin.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -48,12 +43,10 @@ class PinsController < ApplicationController
   def update
     respond_to do |format|
       if @pin.update(pin_params)
-        format.html { redirect_to pin_url(@pin), notice: "Pin was successfully updated." }
-        format.json { render :show, status: :ok, location: @pin }
-        format.turbo_stream { flash.now[:notice] = "Pin was successfully updated." }
+        format.html { redirect_to pin_url(@pin), notice: 'Pin was successfully updated.' }
+        format.turbo_stream { flash.now[:notice] = 'Pin was successfully updated.' }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @pin.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -63,26 +56,35 @@ class PinsController < ApplicationController
     @pin.destroy!
 
     respond_to do |format|
-      format.html { redirect_to pins_url, notice: "Pin was successfully destroyed." }
+      format.html { redirect_to pins_url, notice: 'Pin was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_pin
-      @pin = Pin.find(params[:id])
-    end
 
-    def check_user
-      @pin = set_pin
-      if @pin.user != current_user
-        redirect_to @pin, notice: "You are not the owner of this pin"
-      end
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_pin
+    @pin = Pin.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def pin_params
-      params.require(:pin).permit(:image, :title, :description, :link, :image_url)
-    end
+  def set_boards
+    @boards = current_user.boards
+  end
+
+  def check_user
+    set_pin
+    redirect_to @pin, notice: 'You are not the owner of this pin' if @pin.user != current_user
+  end
+
+  # Only allow a list of trusted parameters through.
+  def pin_params
+    params.require(:pin).permit(:image, :title, :description, :link, :image_url)
+  end
+
+  def create_saved_pin_along_with_pin(pin)
+    return unless pin.persisted? && params[:board_id].present?
+
+    pin.saved_pins.create!(user_id: current_user.id, board_id: params[:board_id])
+  end
 end
