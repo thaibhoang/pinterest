@@ -1,0 +1,5 @@
+# Disable the Style/Documentation cop globally
+Style/Documentation:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
