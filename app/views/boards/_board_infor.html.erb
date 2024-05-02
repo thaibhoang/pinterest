@@ -1,7 +1,5 @@
 <%= turbo_frame_tag "board-infor" do %>
   <%= render board %>
-  <% if board.user == current_user %>
-    <%= link_to "Edit this board", edit_user_board_path(current_user, board), class: "bold" %>
-  <% end %>
+  <%= render_edit_board_link(board) if can_edit_board?(board) %>
 <% end %>
 
