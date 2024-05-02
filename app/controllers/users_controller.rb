@@ -1,6 +1,6 @@
+# handle user routing
 class UsersController < ApplicationController
   before_action :authenticate_user!, :set_user
-
 
   def show
     @pins = @user.pins
