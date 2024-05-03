@@ -1,4 +1,3 @@
-<% user = pin.user if defined?(pin) %>
 <%= turbo_frame_tag("follow_frame") do %>
   <%= button_to "Follow", follows_path(followee_id: user.id), class: "not-follow" %>
 <% end %>

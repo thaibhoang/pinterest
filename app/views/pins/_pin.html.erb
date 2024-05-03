@@ -53,10 +53,10 @@
           <% if current_user != pin.user %>
             <% followed = current_user.followings.find_by(id: pin.user.id) %>
             <% if followed %>
-              <%= render partial: "follows/follow", locals: {pin: pin} %>
+              <%= render partial: "follows/follow", locals: {user: pin.user} %>
             <% end %>
             <% if not followed %>
-              <%= render partial: "follows/following", locals: {pin: pin} %>
+              <%= render partial: "follows/following", locals: {user: pin.user} %>
             <% end %>
           <% end %>
         </div>
