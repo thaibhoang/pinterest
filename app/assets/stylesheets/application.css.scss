@@ -392,3 +392,16 @@ input.save-button {
 .errors {
   color: red;
 }
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+footer {
+  margin-top: auto;
+}
+#profile-frame-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

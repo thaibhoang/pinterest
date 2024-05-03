@@ -1,19 +1,21 @@
-<% unless (profile.avatar.present? || profile.username? || profile.about?) %>
-  <div>Click Edit profile to add Avatar</div>
-  <div>and share more about yourself</div>
-<% end %>
 <%= render partial: "shared/user_avatar", locals: {user: profile.user, size: 128} %>
 
-<% if profile.username? %>
-  <div class="m1">
-    <div>Username: </div>
-    <div><%= profile.username %></div>
-  </div>
-<% end %>
+<%= turbo_frame_tag("profile-content") do %>
+  <% if profile.username? %>
+    <div class="m1">
+      <div>Username: </div>
+      <div><%= profile.username %></div>
+    </div>
+  <% end %>
 
-<% if profile.about? %>
-  <div class="m1">
-    <div>About:</div>
-    <div><%= profile.about %></div>
-  </div>
+  <% if profile.about? %>
+    <div class="m1">
+      <div>About:</div>
+      <div><%= profile.about %></div>
+    </div>
+  <% end %>
+
+  <% if user_signed_in? && current_user == profile.user %>
+    <div class="md"><%= link_to "Edit profile", edit_user_profile_path(current_user, @profile), class: "bold" %></div>
+  <% end %>
 <% end %>

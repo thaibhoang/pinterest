@@ -1,5 +1,4 @@
-<%= turbo_frame_tag "profile-frame-info" do %>
-
+<%= turbo_frame_tag "profile-content" do %>
   <%= form_with(model: [@user, @profile]) do |form| %>
     <%= render partial: "shared/errors_notification", locals: { resource: @profile } %>
 
