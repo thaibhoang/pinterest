@@ -11,24 +11,31 @@
   </head>
 
   <body data-controller="navigate" data-navigate-target="link" data-path=<%= request.fullpath %>>
-    <nav>      
-      <% if user_signed_in? %>
-        <%= link_to "Home ", root_path, class: "md big", "data-navigate-target": "navButton" %>
-        <%= link_to "Create Pin ", new_pin_path, class: "md big", "data-navigate-target": "navButton" %>
-        <%= link_to "Create Board ", new_user_board_path(current_user), class: "md big", "data-navigate-target": "navButton" %>
-        <%= link_to "Profile ", user_path(current_user), class: "md big", "data-navigate-target": "navButton" %>
-        <%= link_to "Log out ", destroy_user_session_path, data: {turbo_method: :delete}, class: "md big right-side" %>
-
-      <% else %>
-        <p><%= link_to "Sign in ", new_user_session_path, class: "md big" %></p>
-        <p><%= link_to "Sign up", new_user_registration_path, class: "md big" %></p>        
-      <% end %>
-    </nav>
-    <div>
+    <header>
+      <nav>
+        <% if user_signed_in? %>
+          <%= link_to "Home ", root_path, class: "md big", "data-navigate-target": "navButton" %>
+          <%= link_to "Create Pin ", new_pin_path, class: "md big", "data-navigate-target": "navButton" %>
+          <%= link_to "Create Board ", new_user_board_path(current_user), class: "md big", "data-navigate-target": "navButton" %>
+          <%= link_to "Profile ", user_path(current_user), class: "md big", "data-navigate-target": "navButton" %>
+          <%= link_to "Log out ", destroy_user_session_path, data: {turbo_method: :delete}, class: "md big right-side" %>
+        <% else %>
+          <p><%= link_to "Sign in ", new_user_session_path, class: "md big" %></p>
+          <p><%= link_to "Sign up", new_user_registration_path, class: "md big" %></p>
+        <% end %>
+      </nav>
+    </header>
+    <main>
       <div>
-        <%= render partial: "shared/flash" %>
-        <%= yield %>
+        <div>
+          <%= render partial: "shared/flash" %>
+          <%= yield %>
+        </div>
       </div>
-    </div>
+    </main>
+    <footer>
+      <hr>
+      <p>&copy; <%= Time.now.year %> Thai Bui Hoang. Source Code on Github: <a href="https://github.com/thaibhoang/pinterest">https://github.com/thaibhoang/pinterest</a></p>
+    </footer>
   </body>
 </html>
