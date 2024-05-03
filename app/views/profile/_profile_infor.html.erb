@@ -1,16 +1,19 @@
-<%= render partial: "shared/user_avatar", locals: {user: profile.user, size: 128} %>
+<div class="information">
+  <%= render partial: "shared/user_avatar", locals: {user: profile.user, size: 128} %>
+</div>
+<br>
 
 <%= turbo_frame_tag("profile-content") do %>
   <% if profile.username? %>
     <div class="m1">
-      <div>Username: </div>
+      <div>My name: </div>
       <div><%= profile.username %></div>
     </div>
   <% end %>
 
   <% if profile.about? %>
     <div class="m1">
-      <div>About:</div>
+      <div>About me:</div>
       <div><%= profile.about %></div>
     </div>
   <% end %>
