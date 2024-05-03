@@ -1,5 +1,5 @@
-<% form_id = "form_comment_#{comment.parent_id ? comment.parent_id : comment.id}" %>
-<%= turbo_frame_tag(form_id) do %>
+<%= turbo_frame_tag(form_id(comment)) do %>
+  <%# If cancel_form is true, only render the turbo_frame aka remove the form with only the frame, else render the form %>
   <% unless cancel_form %>
     <%= form_with(model: [pin, comment] ) do |form| %>
       <%= render partial: "shared/errors_notification", locals: { resource: comment } %>
@@ -15,11 +15,10 @@
     
       <div>
         <%= form.submit "Send" %>
-        <% unless defined?(not_show_cancel_button) %>
-          <%= link_to 'Cancel', new_pin_comment_path(pin, parent_id: comment.parent_id, cancel_form: true) %>
-        <% end %>
+
+        <%# Dont show the Cancel button on the default "add comment" window %>
+        <%= cancel_button_for_new_comment(defined?(not_show_cancel_button), pin, comment) %>
       </div>
-      
     <% end %>
   <% end %>
 <% end %>

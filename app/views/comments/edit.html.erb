@@ -1,16 +1,9 @@
-<% if @cancel_form %>
-  <%# render the original comment %>
-  <%= turbo_frame_tag("#{dom_id(@comment)}_body") do %>
-    <div class="align-items-center">
-      <%= link_to user_path(@comment.user), data: {turbo_frame: "_top"}, class: "align-items-center" do %>
-        <%= render partial: "shared/user_avatar", locals: {user: @comment.user, size: 32} %>
-        <strong><%= @comment.user.email.truncate(15) %></strong>
-      <% end %>
-      <%= @comment.body.strip %>
-    </div>
-  <% end %>
-<% else %>
-  <%= turbo_frame_tag("#{dom_id(@comment)}_body") do %>
+
+<%= turbo_frame_tag("#{dom_id(@comment)}_body_content") do %>
+  <% if @cancel_form %>
+    <%# render the original comment body %>
+    <%= @comment.body.strip %>
+  <% else %>
     <%= form_with(model: [@pin, @comment]) do |form| %>
       <%= render partial: "shared/errors_notification", locals: { resource: @comment } %>
 

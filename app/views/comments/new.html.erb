@@ -1,4 +1,4 @@
-<%= turbo_frame_tag(@turbo_frame_id) do %>
+<%= turbo_frame_tag(create_turbo_frame_id(@comment)) do %>
   <%= render partial: "comments/form", 
              locals: { pin: @pin, 
                        comment: @comment, 

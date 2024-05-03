@@ -9,4 +9,8 @@ class Comment < ApplicationRecord
   scope :newest_reply, -> { order(created_at: :desc).first }
 
   validates :body, presence: true
+
+  def pin_comment?
+    parent_id.nil?
+  end
 end

@@ -1,14 +1,6 @@
 <%= turbo_frame_tag(dom_id(comment)) do %>
   <div class="left-padding-1rem">
-    <%= turbo_frame_tag("#{dom_id(comment)}_body") do %>
-      <div class="comment-body">
-        <%= link_to user_path(comment.user), data: {turbo_frame: "_top"}, class: "align-items-center" do %>
-          <%= render partial: "shared/user_avatar", locals: {user: comment.user, size: 32} %>
-          <strong><%= comment.user.email.truncate(15) %></strong>
-        <% end %>
-        <%= comment.body.strip %>
-      </div>
-    <% end %>
+    <%= render partial: "comments/comment_body", locals: { comment: comment } %>
 
     <%# Like a comment %>
     <div class="one-line-container left-padding-1rem">
@@ -22,7 +14,7 @@
       </div>
       <%= link_to "Reply", new_pin_comment_path(pin, parent_id: comment.id), data: {turbo_frame: "#{dom_id(comment)}_new_reply"}, class: "bold blur" %>
       <% if comment.user == current_user %>
-        <%= link_to "Edit", edit_pin_comment_path(pin, comment), data: {turbo_frame: "#{dom_id(comment)}_body"}, class: "bold blur" %>
+        <%= link_to "Edit", edit_pin_comment_path(pin, comment), data: {turbo_frame: "#{dom_id(comment)}_body_content"}, class: "bold blur" %>
         <%= link_to "Delete", pin_comment_path(pin, comment), data: {turbo_method: :delete, turbo_comfirm: "Are you sure?"}, class: "bold blur" %>
       <% end %>
     </div>

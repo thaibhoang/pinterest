@@ -10,7 +10,6 @@ class CommentsController < ApplicationController
   # GET /comments/new
   def new
     @comment = @pin.comments.build(parent_id: params[:parent_id])
-    @turbo_frame_id = create_turbo_frame_id(@comment)
     @cancel_form = params[:cancel_form]
   end
 
@@ -68,9 +67,5 @@ class CommentsController < ApplicationController
 
   def check_owner
     redirect_to pin_path(@pin), notice: 'You are not authorized to change this comment' if @comment.user != current_user
-  end
-
-  def create_turbo_frame_id(comment)
-    params[:parent_id] ? "comment_#{params[:parent_id]}_new_reply" : "comment_#{comment.id}_new_reply"
   end
 end
