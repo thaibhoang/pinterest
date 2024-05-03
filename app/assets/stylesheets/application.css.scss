@@ -242,13 +242,14 @@ nav {
   padding: 0 1rem;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1rem;  
 }
 nav a {
   padding: 1.25rem;
   border-radius: 1.5rem;
   padding: 0.75rem;
   margin: 0.5rem;
+  z-index: 1;
 }
 nav a:hover {
   background-color: rgb(204, 204, 204);
