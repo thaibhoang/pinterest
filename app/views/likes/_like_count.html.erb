@@ -1,6 +1,3 @@
-<% count = likeable.likes.count %>
 <span>
-  <% if count > 0 %>
-    <%= pluralize(count, "like") %>
-  <% end %>
+  <%= likes_count(likeable) if likes_count(likeable).positive? %>
 </span>
