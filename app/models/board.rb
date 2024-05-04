@@ -4,4 +4,8 @@ class Board < ApplicationRecord
   has_many :saved_pins, dependent: :nullify
 
   validates :name, uniqueness: true, presence: true
+
+  def not_empty?
+    saved_pins.present?
+  end
 end

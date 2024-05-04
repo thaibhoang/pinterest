@@ -4,15 +4,13 @@
   <hr>
   <div class="m1 md big">All boards</div>
 
-  <% if @user == current_user && @user.boards.count == 0 %>
-    <div class="m1 md">
-      <div>You haven't created any board yet.</div>
-      <div><%= link_to "Create One", new_user_board_path(@user), data: {turbo_frame: "_top"} %></div>
-    </div>
-  <% end %>
-  
-  <div id="all-boards"><%= render partial: "shared/all_boards", locals: {boards: @boards, user: @user} %></div>
+  <div class="m1 md">
+    <%= display_when_user_has_no_boards(@user) %>
+  </div>
 
+  <div id="all-boards">
+    <%= render partial: "shared/all_boards", locals: {boards: @boards, user: @user} %>
+  </div>
   <hr>
 
   <div class="md big m1">Unorganized Ideas</div>
