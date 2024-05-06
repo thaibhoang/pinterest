@@ -3,3 +3,14 @@
 <%= turbo_stream.replace "original_box_#{dom_id(@pin)}" do %>
   <%= render partial: "shared/pin", locals: {pin: @pin} %>
 <% end %>
+
+<%= turbo_stream.update "save_unsaved#{dom_id(@pin)}" do %>
+  <% been_saved, saved_to = saved_to_board(@pin, current_user) %>
+  <%# saved_to_board is a helper method %>   
+  <% if been_saved == false %>
+    <%= render partial: "shared/saved_pin_form_layout", locals: {pin: @pin} %>
+  <% end %>
+  <% if been_saved == true %>
+    <%= render partial: "shared/unsave_layout", locals: {pin: @pin, board_id: saved_to} %>
+  <% end %>
+<% end %>
