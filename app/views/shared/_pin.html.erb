@@ -1,40 +1,21 @@
-<% if pin.image.attached? || pin.image_url.present? %>
-  <div class="relative-container">
-    <% frame_tag_id = defined?(saved_pin) ? "box_#{dom_id(pin)}" : "original_box_#{dom_id(pin)}" %>
-    <%= turbo_frame_tag(frame_tag_id) do %>
-      <div class="box">
-        <% if pin.image_url.present? %>
-          <div style="width: 236px;"><%= link_to image_tag(pin.image_url, style: 'width: 100%; height: auto;'), pin , data: { turbo_frame: "_top" } %></div>
-        <% else %>
-          <div><%= link_to image_tag(pin.resize_img(pin.image, 236, 760)), pin , data: { turbo_frame: "_top" } %></div>
-        <% end %>
-        <%= turbo_frame_tag(dom_id(pin)) do %>
+<% return unless pin.image? %>
 
-          <% if frame_tag_id == "original_box_#{dom_id(pin)}" %>
-            <% been_saved, saved_to = saved_to_board(pin, current_user) %>
-            <%# saved_to_board is a helper method %>
-            <% if been_saved == false %>
-              <%= render partial: "shared/saved_pin_form_layout", locals: {pin: pin} %>
-            <% end %>
-            <% if been_saved == true %>
-              <%= render partial: "shared/unsave_layout", locals: {pin: pin, board_id: saved_to} %>
-            <% end %>
-          <% end %>
-
-          <% if frame_tag_id == "box_#{dom_id(pin)}" %>
-            <%= render partial: "shared/saved_pin_form_layout", locals: {pin: pin} %>
-          <% end %>
-
-          <% if defined?(saved_pin) && saved_pin.user == current_user  %>
-            <%= render partial: "shared/edit_saved_pin_layout", locals: {pin: pin, saved_pin: saved_pin} %>
-          <% end %>
-        <% end %>
-    
+<div class="relative-container">
+  <% frame_tag_id = create_frame_tag_id(defined?(saved_pin), pin) %>
+  <%= turbo_frame_tag(frame_tag_id) do %>
+    <div class="box">
+      <div class="pin-thumbnail">
+        <%= render_pin_thumbnail(pin, 236, 760) %>
       </div>
-    <% end %>
-    <% if defined?(edit_pin) && edit_pin && pin.user == current_user %>
-        <%= render partial: "shared/edit_pin_layout", locals: {pin: pin} %>
-    <% end %>
-  </div>
-<% end %>
+
+      <%= turbo_frame_tag(dom_id(pin)) do %>
+        <%= render partial: "shared/saved_overlay", locals: { pin: pin } unless defined?(saved_pin) %>
+        <%= render partial: "shared/edit_saved_pin_layout", locals: {pin: pin, saved_pin: saved_pin} if defined?(saved_pin) %>
+      <% end %>  
+    </div>
+  <% end %>
+  
+  <%= render partial: "shared/edit_pin_layout", locals: {pin: pin} if defined?(edit_pin) %>
+</div>
+
   

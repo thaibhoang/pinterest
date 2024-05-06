@@ -1,102 +1,16 @@
 <div class="middle-container">
   <div id="<%= dom_id pin %>" class= "pin_display">
-    <p class = "pin_img">
-      <% if pin.image_url.present? %>
-        <%= link_to image_tag(pin.image_url, style: 'max-width: 508px; max-height: 760px; object-fit: cover;'), pin.image_url , data: { turbo_frame: "_top" } %>
-      <% else %>
-        <%= link_to image_tag(pin.resize_img(pin.image, 508, 760)), pin.image if pin.image.attached? %>
-      <% end %>
-    </p>
+    <%= render partial: "pins/pin_image", locals: { pin: pin } %>
     
-    <div class = "pin_content">
-      <% if pin.user == current_user %>
-        <div>
-          <%= link_to "Edit this pin", edit_pin_path(pin), class: "bold" %> 
-          <%= link_to "Destroy this pin", pin_path(pin), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "bold" %>
-        </div>
-      <% end %>
-      
-      <div class="save-frame">
-        <%= turbo_frame_tag("save_unsaved#{dom_id(pin)}") do %>
-          <% been_saved, saved_to = saved_to_board(pin, current_user) %>
-          <%# saved_to_board is a helper method %>   
-          <% if been_saved == false %>
-            <%= render partial: "shared/saved_pin_form_layout", locals: {pin: pin} %>
-          <% end %>
-          <% if been_saved == true %>
-            <%= render partial: "shared/unsave_layout", locals: {pin: pin, board_id: saved_to} %>
-          <% end %>
-        <% end %>
-      </div>
-
-      <p  class="m1">
-        <strong>Title:</strong>
-        <strong><%= pin.title %></strong>
-      </p>
-      <p class="m1">
-        <strong>Description:</strong>
-        <%= pin.description %>
-      </p>
-      <% if pin.link.present? %>
-        <p class="m1">
-          <strong>Link:</strong>
-          <%= pin.link %>
-        </p>
-      <% end %>
-
-
-      <div class="follow-container">
-        <%= render partial: "shared/user_avatar", locals: {user: pin.user, size: 48} %>
-        <%= render partial: "users/creator_info", locals: {user: pin.user} %>
-        <%# creator of the pin will not be able to follow himself %>
-        <div class="follow-button">
-          <% if current_user != pin.user %>
-            <% followed = current_user.followings.find_by(id: pin.user.id) %>
-            <% if followed %>
-              <%= render partial: "follows/follow", locals: {user: pin.user} %>
-            <% end %>
-            <% if not followed %>
-              <%= render partial: "follows/following", locals: {user: pin.user} %>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-  
-      <p class="m1">
-        <%= render partial: "pins/note", locals: {pin: pin, note: note} %>
-      </p>
-
-      <p class="m1">
-        <div>
-          <%= turbo_frame_tag("like_frame_#{dom_id(pin)}") do %>
-            <div class="one-line-container">
-              <%= render partial: 'likes/like_icon', locals: {likeable: pin} %>
-              <%= render partial: 'likes/like_count', locals: {likeable: pin} %>
-            </div>
-          <% end %>
-        </div>
-      </p>
-
-      <p class="m1">
-        <div class="comments-section">
-          <%= turbo_frame_tag("#{dom_id(pin)}_comments") do %>
-            <div id="add-comment"><%= render partial: "comments/form", locals: {pin: pin, comment: pin.comments.build, cancel_form: false, not_show_cancel_button: true} %></div>
-            <div class="bold m1">Comments</div>
-            <%= turbo_frame_tag("#{dom_id(pin)}_show_all_comments") do %>
-              <% if pin.comments.count == 0 %>
-                <div id="comment-empty">No comments yet! Add one to start the conversation.</div>
-              <% end %>
-              <% pin.comments.is_root.order(created_at: :desc).each do |comment| %>
-                <%= render partial: "shared/comment_short", locals: {pin: pin, comment: comment} %>
-              <% end %>
-            <% end %>
-          <% end %>
-        </div>
-      </p>
+    <div class = "pin_content pr-2">
+      <%= render partial: "pins/pin_details", locals: { pin: pin } %>
+      <%= render partial: "pins/creator_info", locals: { pin: pin } %>      
+      <%= render partial: "pins/note", locals: {pin: pin, note: note} %>
+      <%= render partial: "shared/like", locals: {likeable: pin} %>
+      <%= render partial: "pins/comments", locals: { pin: pin } %>
     </div>
   </div>
 </div>
 
 <div class="m2 md big">More to explore</div>
-
 <%= turbo_frame_tag "content", src: root_path %>

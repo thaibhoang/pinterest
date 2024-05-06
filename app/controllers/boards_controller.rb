@@ -29,6 +29,8 @@ class BoardsController < ApplicationController
 
   # POST /boards or /boards.json
   def create
+    @in_saved_pin_mode = params[:in_saved_pin_mode]
+    @pin_id = params[:pin_id]
     @board = current_user.boards.build(board_params)
     respond_to do |format|
       if @board.save

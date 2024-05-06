@@ -1,0 +1,6 @@
+<%= turbo_frame_tag("like_frame_#{dom_id(likeable)}") do %>
+  <div class="flex gap-2 items-center">
+    <%= render partial: 'likes/like_icon', locals: {likeable: likeable} %>
+    <%= render partial: 'likes/like_count', locals: {likeable: likeable} %>
+  </div>
+<% end %>

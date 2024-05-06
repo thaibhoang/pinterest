@@ -1,0 +1,22 @@
+.pin_img {
+  max-height: 760px;
+  width: 508px;
+}
+.pin_img > a {
+  max-height: 760px;
+  display: flex;
+  justify-content: center;
+  margin-right: 0;
+}
+.pin_img img {
+  border-radius: 1rem;
+}
+.pin_img_inner_container{
+  position: relative;
+}
+.pin_img_inner_container:hover .bottom-right,
+.pin_img_inner_container:hover .top-left,
+.pin_img_inner_container:hover .bottom-left {
+  opacity: 1;
+  transition: opacity 0.25s ease;
+}

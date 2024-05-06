@@ -1,5 +1,5 @@
 <div>
-  <label for="board_id" style="display: block;">Board</label>
+  <label for="board_id" style="display: block;">Move Pin to Board:</label>
   <% open_boards, closed_boards = filter_options(pin, current_user, current_user.boards) %>
   <%= render partial: "pins/select_tag", locals: { open_boards: open_boards, closed_boards: closed_boards, new_board_id: nil, new_board_name: nil } %>
 

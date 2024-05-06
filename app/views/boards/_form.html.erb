@@ -4,7 +4,8 @@
   <%= turbo_frame_tag "new_board" do %>
     <%= form_with(model: [current_user, board]) do |form| %>
       <%= render partial: "shared/errors_notification", locals: { resource: board } %>
-
+      <%= hidden_field_tag :in_saved_pin_mode, in_saved_pin_mode %>
+      
       <% if defined?(pin_id) && pin_id != nil %>
         <%= hidden_field_tag :pin_id, pin_id %>
         <%# pin_id is for the case of createing new board in "save pin process" %>
@@ -46,7 +47,7 @@
 
       <% if pin_id == nil %>
         <div>
-          <%= form.submit "Submit", data: { turbo_frame: "_top" } %>
+          <%= form.submit "Create Board", data: { turbo_frame: "_top" } %>
           <% if in_saved_pin_mode %>
             <%= link_to "Cancel", new_user_board_path(current_user, cancel_form: true) %>
           <% end %>

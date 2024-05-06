@@ -1,0 +1,12 @@
+<%= turbo_frame_tag("#{dom_id(comment)}_show_replies") do %>
+  <% count = comment.replies.count%>
+  <% if count.positive? %>
+    <% if count > 1 %>
+      <div class="px-2 pb-2 text-sm">
+        <%= link_to "___ View #{pluralize(count, "reply")}", pin_comment_path(pin, comment), class: "blur bold" %>
+      </div>
+    <% end %>
+
+    <%= render partial: "shared/comment_short", locals: {pin: pin, comment: comment.newest_reply} %>
+  <% end %>
+<% end %>

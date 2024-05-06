@@ -1,11 +1,15 @@
 <%= turbo_frame_tag("#{dom_id(comment)}_body") do %>
-  <div class="comment-body">
-    <%= link_to user_path(comment.user), data: {turbo_frame: "_top"}, class: "align-items-center" do %>
-      <%= render partial: "shared/user_avatar", locals: {user: comment.user, size: 32} %>
-      <strong><%= comment.user.email.truncate(20) %></strong>
-    <% end %>
+  <div class="bg-light-gray p-2 rounded-lg inline-block max-w-full">
+    <div>
+      <%= link_to user_path(comment.user), data: {turbo_frame: "_top"} do %>
+        <strong><%= comment.user.email.truncate(20) %></strong>
+      <% end %>
+    </div>
+    
     <%= turbo_frame_tag("#{dom_id(comment)}_body_content") do %>
-      <%= comment.body.strip %>
-    <% end %>
+      <div class="break-words text-wrap max-w-full">
+        <%= comment.body.strip %>
+      </div>
+    <% end %>    
   </div>
 <% end %>

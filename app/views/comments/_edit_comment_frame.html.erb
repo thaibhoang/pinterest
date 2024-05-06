@@ -1,0 +1,4 @@
+<% if current_user_is_owner_of?(comment) %>
+  <%= link_to "Edit", edit_pin_comment_path(pin, comment), data: {turbo_frame: "#{dom_id(comment)}_body_content"}, class: "bold blur" %>
+  <%= link_to "Delete", pin_comment_path(pin, comment), data: {turbo_method: :delete, turbo_comfirm: "Are you sure?"}, class: "bold blur" %>
+<% end %>

@@ -32,6 +32,10 @@ class User < ApplicationRecord
     end
   end
 
+  def following?(user)
+    followings.find_by(id: user.id)
+  end
+
   protected
 
   def generate_profile

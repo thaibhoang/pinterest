@@ -1,6 +1,3 @@
 <%= render partial: "shared/profile", locals: { user: @user } %>
 <hr>
 <%= turbo_frame_tag "content", src: user__created_index_path(@user), loading: "lazy" %>
-
-
-

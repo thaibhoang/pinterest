@@ -15,6 +15,6 @@
     <%= link_to new_pin_saved_pin_path(pin), class: "bold white", data: { turbo_frame: "#{dom_id(pin)}_new_saved_pin" } do %>
       <span>Choose Board</span> <i class="fa-solid fa-circle-chevron-down"></i>
     <% end %>
-    <%= turbo_frame_tag("#{dom_id(pin)}_new_saved_pin") %>
   </div>
+  <%= turbo_frame_tag("#{dom_id(pin)}_new_saved_pin") %>
 </div>

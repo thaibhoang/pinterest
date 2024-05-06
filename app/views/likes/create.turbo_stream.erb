@@ -1,7 +1,4 @@
-<%= turbo_stream.update @like_frame_name do %>
-  <div class="one-line-container">
-    <%= render partial: 'likes/like_icon', locals: {likeable: @like.likeable} %>
-    <%= render partial: 'likes/like_count', locals: {likeable: @like.likeable} %>
-  </div>
+<%= turbo_stream.replace @like_frame_name do %>
+  <%= render partial: "shared/like", locals: {likeable: @like.likeable} %>
 <% end %>
 

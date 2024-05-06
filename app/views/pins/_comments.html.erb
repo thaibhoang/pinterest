@@ -1,0 +1,22 @@
+<div class="comments-section m1">
+  <%= turbo_frame_tag("#{dom_id(pin)}_comments") do %>
+    <div id="add-comment">
+      <%= render partial: "comments/form", 
+                 locals: { pin: pin, 
+                           comment: pin.comments.build, 
+                           cancel_form: false, 
+                           not_show_cancel_button: true } %>
+    </div>
+    <div class="bold m1">Comments</div>
+    
+    <%= turbo_frame_tag("#{dom_id(pin)}_show_all_comments") do %>
+      <% if pin.comments.count.zero? %>
+        <div id="comment-empty">No comments yet! Add one to start the conversation.</div>
+      <% end %>
+
+      <% pin.comments.is_root.order(id: :desc).each do |comment| %>
+        <%= render partial: "shared/comment_short", locals: {pin: pin, comment: comment} %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

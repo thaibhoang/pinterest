@@ -1,0 +1,5 @@
+<div class="follow-container">
+  <%= render partial: "shared/user_avatar", locals: {user: pin.user, size: 48} %>
+  <%= render partial: "users/creator_info", locals: {user: pin.user} %>
+  <%= render partial: "shared/follow_user", locals: {user: pin.user} %>
+</div>

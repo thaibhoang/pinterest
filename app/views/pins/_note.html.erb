@@ -1,13 +1,12 @@
-<div id="note_content">
-  <div class="m0_25"><strong>Note to self: (only you can see)</strong></div>
+<div id="note_content" class="m1">
+  <div class="note-header"><strong>Note to self:</strong></div>
   <div><%= note.content if note.present? %></div>
 
   <%= turbo_frame_tag "note" do %>
-    <% if note.present? %>    
-      <%= link_to "Edit Note", edit_pin_note_path(pin, note), class: "bold" %>
-    <% else %>
-      <div>What do you want to remember about this Pin?</div>
-      <%= link_to "Add a Note", new_pin_note_path(pin), class: "bold" %>
-    <% end %>
+    <%= note.present? ? 
+      link_to("Edit Note", edit_pin_note_path(pin, note), class: "bold") :
+      (content_tag(:div, "What do you want to remember about this Pin?") +
+       link_to("Add a Note", new_pin_note_path(pin), class: "bold"))  
+    %>
   <% end %>
 </div>

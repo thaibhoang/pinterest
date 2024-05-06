@@ -41,6 +41,7 @@ class PinsController < ApplicationController
 
   # PATCH/PUT /pins/1 or /pins/1.json
   def update
+    @in_frame_mode = params[:in_frame_mode]
     respond_to do |format|
       if @pin.update(pin_params)
         format.html { redirect_to pin_url(@pin), notice: 'Pin was successfully updated.' }
@@ -56,7 +57,7 @@ class PinsController < ApplicationController
     @pin.destroy!
 
     respond_to do |format|
-      format.html { redirect_to pins_url, notice: 'Pin was successfully destroyed.' }
+      format.html { redirect_to user__created_index_path(current_user), notice: 'Pin was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

@@ -1,0 +1,7 @@
+<% if user_signed_in? && current_user != user %>
+  <div class="follow-button">
+    <% followed = current_user.following?(user) %>
+    <%= render partial: "follows/follow", locals: {user: user} if followed %>
+    <%= render partial: "follows/following", locals: {user: user} unless followed %>
+  </div>
+<% end %>

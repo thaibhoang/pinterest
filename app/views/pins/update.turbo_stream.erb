@@ -1,6 +1,15 @@
 <%= turbo_stream.replace "original_box_#{dom_id(@pin)}" do %>
   <%= render partial: "shared/pin", locals: {pin: @pin} %>
 <% end %>
+
 <%= turbo_stream.replace "#{dom_id(@pin)}_edit_layout" do %>
   <%= turbo_frame_tag [dom_id(@pin), "edit_layout"] %>
+<% end %>
+
+<%= turbo_stream.replace "pin_detail" do %>
+  <%= render partial: "pins/pin_details", locals: { pin: @pin } %>
+<% end %>
+
+<%= turbo_stream.update "pin_img" do %>
+  <%= render_pin_image(@pin, 508, 760) %>
 <% end %>

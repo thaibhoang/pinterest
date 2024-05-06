@@ -1,7 +1,8 @@
+<% return unless current_user_is_owner_of?(saved_pin) %>
+
 <div class="bottom-right">
   <%= link_to edit_pin_saved_pin_path(pin, saved_pin), class: "bold white", data: { turbo_frame: "edit#{dom_id(saved_pin)}" } do %>
-    <span>Edit</span>
     <i class="fa-solid fa-pen"></i>
   <% end %>
-  <%= turbo_frame_tag("edit#{dom_id(saved_pin)}") %>
 </div>
+<%= turbo_frame_tag("edit#{dom_id(saved_pin)}") %>

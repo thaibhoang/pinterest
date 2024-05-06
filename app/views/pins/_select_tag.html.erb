@@ -1,8 +1,8 @@
 <select name="board_id" id="board_id">
   <% if not new_board_id %>
-    <option value="" disabled selected>Profile</option>
+    <option value="" disabled selected>Unorganized Ideas</option>
   <% else %>
-    <option value="" disabled >Profile</option>
+    <option value="" disabled >Unorganized Ideas</option>
     <option value=<%= new_board_id %> selected><%= new_board_name %></option>
   <% end %>
   <% open_boards.each do |name, id| %>

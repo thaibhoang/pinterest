@@ -6,11 +6,14 @@ class Comment < ApplicationRecord
   has_many :likes, as: :likeable
 
   scope :is_root, -> { where(parent_id: nil) }
-  scope :newest_reply, -> { order(created_at: :desc).first }
 
   validates :body, presence: true
 
   def pin_comment?
     parent_id.nil?
+  end
+
+  def newest_reply
+    replies.order(id: :desc).first
   end
 end

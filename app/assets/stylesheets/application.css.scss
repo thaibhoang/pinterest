@@ -15,14 +15,18 @@
  */
 @import "font-awesome";
 @import "profile-img";
+@import "pin";
+@import "pin-thumbnail";
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   --color60: white;
   --color30: #191645;
   --color10: #43c64c; 
-  font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif
+  font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  text-decoration: none;
 }
 
 a {
@@ -117,8 +121,34 @@ img {
 .board-thumbnail {
   border-radius: 15px;
 }
-.left-padding-1rem {  
-  padding-left: 1rem;
+.p-2 {
+  padding: 0.5rem 0.5rem;
+}
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.pb-2 {
+  padding-bottom: 0.5rem;
+}
+.pr-2 {
+  padding-right: 0.5rem
+}
+.max-w-full {
+  max-width: 100%;
+}
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+.inline-block {
+  display: inline-block;
+}
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+.break-words {
+  word-wrap: break-word;
 }
 .middle-container {
   display: flex;
@@ -131,10 +161,35 @@ img {
   justify-content: center;
   align-items: center;
 }
-.one-line-container {
-  gap: 0.25rem;
+.flex {
   display: flex;
+}
+.flex-col {
+  flex-direction: column;
+}
+.flex-initial {
+  flex: 0 1 auto;
+}
+.gap-2 {
+  gap: 0.5rem;
+}
+.items-start {
+  align-items: flex-start;
+}
+.items-center {
   align-items: center;
+}
+.whitespace-normal {
+  white-space: normal;
+}
+.ml-2 {
+  margin-left: 0.5rem;
+}
+.text-wrap {
+  text-wrap: wrap;
+}
+.min-w-0 {
+  min-width: 0px;
 }
 .information {
   display: flex;
@@ -155,19 +210,6 @@ img {
   width: 508px;
   overflow-y: scroll;
 }
-.pin_img {
-  max-height: 760px;
-  width: 508px;
-}
-.pin_img a {
-  max-height: 760px;
-  display: flex;
-  justify-content: center;
-  margin-right: 0;
-}
-.pin_img img {
-  border-radius: 1rem;
-}
 input, textarea {
   border: 2px solid grey;
   width: 400px;
@@ -187,7 +229,11 @@ input[type=image] {
 input[type=checkbox] {
   width: auto;
 }
-button, input[type=button], input[type=submit], input[type=reset] { 
+button, 
+input[type=button], 
+input[type=submit], 
+input[type=reset], 
+.modal .button { 
   border: none;
   width: auto;
   color: white;
@@ -200,7 +246,12 @@ button, input[type=button], input[type=submit], input[type=reset] {
   font-size: medium;
   font-weight: 555;
 }
-select:hover, button:hover, input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover, .custom-file-upload:hover {
+select:hover, 
+button:hover, 
+input[type=button]:hover, 
+input[type=submit]:hover, 
+input[type=reset]:hover, 
+.custom-file-upload:hover {
   cursor: pointer;
 }
 label {
@@ -210,9 +261,6 @@ a {
   display: inline-block;
   padding: 0.25rem 0;
 }
-.one-line-container a {
-  padding: 0.25rem
-}
 .m2 {
   margin-top: 2rem;
   margin-bottom: 2rem;
@@ -221,7 +269,7 @@ a {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
-.m0_25 {
+.note-header {
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
 }
@@ -306,22 +354,15 @@ button.like {
   color: var(--color30);
   background-color: white;
   padding: 0;
+  margin: 0;
+}
+.bg-light-gray {
+  background-color: #f0f2f5;
 }
 .align-items-center {
   gap: 0.25rem;
   display: flex;
   align-items: center;
-}
-.comment-body a {
-  display: inline-block;
-  position: relative;
-  padding-left: 1.5rem;
-}
-.comment-body a div {
-  position: absolute;
-  top: 50%;
-  left: -0.45rem;
-  transform: translateY(-50%);
 }
 .modal {
   position: fixed;
@@ -348,12 +389,30 @@ button.like {
 .relative-container:hover img {
   filter: brightness(75%);
 }
-.relative-container:hover .top-left, .relative-container:hover .bottom-left, .relative-container:hover .bottom-right  {
-  display: inline-block;
+.relative-container:hover .top-left, 
+.relative-container:hover .bottom-left, 
+.relative-container:hover .bottom-right  {
+  opacity: 1;
+  transition: opacity 0.25s ease;
+}
+.top-left a, 
+.bottom-left, 
+.bottom-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  text-decoration: none;
+  gap: 0.2rem;
+}
+.top-left, 
+.bottom-left, 
+.bottom-right {
+  opacity: 0;
+  position: absolute;
+  transition: opacity 0.25s ease;
 }
 .top-left {
-  display: none;
-  position: absolute;
   top: 1rem;
   left: 1rem;
   border-radius: 1rem;
@@ -361,18 +420,16 @@ button.like {
   background-color: var(--color30);
 }
 .bottom-left {
-  display: none;
-  position: absolute;
   bottom: 0.75rem;
   left: 0.5rem;
 }
 .bottom-right {
-  display: none;
-  position: absolute;
   bottom: 1rem;
   right: 1rem;
-  border-radius: 1rem;
-  padding: 0.1rem 0.35rem;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  padding: 0.2rem;
   background-color: var(--color30);
 }
 .white {

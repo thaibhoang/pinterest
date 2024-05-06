@@ -1,5 +1,6 @@
 <%= form_with(model: pin) do |form| %>
   <%= render partial: "shared/errors_notification", locals: { resource: pin } %>
+  <%= hidden_field_tag :in_frame_mode, in_frame_mode %>
 
   <div>
     <%= form.label :image, "Upload Image",  style: "display: block" %>
@@ -27,12 +28,14 @@
   </div>
 
   <div>
-    
     <% if in_frame_mode %>
       <%= form.submit %>
-      <%= link_to "Cancel", edit_pin_path(pin, cancel_form: true), data: {close_form_target: "button"} %>
+      <%= link_to "Cancel", edit_pin_path(pin, cancel_form: true), data: {close_form_target: "button"}, class: "button" %>
     <% else %>
       <%= form.submit "Submit", data: {turbo: "false"} %>
     <% end %>
+    <%= link_to "Destroy this pin", pin_path(pin), 
+                data: {turbo_method: :delete, turbo_confirm: "Are you sure?", turbo_frame: "_top" }, 
+                class: "button" %>
   </div>
 <% end %>

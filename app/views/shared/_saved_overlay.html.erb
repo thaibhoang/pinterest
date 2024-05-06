@@ -1,0 +1,5 @@
+<% been_saved, saved_to = saved_to_board(pin, current_user) %>
+<%# saved_to_board is a saved_pin helper method %>
+
+<%= render partial: "shared/saved_pin_form_layout", locals: {pin: pin} if been_saved == false %>
+<%= render partial: "shared/unsave_layout", locals: {pin: pin, board_id: saved_to} if been_saved == true %>
