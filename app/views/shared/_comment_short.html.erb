@@ -1,7 +1,7 @@
 <%= turbo_frame_tag(dom_id(comment)) do %>
   <div class="flex gap-2">
     <%= render partial: "shared/visit_user_via_avatar", locals: {user: comment.user, size: 32} %>
-    <div class="min-w-0">
+    <div class="min-w-0 flex-auto">
       <%= render partial: "comments/comment_body", locals: { comment: comment } %>
 
       <div class="flex gap-2 items-center px-2 pb-2">

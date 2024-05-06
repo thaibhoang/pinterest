@@ -4,7 +4,9 @@ module CommentsHelper
   end
 
   def cancel_button_for_new_comment(not_show_button, pin, comment)
-    link_to 'Cancel', new_pin_comment_path(pin, parent_id: comment.parent_id, cancel_form: true) unless not_show_button
+    return if not_show_button
+
+    link_to 'Cancel', new_pin_comment_path(pin, parent_id: comment.parent_id, cancel_form: true), class: "button"
   end
 
   def siblings_desc(comment)

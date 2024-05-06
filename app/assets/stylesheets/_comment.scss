@@ -1,0 +1,23 @@
+.comments-section textarea {
+  width: 100%;
+  padding-right: 3rem;
+  resize: none;
+  overflow: hidden;
+  margin: 0.25rem 0;
+}
+.comments-section form button {
+  background-color: white;
+  color: var(--color30);
+  padding: 0;
+  margin: 0;
+}
+.comments-section .button {
+  text-decoration: none;
+  margin-bottom: 0.25rem;
+}
+.send-button {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+}

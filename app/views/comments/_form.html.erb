@@ -3,22 +3,19 @@
   <% unless cancel_form %>
     <%= form_with(model: [pin, comment] ) do |form| %>
       <%= render partial: "shared/errors_notification", locals: { resource: comment } %>
-    
-      <div>
+      <%= form.hidden_field :parent_id, value: comment.parent_id %>
+
+      <div class="relative">
         <% placeholder = comment.parent_id ? "Reply" : "Add a comment" %>
-        <%= form.text_area :body, placeholder: placeholder %>
-      </div>
-    
-      <div>
-        <%= form.hidden_field :parent_id, value: comment.parent_id %>
-      </div>
-    
-      <div>
-        <%= form.submit "Send" %>
+        <%= form.text_area :body, placeholder: placeholder, class: "in-comments-section" %>
+
+        <button class="send-button">
+          <i class="fa-brands fa-telegram fa-2xl"></i>
+        </button>
 
         <%# Dont show the Cancel button on the default "add comment" window %>
-        <%= cancel_button_for_new_comment(defined?(not_show_cancel_button), pin, comment) %>
       </div>
+      <%= cancel_button_for_new_comment(defined?(not_show_cancel_button), pin, comment) %>
     <% end %>
   <% end %>
 <% end %>

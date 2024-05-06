@@ -1,6 +1,6 @@
 .pin_img {
   max-height: 760px;
-  width: 508px;
+  width: auto;
 }
 .pin_img > a {
   max-height: 760px;
@@ -19,4 +19,9 @@
 .pin_img_inner_container:hover .bottom-left {
   opacity: 1;
   transition: opacity 0.25s ease;
+}
+.pin_content{
+  max-height: 760px;
+  width: 508px;
+  overflow-y: scroll;
 }

@@ -17,6 +17,7 @@
 @import "profile-img";
 @import "pin";
 @import "pin-thumbnail";
+@import "comment";
 * {
   box-sizing: border-box;
   margin: 0;
@@ -170,11 +171,20 @@ img {
 .flex-initial {
   flex: 0 1 auto;
 }
+.flex-auto {
+  flex: 1 1 auto;
+}
+.grow {
+  flex-grow: 1;
+}
 .gap-2 {
   gap: 0.5rem;
 }
 .items-start {
   align-items: flex-start;
+}
+.items-end {
+  align-items: flex-end;
 }
 .items-center {
   align-items: center;
@@ -191,6 +201,12 @@ img {
 .min-w-0 {
   min-width: 0px;
 }
+.relative {
+  position: relative;
+}
+.absolute {
+  position: absolute;
+}
 .information {
   display: flex;
   flex-direction: column;
@@ -205,11 +221,7 @@ img {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 1rem;
 }
-.pin_content {
-  max-height: 760px;
-  width: 508px;
-  overflow-y: scroll;
-}
+
 input, textarea {
   border: 2px solid grey;
   width: 400px;
@@ -233,14 +245,14 @@ button,
 input[type=button], 
 input[type=submit], 
 input[type=reset], 
-.modal .button { 
+.button { 
   border: none;
   width: auto;
   color: white;
   background-color: var(--color30);
-  padding: 0.5rem 1rem 0.45rem;
+  padding: 0.4rem 0.5rem 0.35rem;
   border-radius: 1rem;
-  margin: 0.25rem;
+  margin-bottom: 0.25rem;
   display: inline-block;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: medium;

@@ -1,5 +1,5 @@
 <%= turbo_frame_tag("#{dom_id(comment)}_body") do %>
-  <div class="bg-light-gray p-2 rounded-lg inline-block max-w-full">
+  <div class="bg-light-gray p-2 rounded-lg max-w-full">
     <div>
       <%= link_to user_path(comment.user), data: {turbo_frame: "_top"} do %>
         <strong><%= comment.user.email.truncate(20) %></strong>
