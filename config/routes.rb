@@ -6,6 +6,9 @@ Rails.application.routes.draw do
     resources :notes, except: %i[index show]
     resources :saved_pins, except: %i[index show]
     resources :comments
+    member do
+      resources :pin_thumbnail, only: :index
+    end
   end
 
   devise_for :users, controllers: {
