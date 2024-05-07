@@ -10,9 +10,7 @@
     <div class="bold my-4">Comments</div>
     
     <%= turbo_frame_tag("#{dom_id(pin)}_show_all_comments") do %>
-      <% if pin.comments.count.zero? %>
-        <div id="comment-empty">No comments yet! Add one to start the conversation.</div>
-      <% end %>
+      <%= render partial: "comments/no_comment_notice", locals: {pin: pin} %>
 
       <% pin.comments.is_root.order(id: :desc).each do |comment| %>
         <%= render partial: "shared/comment_short", locals: {pin: pin, comment: comment} %>

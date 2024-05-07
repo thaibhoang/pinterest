@@ -1,1 +1,8 @@
 <%= turbo_stream.remove "#{dom_id(@comment)}" %>
+
+<%# if there is no comment, add the no comment notification %>
+<% if @pin.comments.count.zero? %>
+  <%= turbo_stream.prepend "#{dom_id(@pin)}_show_all_comments" do %>
+    <%= render partial: "comments/no_comment_notice", locals: {pin: @pin}  %>
+  <% end %>  
+<% end %>

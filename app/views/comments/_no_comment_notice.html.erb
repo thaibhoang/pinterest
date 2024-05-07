@@ -1,0 +1,5 @@
+<% if pin.comments.count.zero? %>
+  <%= turbo_frame_tag("no_comment_yet") do %>
+    <div id="comment-empty">No comments yet! Add one to start the conversation.</div>
+  <% end %>
+<% end %>

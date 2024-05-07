@@ -4,6 +4,9 @@
     <%= render partial: "shared/comment_short", locals: {pin: @pin, comment: @comment} %>
   <% end %>
 
+  <%# if adding the first comment, remove the no comment notification %>
+  <%= turbo_stream.remove "no_comment_yet" if @comment.pin.comments %>
+
   <%# clear the add comment section %>
   <%= turbo_stream.update "add-comment" do %>
     <%= render partial: "comments/form", locals: {pin: @pin, comment: @pin.comments.build, cancel_form: false, not_show_cancel_button: true} %>
