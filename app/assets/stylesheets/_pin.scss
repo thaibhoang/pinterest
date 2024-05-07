@@ -1,3 +1,11 @@
+.pin_display {
+  padding: 1rem 0 1rem 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 1rem;
+}
 .pin_img {
   max-height: 760px;
   width: auto;

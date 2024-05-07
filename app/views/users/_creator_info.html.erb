@@ -2,6 +2,6 @@
   <%= link_to user_path(user) do %>
     <div><strong><%= user.email.truncate(20) %></strong></div>
 
-    <div class="md"><%= show_follow_count(user) %></div>
+    <div class="text-center"><%= show_follow_count(user) %></div>
   <% end %>
 </div>

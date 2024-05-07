@@ -1,0 +1,41 @@
+.relative-container {
+  position: relative;  
+}
+.relative-container:hover img {
+  filter: brightness(75%);
+}
+.relative-container:hover .top-left, 
+.relative-container:hover .bottom-left, 
+.relative-container:hover .bottom-right  {
+  opacity: 1;
+  transition: opacity 0.25s ease;
+}
+.top-left a, 
+.bottom-left, 
+.bottom-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  text-decoration: none;
+  gap: 0.2rem;
+}
+.top-left, 
+.bottom-left, 
+.bottom-right {
+  opacity: 0;
+  position: absolute;
+  transition: opacity 0.25s ease;
+}
+.top-left {
+  top: 1rem;
+  left: 1rem;
+}
+.bottom-left {
+  bottom: 0.75rem;
+  left: 0.5rem;
+}
+.bottom-right {
+  bottom: 1rem;
+  right: 1rem;
+}

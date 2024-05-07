@@ -3,7 +3,12 @@
   <% open_boards, closed_boards = filter_options(pin, current_user, current_user.boards) %>
   <%= render partial: "pins/select_tag", locals: { open_boards: open_boards, closed_boards: closed_boards, new_board_id: nil, new_board_name: nil } %>
 
-  <div><%= link_to "Or Create New Board", new_user_board_path(current_user, pin_id: pin.id, in_saved_pin_mode: true), data: { turbo_frame: "new_board" } %></div>
+  <div>
+    <%= link_to "Or Create New Board", 
+          new_user_board_path(current_user, pin_id: pin.id, in_saved_pin_mode: true), 
+          data: { turbo_frame: "new_board" },
+          class: "bold blur" %>
+  </div>
 
-  <div id="new_board_form"><%= turbo_frame_tag "new_board" %></div>
+  <%= turbo_frame_tag "new_board" %>
 </div>

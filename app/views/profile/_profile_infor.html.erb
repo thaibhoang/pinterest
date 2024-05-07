@@ -5,20 +5,20 @@
 
 <%= turbo_frame_tag("profile-content") do %>
   <% if profile.username? %>
-    <div class="m1">
+    <div class="my-4">
       <div>My name: </div>
       <div><%= profile.username %></div>
     </div>
   <% end %>
 
   <% if profile.about? %>
-    <div class="m1">
+    <div class="my-4">
       <div>About me:</div>
       <div><%= profile.about %></div>
     </div>
   <% end %>
 
   <% if user_signed_in? && current_user == profile.user %>
-    <div class="md"><%= link_to "Edit profile", edit_user_profile_path(current_user, @profile), class: "bold" %></div>
+    <div class="text-center"><%= link_to "Edit profile", edit_user_profile_path(current_user, @profile), class: "bold" %></div>
   <% end %>
 <% end %>

@@ -2,7 +2,7 @@
   <div id="<%= dom_id pin %>" class= "pin_display relative">
     <%= render partial: "pins/pin_image", locals: { pin: pin } %>
     
-    <div class = "pin_content pr-2">
+    <div class = "pin_content px-2">
       <%= render partial: "pins/pin_details", locals: { pin: pin } %>
       <%= render partial: "pins/creator_info", locals: { pin: pin } %>      
       <%= render partial: "pins/note", locals: {pin: pin, note: note} %>
@@ -12,5 +12,5 @@
   </div>
 </div>
 
-<div class="m2 md big">More to explore</div>
+<div class="my-4 text-center big">More to explore</div>
 <%= turbo_frame_tag "content", src: root_path %>

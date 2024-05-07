@@ -1,0 +1,71 @@
+input, textarea {
+  border: 2px solid grey;
+  width: 400px;
+  padding: 0.75rem;
+  height: auto;
+  border-radius: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.box input, .box textarea {
+  width: 90%;
+}
+input[type=image] {
+  width: auto;
+  padding: 0;
+  border: none;
+}
+input[type=file] {
+  background-color: white;
+}
+input[type=checkbox] {
+  width: auto;
+}
+button, 
+input[type=button], 
+input[type=submit], 
+input[type=reset], 
+.button { 
+  border: none;
+  width: auto;
+  color: white;
+  background-color: var(--color30);
+  padding: 0.4rem 0.5rem 0.35rem;
+  border-radius: 1rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  display: inline-block;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: medium;
+  font-weight: 555;
+  transition: transform 0.05s ease-in;
+}
+input.save-button {
+  background-color: var(--color10);
+  color: var(--color30);
+}
+select:hover {
+  cursor: pointer;
+} 
+select {
+  margin-bottom: 0.5rem;
+}
+button:hover, 
+input[type=button]:hover, 
+input[type=submit]:hover,
+.button:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  transition: transform 0.05s ease-in;
+}
+label {
+  margin: 0.25rem 0;
+}
+.form-group label {
+  display: block;
+}
+button.like {
+  color: var(--color30);
+  background-color: white;
+  padding: 0;
+  margin: 0;
+}

@@ -12,7 +12,7 @@
   </div>
   
   <div class="top-left">
-    <%= link_to new_pin_saved_pin_path(pin), class: "bold white", data: { turbo_frame: "#{dom_id(pin)}_new_saved_pin" } do %>
+    <%= link_to new_pin_saved_pin_path(pin), class: "bold white button", data: { turbo_frame: "#{dom_id(pin)}_new_saved_pin" } do %>
       <span>Choose Board</span> <i class="fa-solid fa-circle-chevron-down"></i>
     <% end %>
   </div>

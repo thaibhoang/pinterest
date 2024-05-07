@@ -1,4 +1,4 @@
-<div class="comments-section m1">
+<div class="comments-section my-4">
   <%= turbo_frame_tag("#{dom_id(pin)}_comments") do %>
     <div id="add-comment">
       <%= render partial: "comments/form", 
@@ -7,7 +7,7 @@
                            cancel_form: false, 
                            not_show_cancel_button: true } %>
     </div>
-    <div class="bold m1">Comments</div>
+    <div class="bold my-4">Comments</div>
     
     <%= turbo_frame_tag("#{dom_id(pin)}_show_all_comments") do %>
       <% if pin.comments.count.zero? %>

@@ -1,6 +1,6 @@
 <%= render partial: "shared/profile", locals: { user: @user } %>
 <hr>
-<div class="md big m1">All Pins Created</div>
+<div class="text-center big my-4">All Pins Created</div>
 <%= turbo_frame_tag "content" do %>
   <div class="container">
     <% cache @pins do %>
@@ -13,7 +13,7 @@
   </div>
 
   <% if @user == current_user && @user.pins.count == 0 %>
-    <div class="m1 md">
+    <div class="text-center my-4">
       <div>You haven't created any pin yet.</div>
       <div><%= link_to "Create One", new_pin_path, data: {turbo_frame: "_top"} %></div>
     </div>

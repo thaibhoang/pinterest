@@ -8,7 +8,7 @@ module BoardsHelper
   end
 
   def render_edit_board_link(board)
-    link_to link_text("Edit", board), edit_user_board_path(current_user, board), class: "bold"
+    link_to link_text("Edit", board), edit_user_board_path(current_user, board), class: "button"
   end
 
   def render_destroy_board_link(board)
@@ -16,7 +16,7 @@ module BoardsHelper
             data: { turbo_confirm: "Are you sure?",
                     turbo_method: :delete,
                     turbo_frame: "_top" },
-            class: "bold"
+            class: "button"
   end
 
   def link_text(action, board)

@@ -1,5 +1,5 @@
 <%= turbo_frame_tag("#{dom_id(board)}_privacy_change") do %>
-  <div class="one-line-container">
+  <div class="flex gap-2 items-center">
     <div>Who can see this board:</div>
     <% next_state = toggle_privacy_state(board) %>
     <%= button_to next_state, user_board_path(board.user, board, board: { keep_secret: !board.keep_secret }), method: :patch %>

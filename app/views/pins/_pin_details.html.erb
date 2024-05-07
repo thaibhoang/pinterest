@@ -1,12 +1,12 @@
 <%= turbo_frame_tag("pin_detail") do %>
-  <p  class="m1">
+  <p  class="my-4">
     <strong><%= pin.title %></strong>
   </p>
-  <p class="m1">
+  <p class="my-4">
     <%= pin.description %>
   </p>
   <% if pin.link.present? %>
-    <p class="m1">
+    <p class="my-4">
       <span>Link:</span>
       <%= pin.link %>
     </p>

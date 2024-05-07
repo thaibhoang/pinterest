@@ -2,7 +2,7 @@
 <% name = board_id.nil? ? "Unorganized Ideas" : Board.find(board_id).name %>
 <% name_prettier = "#{name.truncate(19)}" %>
 <div class="top-left bold">
-  <%= link_to destination, class: "white", data: {turbo_frame: "_top"} do %>
+  <%= link_to destination, class: "button", data: {turbo_frame: "_top"} do %>
     <span><%= name_prettier %></span> 
     <i class="fa-solid fa-check"></i>
   <% end %>

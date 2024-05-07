@@ -1,5 +1,5 @@
   <%= turbo_stream.update @like_frame_name do %>
-    <div class="one-line-container">
+    <div class="flex gap-2">
       <%= render partial: 'likes/like_icon', locals: {likeable: @likeable} %>
       <%= render partial: 'likes/like_count', locals: {likeable: @likeable} %>
     </div>

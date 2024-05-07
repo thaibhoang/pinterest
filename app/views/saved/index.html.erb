@@ -2,9 +2,9 @@
 
 <%= turbo_frame_tag "content" do %>
   <hr>
-  <div class="m1 md big">All boards</div>
+  <div class="my-4 text-center big">All boards</div>
 
-  <div class="m1 md">
+  <div class="my-4 text-center">
     <%= display_when_user_has_no_boards(@user) %>
   </div>
 
@@ -13,7 +13,7 @@
   </div>
   <hr>
 
-  <div class="md big m1">Unorganized Ideas</div>
+  <div class="text-center big my-4">Unorganized Ideas</div>
 
   <div class="container">
     <% cache @unorganized_saved_pins do %>
@@ -27,7 +27,7 @@
 
 
   <% if @user == current_user && @user.saved_pins.count == 0 %>
-    <div class="m1 md">
+    <div class="my-4 text-center">
       <div>You haven't saved any pin yet.</div>
       <div><%= link_to "Browse for Ideas", root_path, data: {turbo_frame: "_top"} %></div>
     </div>
