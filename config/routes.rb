@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resources :saved_pins, except: %i[index show]
     resources :comments
   end
-  
+
   devise_for :users, controllers: {
     registrations: "users/registrations",
     sessions: "users/sessions",

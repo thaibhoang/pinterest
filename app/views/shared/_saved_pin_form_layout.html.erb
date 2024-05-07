@@ -5,8 +5,7 @@
       <%= form_with model: [pin, pin.saved_pins.build] do |f| %>
         <%= f.submit "Save", class: "save-button" %>
       <% end %>
-    <% end %>
-    <% if save_pin_profile %>
+    <% else %>
       <%= button_to "Saved", pin_saved_pin_path(pin, save_pin_profile), method: :delete %>
     <% end %>
   </div>

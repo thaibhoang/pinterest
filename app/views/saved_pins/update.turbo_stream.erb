@@ -3,7 +3,7 @@
 <%= turbo_stream.remove "box_#{dom_id(@pin)}" %>
 
 <%# reload the board thumbnail %>
-<% if @saved_pin.board != nil %>
+<% unless @saved_pin.board.nil? %>
   <%= turbo_stream.replace "#{ dom_id(@saved_pin.board) }" do %>
     <%= render partial: "saved/board_thumbnail", locals: {board: @saved_pin.board, user: @saved_pin.user} %>
   <% end %>

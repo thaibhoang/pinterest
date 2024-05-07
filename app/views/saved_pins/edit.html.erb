@@ -1,9 +1,7 @@
 <h1>Edit Saved Pin</h1>
 
-<% if @cancel_form %>
-  <%= turbo_frame_tag("edit#{dom_id(@saved_pin)}") %>
-<% else %>
-  <%= turbo_frame_tag("edit#{dom_id(@saved_pin)}") do %>
+<%= turbo_frame_tag("edit#{dom_id(@saved_pin)}") do %>
+  <% unless @cancel_form %>
     <div class="modal" data-controller="close-form" data-close-form-target="container" >
       <div class="modal-content">
         <%= render partial: "saved_pins/edit_saved_pin", locals: {pin: @pin, saved_pin: @saved_pin} %>
