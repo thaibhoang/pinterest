@@ -3,7 +3,7 @@
 <%= turbo_frame_tag("edit#{dom_id(@saved_pin)}") do %>
   <% unless @cancel_form %>
     <div class="modal z-15" data-controller="close-form" data-close-form-target="container" >
-      <div class="modal-content z-20">
+      <div class="modal-content z-20 p-4">
         <%= render partial: "saved_pins/edit_saved_pin", locals: {pin: @pin, saved_pin: @saved_pin} %>
       </div>
     </div>

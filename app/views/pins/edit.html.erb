@@ -6,7 +6,7 @@
       <% unless @cancel_form %>
         <% if @in_frame_mode %>
           <div class="modal z-15" data-controller="close-form" data-close-form-target="container" >
-            <div class="modal-content z-20">
+            <div class="modal-content z-20 p-4">
               <%= render partial: "pins/edit_form", locals: {pin: @pin, in_frame_mode: @in_frame_mode} %>
             </div>
           </div>
