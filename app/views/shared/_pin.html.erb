@@ -16,6 +16,7 @@
   <% end %>
   
   <%= render partial: "shared/edit_pin_layout", locals: {pin: pin} if defined?(edit_pin) %>
+  <%= turbo_frame_tag("#{dom_id(pin)}__modal") %>
 </div>
 
   

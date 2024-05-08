@@ -6,7 +6,8 @@ export default class extends Controller {
   connect() {
     this.containerTarget.addEventListener('click', (event) => {
       if (event.target === this.containerTarget) {
-        this.buttonTarget.click()
+        // this.buttonTarget.click()
+        this.containerTarget.remove();
       }
     });
     this.buttonTarget.addEventListener('click', (event) => {

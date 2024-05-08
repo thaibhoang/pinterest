@@ -1,16 +1,25 @@
-<div class="middle-container">
-  <div id="<%= dom_id pin %>" class= "pin_display relative">
-    <%= render partial: "pins/pin_image", locals: { pin: pin } %>
-    
-    <div class = "pin_content px-2">
-      <%= render partial: "pins/pin_details", locals: { pin: pin } %>
-      <%= render partial: "pins/creator_info", locals: { pin: pin } %>      
-      <%= render partial: "pins/note", locals: {pin: pin, note: note} %>
-      <%= render partial: "shared/like", locals: {likeable: pin} %>
-      <%= render partial: "pins/comments", locals: { pin: pin } %>
+<%= turbo_frame_tag("#{dom_id(pin)}__modal") do %>
+  <div class="modal z-5" data-controller="close-form" data-close-form-target="container" >
+    <div class="modal-content z-10">
+      <div class="middle-container relative">
+        <button class="modal__close" data-close-form-target="button">
+          <i class="fa-sharp fa-solid fa-xmark fa-2xl "></i>
+        </button>
+        <div id="<%= dom_id pin %>" class= "pin_display relative">
+          <%= render partial: "pins/pin_image", locals: { pin: pin } %>
+          
+          <div class = "pin_content px-2">
+            <%= render partial: "pins/pin_details", locals: { pin: pin } %>
+            <%= render partial: "pins/creator_info", locals: { pin: pin } %>      
+            <%= render partial: "pins/note", locals: {pin: pin, note: note} %>
+            <%= render partial: "shared/like", locals: {likeable: pin} %>
+            <%= render partial: "pins/comments", locals: { pin: pin } %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+<% end %>
 
 <div class="my-4 text-center big">More to explore</div>
 <%= turbo_frame_tag "content", src: root_path %>

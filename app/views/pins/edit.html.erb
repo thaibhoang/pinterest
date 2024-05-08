@@ -5,8 +5,8 @@
     <%= turbo_frame_tag [dom_id(@pin), "edit_layout"] do %>
       <% unless @cancel_form %>
         <% if @in_frame_mode %>
-          <div class="modal" data-controller="close-form" data-close-form-target="container" >
-            <div class="modal-content">
+          <div class="modal z-15" data-controller="close-form" data-close-form-target="container" >
+            <div class="modal-content z-20">
               <%= render partial: "pins/edit_form", locals: {pin: @pin, in_frame_mode: @in_frame_mode} %>
             </div>
           </div>

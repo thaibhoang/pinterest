@@ -10,20 +10,30 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body data-controller="navigate" data-navigate-target="link" data-path=<%= request.fullpath %>>
+  <body>
     <header>
-      <nav>
-        <% if user_signed_in? %>
-          <%= link_to "Home ", root_path, class: "big", "data-navigate-target": "navButton" %>
-          <%= link_to "Create Pin ", new_pin_path, class: "big", "data-navigate-target": "navButton" %>
-          <%= link_to "Create Board ", new_user_board_path(current_user), class: "big", "data-navigate-target": "navButton" %>
-          <%= link_to "Profile ", user_path(current_user), class: "big", "data-navigate-target": "navButton" %>
-          <%= link_to "Log out ", destroy_user_session_path, data: {turbo_method: :delete}, class: "big right-side" %>
-        <% else %>
+      <%= link_to "Home ", root_path, class: "big logo" %>
+      <input type="checkbox" id="check"></input>
+      <label for="check" class="icons">
+        <i class="fa-sharp fa-solid fa-bars fa-2xl" id="icon__menu"></i>
+        <i class="fa-sharp fa-solid fa-xmark fa-2xl" id="icon__close"></i>  
+      </label>
+      <% if user_signed_in? %>
+        <nav class="navbar">
+          <%= link_to "New Pin ", new_pin_path, class: "big", style: "--i:0" %>
+          <%= link_to "New Board ", new_user_board_path(current_user), class: "big", style: "--i:1" %>
+          <%= link_to "Pins ", user_path(current_user), class: "big", style: "--i:2" %>
+          <%= link_to "Boards ", user__saved_index_path(current_user), class: "big", style: "--i:3" %>
+        </nav>
+        <%= link_to user_path(current_user), class: "header__user" do %>
+          <%= render partial: "shared/user_avatar", locals: {user: current_user, size: 48} %>
+        <% end %>
+      <% else %>
+        <nav>
           <p><%= link_to "Sign in ", new_user_session_path, class: "big" %></p>
           <p><%= link_to "Sign up", new_user_registration_path, class: "big" %></p>
-        <% end %>
-      </nav>
+        </nav>
+      <% end %>
     </header>
     <main>
       <div>
