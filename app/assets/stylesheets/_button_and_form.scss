@@ -54,7 +54,7 @@ input[type=button]:hover,
 input[type=submit]:hover,
 .button:hover {
   cursor: pointer;
-  transform: scale(1.05);
+  opacity: 0.9;
   transition: transform 0.05s ease-in;
 }
 label {

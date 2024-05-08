@@ -1,8 +1,8 @@
 <div class = "pin_img">
-  <div class = "pin_img_inner_container">
+  <div class = "pin_img_inner_container ">
 
     <%= turbo_frame_tag("pin_img") do %>
-      <%= render_pin_image(pin, 508, 760) %>
+      <%= render_full_pin_image(@pin) %>
     <% end %>
     <%= render partial: "shared/edit_pin_layout", locals: { pin: pin} %>
 

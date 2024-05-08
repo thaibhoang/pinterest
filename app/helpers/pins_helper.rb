@@ -8,6 +8,17 @@ module PinsHelper
     end
   end
 
+  def render_full_pin_image(pin)
+    if pin.image_url.present?
+      link_to image_tag(pin.image_url, class: "img--full"),
+              pin.image_url,
+              data: { turbo_frame: "_top" },
+              class: "link--img--full"
+    elsif pin.image.attached?
+      link_to image_tag(pin.image, class: "img--full"), pin.image, class: "link--img--full"
+    end
+  end
+
   def render_pin_thumbnail(pin, width, height)
     if pin.image_url.present?
       link_to image_tag(pin.image_url, style: 'width: 100%; height: auto;'), pin,

@@ -58,6 +58,8 @@ a {
 }
 img {
   border-radius: 1rem;
+  display: block;
+  max-width: 100%;
 }
 .middle-container {
   display: flex;
@@ -103,6 +105,7 @@ img {
   display: flex;
   gap: 1rem;
   align-items: center;
+  flex-wrap: wrap;
 }
 .board-img {
   border-radius: 1rem;

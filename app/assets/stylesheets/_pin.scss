@@ -1,25 +1,36 @@
+* {
+  --max-img-width: 508px;
+}
 .pin_display {
   padding: 1rem 0 1rem 1rem;
   display: flex;
   justify-content: center;
-  gap: 3rem;
+  gap: 2rem;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 1rem;
 }
 .pin_img {
-  max-height: 760px;
-  width: auto;
+  max-height: calc(min(860px, 100vh) - 132px);
+  width: var(--max-img-width);
+  margin-right: 1rem;
 }
-.pin_img > a {
-  max-height: 760px;
-  display: flex;
-  justify-content: center;
-  margin-right: 0;
-}
-.pin_img img {
+.link--img--full {
+  max-height: calc(min(860px, 100vh) - 132px);
+  width: var(--max-img-width);
+  margin-right: 1rem;
+  overflow: hidden;
   border-radius: 1rem;
 }
+.img--full {
+  border-radius: 1rem;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 .pin_img_inner_container{
+  width: 100%;
+  max-height: 100%;
   position: relative;
 }
 .pin_img_inner_container:hover .bottom-right,
@@ -28,8 +39,32 @@
   opacity: 1;
   transition: opacity 0.25s ease;
 }
-.pin_content{
-  max-height: 760px;
-  width: 508px;
+
+.pin_content{  
+  max-height: calc(min(860px, 100vh) - 100px);
+  max-width: var(--max-img-width);
+  width: clamp( 100px, var(--max-img-width), var(--max-img-width));
   overflow-y: scroll;
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+@media (max-width: 992px) {
+  .pin_display {
+    flex-direction: column;
+    border-radius: 0;
+  }
+  .pin_content {
+    max-height: none;
+    overflow-y: visible;
+    padding-right: 0rem;
+    padding-left: 0rem;
+  }
+}
+@media (max-width: 550px) {
+  * {
+    --max-img-width: 90vw;
+  }
+  .pin_img {
+    padding-right: 1rem;
+  }
 }
