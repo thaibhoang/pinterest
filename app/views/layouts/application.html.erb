@@ -29,9 +29,9 @@
           <%= render partial: "shared/user_avatar", locals: {user: current_user, size: 48} %>
         <% end %>
       <% else %>
-        <nav>
-          <p><%= link_to "Sign in ", new_user_session_path, class: "big" %></p>
-          <p><%= link_to "Sign up", new_user_registration_path, class: "big" %></p>
+        <nav class="navbar">
+          <%= link_to "Sign in ", new_user_session_path, class: "big" %>
+          <%= link_to "Sign up", new_user_registration_path, class: "big" %>
         </nav>
       <% end %>
     </header>
