@@ -1,11 +1,11 @@
 <% if flash[:notice].present? %>
-  <div style="color: green">
+  <div class="notice">
     <%= flash[:notice] %>
   </div>
 <% end %>
 
 <% if flash[:error].present? %>
-  <div style="color: red">
+  <div class="error">
     <%= flash[:error] %>
   </div>
 <% end %>
