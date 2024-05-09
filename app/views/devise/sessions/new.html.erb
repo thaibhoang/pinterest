@@ -25,15 +25,24 @@
       </div>
     <% end %>
   
+    <br>
     <hr>
     <br>
-    <div class="bold">Demo account 1: </div>
-    <div>Username: demo1@example.com</div>
-    <div>Password: demo1@example</div>
-    <hr>
+
+    <%= link_to "Login as demo_user_1",
+                user_session_path(user: {email: "demo1@example.com", password: "demo1@example"}),
+                data: { turbo_method: :post },
+                class: "button" %>
     <br>
-    <div class="bold">Demo account 2:</div>
-    <div>Username: demo2@example.com</div>
-    <div>Password: demo2@example</div>
+    <%= link_to "Login as demo_user_2",
+                user_session_path(user: {email: "demo2@example.com", password: "demo2@example"}),
+                data: { turbo_method: :post },
+                class: "button" %>
+    <br>
+    <%= link_to "Login as demo_user_3",
+                user_session_path(user: {email: "demo3@example.com", password: "demo3@example"}),
+                data: { turbo_method: :post },
+                class: "button" %>
+
   </div>
 </div>
