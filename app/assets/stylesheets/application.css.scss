@@ -61,7 +61,12 @@ img {
   display: block;
   max-width: 100%;
 }
+h1 {
+  font-size: x-large;
+}
 .middle-container {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -139,9 +144,4 @@ img {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-#new_board_form {
-  padding: 0.5rem;
-  border-radius: 1rem;
-  background-color: #19164520;
 }

@@ -1,10 +1,17 @@
-input, textarea {
+input, textarea, select {
   border: 2px solid grey;
-  width: 400px;
+  width: 450px;
   padding: 0.75rem;
   height: auto;
-  border-radius: 1rem;
+  
   font-family: Arial, Helvetica, sans-serif;
+}
+input, textarea {
+  border-radius: 1rem;
+}
+select {
+  width: 100%;
+  display: block;
 }
 .box input, .box textarea {
   width: 90%;
@@ -68,4 +75,25 @@ button.like {
   background-color: white;
   padding: 0;
   margin: 0;
+}
+.pin_form {
+  padding: 0.5rem;
+  border-radius: 1rem;
+  background-color: #19164520;
+}
+#new_board_form {
+  padding: 0.5rem;
+  border-radius: 1rem;
+  background-color: #19164540;
+}
+.modal-content > form {
+  min-width: 450px;
+}
+@media (max-width: 550px) {
+  input, textarea {
+    width: 100%;
+  }
+  .modal-content > form {
+    min-width: 80vw;
+  }
 }
