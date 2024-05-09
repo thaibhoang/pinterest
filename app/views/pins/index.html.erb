@@ -1,5 +1,5 @@
 <%= turbo_frame_tag "content" do %>
-  <div class="container">
+  <div class="container" id="pins-container">
     <% cache @pins do %>
       <% @pins.each do |pin| %>
         <% cache pin do %>
@@ -9,5 +9,7 @@
         <% end %>
       <% end %>
     <% end %>
+
+    <div id="load-more" data-next-page-url="<%= pins_path(skip: @next_skip) %>"></div>
   </div>
 <% end %>

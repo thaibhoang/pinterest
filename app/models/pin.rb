@@ -10,7 +10,11 @@ class Pin < ApplicationRecord
   validates :description, presence: true, length: { maximum: 500 }
 
   def self.get_random_pins(number)
-    Pin.all.order(Arel.sql('RANDOM()')).limit(number)
+    Pin.order(Arel.sql('RANDOM()')).limit(number)
+  end
+
+  def self.skip_some_pins_then_get_some_pins(num1, num2)
+    Pin.order(:title).offset(num1).limit(num2)
   end
 
   def image?
