@@ -7,15 +7,16 @@
       <div class="pin-thumbnail">
         <%= render_pin_thumbnail(pin, 236, 760) %>
       </div>
-
-      <%= turbo_frame_tag(dom_id(pin)) do %>
-        <%= render partial: "shared/saved_overlay", locals: { pin: pin } unless defined?(saved_pin) %>
-        <%= render partial: "shared/edit_saved_pin_layout", locals: {pin: pin, saved_pin: saved_pin} if defined?(saved_pin) %>
+      <% if user_signed_in? %>
+        <%= turbo_frame_tag(dom_id(pin)) do %>
+          <%= render partial: "shared/saved_overlay", locals: { pin: pin } unless defined?(saved_pin) %>
+          <%= render partial: "shared/edit_saved_pin_layout", locals: {pin: pin, saved_pin: saved_pin} if defined?(saved_pin) %>
+        <% end %> 
       <% end %>  
     </div>
   <% end %>
   
-  <%= render partial: "shared/edit_pin_layout", locals: {pin: pin} if defined?(edit_pin) %>
+  <%= render partial: "shared/edit_pin_layout", locals: {pin: pin} if defined?(edit_pin) && user_signed_in? %>
   <%= turbo_frame_tag("#{dom_id(pin)}__modal") %>
 </div>
 

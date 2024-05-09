@@ -3,7 +3,7 @@ class PinThumbnailController < ApplicationController
 
   def index
     @edit_pin = params[:edit_pin]
-    @saved_pin = current_user.saved_pins.find_by(id: params[:saved_pin_id])
+    @saved_pin = current_user.saved_pins.find_by(id: params[:saved_pin_id]) if user_signed_in?
   end
 
   private

@@ -1,6 +1,6 @@
 # handle routing to pins
 class PinsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: %i[index]
   before_action :set_pin, only: %i[show edit update destroy]
   before_action :check_user, only: %i[edit update destroy]
   before_action :set_boards, only: %i[new create]

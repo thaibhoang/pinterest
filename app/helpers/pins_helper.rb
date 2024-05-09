@@ -20,11 +20,13 @@ module PinsHelper
   end
 
   def render_pin_thumbnail(pin, width, height)
+    destination = user_signed_in? ? pin : new_user_session_path
+    data = user_signed_in? ? { turbo_frame: "#{dom_id(pin)}__modal" } : { turbo_frame: "_top" }
     if pin.image_url.present?
-      link_to image_tag(pin.image_url, style: 'width: 100%; height: auto;'), pin,
-              data: { turbo_frame: "#{dom_id(pin)}__modal" }
+      link_to image_tag(pin.image_url, style: 'width: 100%; height: auto;'), destination,
+              data:
     elsif pin.image.attached?
-      link_to image_tag(pin.resize_img(pin.image, width, height)), pin, data: { turbo_frame: "#{dom_id(pin)}__modal" }
+      link_to image_tag(pin.resize_img(pin.image, width, height)), destination, data:
     end
   end
 
