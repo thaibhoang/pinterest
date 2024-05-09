@@ -1,5 +1,5 @@
 <div id="creator-info">
-  <%= link_to user_path(user), class: "flex flex-col items-center" do %>
+  <%= link_to user_path(user), class: "flex flex-col items-center", data: { turbo_frame: "_top" } do %>
     <div><strong><%= user.email.truncate(20) %></strong></div>
 
     <div class="text-center"><%= show_follow_count(user) %></div>
