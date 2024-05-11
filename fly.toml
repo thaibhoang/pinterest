@@ -1,13 +1,16 @@
-# fly.toml app configuration file generated for pinterest-clone-bht-bold-silence-7354 on 2024-04-24T10:20:03+07:00
+# fly.toml app configuration file generated for pinterest-clone-bht-winter-pond-8249 on 2024-05-10T20:59:05+07:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'pinterest-clone-bht-bold-silence-7354'
+app = 'pinterest-clone-bht-winter-pond-8249'
 primary_region = 'sin'
 console_command = '/rails/bin/rails console'
 
 [build]
+
+[deploy]
+  release_command = './bin/rails db:prepare'
 
 [http_service]
   internal_port = 3000
@@ -36,3 +39,7 @@ console_command = '/rails/bin/rails console'
   memory = '1gb'
   cpu_kind = 'shared'
   cpus = 1
+
+[[statics]]
+  guest_path = '/rails/public'
+  url_prefix = '/'
