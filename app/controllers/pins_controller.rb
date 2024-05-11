@@ -8,8 +8,8 @@ class PinsController < ApplicationController
   # GET /pins or /pins.json
   def index
     skip = params[:skip] || 0
-    @pins = Pin.skip_some_pins_then_get_some_pins(skip, 50)
-    @next_skip = skip.to_i + 50
+    @pins = Pin.skip_some_pins_then_get_some_pins(skip, 30)
+    @next_skip = skip.to_i + 30
   end
 
   # GET /pins/1 or /pins/1.json
