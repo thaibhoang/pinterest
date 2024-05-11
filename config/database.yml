@@ -80,4 +80,5 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  DATABASE_URL="postgresql://postgres:PJaztUijkwsBxTVhcvZYnxEsJEZrWiot@roundhouse.proxy.rlwy.net:15262/railway"
+  url: <%= ENV['DATABASE_URL'] %>
+
