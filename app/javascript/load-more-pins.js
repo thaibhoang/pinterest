@@ -4,6 +4,7 @@ document.addEventListener("turbo:load", function() {
 
   if (loadMoreTrigger) {
     window.addEventListener("scroll", function() {
+      console.log("i get call")
       if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
         const nextPageUrl = loadMoreTrigger.dataset.nextPageUrl;
         if (nextPageUrl) {

@@ -3,7 +3,8 @@
     <% cache @pins do %>
       <% @pins.each do |pin| %>
         <% cache pin do %>
-          <%= turbo_frame_tag "#{dom_id(pin)}_thumbnail", src: pin_thumbnail_index_path(pin) do %>
+          <%= turbo_frame_tag "#{dom_id(pin)}_thumbnail", src: pin_thumbnail_index_path(pin), loading: "lazy" do %>
+            <div class="pin_thumbnail--placeholder"></div>
           <% end %>
         <% end %>
       <% end %>
