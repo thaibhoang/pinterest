@@ -13,6 +13,8 @@
  *= require_tree .
  *= require_self
  */
+
+/*
 @import "font-awesome";
 @import "profile-img";
 @import "pin";
@@ -27,6 +29,7 @@
 @import "modal";
 @import "scrollbar";
 @import "flash";
+ */
 
 * {
   box-sizing: border-box;
