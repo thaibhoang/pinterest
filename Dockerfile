@@ -13,21 +13,35 @@ WORKDIR /rails
 ENV BUNDLE_DEPLOYMENT="1" \
     BUNDLE_PATH="/usr/local/bundle" \
     BUNDLE_WITHOUT="development:test" \
-    RAILS_ENV="production"\
+    RAILS_ENV="production" \
     SECRET_KEY_BASE="561eeb8d8837715cd970130d42e689898293401374ad7657562968100571d4e1a173f50dcb3f2b8b1c5dd530dde4a67bef42e2251c57240a2d1bfef24da08358"
 
 # Update gems and bundler
 RUN gem update --system --no-document && \
     gem install -N bundler
 
-# Install packages needed to build gems
+# Install packages needed to build gems and node modules
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential libpq-dev libvips
+    apt-get install --no-install-recommends -y build-essential curl libpq-dev libvips node-gyp pkg-config python-is-python3
+
+# Install JavaScript dependencies
+ARG NODE_VERSION=20.9.0
+ARG YARN_VERSION=1.22.21
+ENV PATH=/usr/local/node/bin:$PATH
+RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz -C /tmp/ && \
+    /tmp/node-build-master/bin/node-build "${NODE_VERSION}" /usr/local/node && \
+    npm install -g yarn@$YARN_VERSION && \
+    rm -rf /tmp/node-build-master
 
 # Install application gems
 COPY --link Gemfile Gemfile.lock ./
 RUN bundle install && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git
+
+# Install node modules
+COPY --link .yarnrc package.json yarn.lock ./
+COPY --link .yarn/releases/* .yarn/releases/
+RUN yarn install --frozen-lockfile
 
 # Copy application code
 COPY --link . .
