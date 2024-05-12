@@ -1,11 +1,13 @@
 # handling comments
 class CommentsController < ApplicationController
   before_action :authenticate_user!, :set_pin
-  before_action :set_comment, only: %i[show edit update destroy]
+  before_action :set_comment, only: %i[edit update destroy]
   before_action :check_owner, only: %i[edit update destroy]
 
   # GET /comments/1 or /comments/1.json
-  def show; end
+  def show
+    @comment = Comment.includes(replies: [{ user: :profile }, :likes, { replies: [{ user: :profile }, :likes] }]).find(params[:id])
+  end
 
   # GET /comments/new
   def new

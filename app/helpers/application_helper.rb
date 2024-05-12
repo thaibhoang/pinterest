@@ -15,6 +15,6 @@ module ApplicationHelper
   end
 
   def current_user_is_owner_of?(resource)
-    resource.user == current_user
+    resource.user_id == current_user.id
   end
 end

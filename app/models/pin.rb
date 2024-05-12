@@ -4,6 +4,7 @@ class Pin < ApplicationRecord
   has_many :notes, dependent: :destroy
   has_many :saved_pins, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :root_comments, -> { where(parent_id: nil) }, class_name: "Comment"
   has_many :likes, as: :likeable, dependent: :destroy
 
   validates :title, presence: true, length: { maximum: 200 }

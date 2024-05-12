@@ -1,5 +1,5 @@
 <%= turbo_frame_tag("#{dom_id(comment)}_show_replies") do %>
-  <% count = comment.replies.count%>
+  <% count = comment.replies.size%>
   <% if count.positive? %>
     <% if count > 1 %>
       <div class="px-2 pb-2 text-sm">
@@ -7,6 +7,6 @@
       </div>
     <% end %>
 
-    <%= render partial: "shared/comment_short", locals: {pin: pin, comment: comment.newest_reply} %>
+    <%= render partial: "shared/comment_short", locals: {pin: pin, comment: comment.replies.first} %>
   <% end %>
 <% end %>
