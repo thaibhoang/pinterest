@@ -14,7 +14,7 @@ class Pin < ApplicationRecord
   end
 
   def self.skip_some_pins_then_get_some_pins(num1, num2)
-    Pin.order(:id).where("id >= ?", num1).limit(num2)
+    Pin.includes([:image_attachment, { saved_pins: :board }]).where("id >= ?", num1).limit(num2)
   end
 
   def image?

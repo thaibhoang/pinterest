@@ -1,7 +1,9 @@
 <%= turbo_frame_tag("#{dom_id(@pin)}_thumbnail") do %>
   <% if @saved_pin %>
     <%= render partial: "shared/pin", locals: {pin: @pin, saved_pin: @saved_pin} %>
-  <% else %>
+  <% elsif @edit_pin %>
     <%= render partial: "shared/pin", locals: {pin: @pin, edit_pin: @edit_pin} %>
+  <% else %>
+    <%= render partial: "shared/pin", locals: {pin: @pin} %>
   <% end %>
 <% end %>

@@ -10,6 +10,7 @@ class PinsController < ApplicationController
     skip = params[:skip] || 0
     @pins = Pin.skip_some_pins_then_get_some_pins(skip, 30)
     @next_skip = skip.to_i + 30
+    @saved_pins = current_user.saved_pins.includes(:pin).where(board_id: nil)
   end
 
   # GET /pins/1 or /pins/1.json

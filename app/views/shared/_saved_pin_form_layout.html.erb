@@ -1,12 +1,7 @@
 <div id="<%= dom_id(pin) %>_save_pin_form_mini">
   <div class="bottom-left">
-    <% save_pin_profile = check_saved_to_profile(pin, current_user) %>
-    <% if save_pin_profile.nil? %>
-      <%= form_with model: [pin, pin.saved_pins.build] do |f| %>
-        <%= f.submit "Save", class: "save-button" %>
-      <% end %>
-    <% else %>
-      <%= button_to "Saved", pin_saved_pin_path(pin, save_pin_profile), method: :delete %>
+    <%= form_with model: [pin, pin.saved_pins.build] do |f| %>
+      <%= f.submit "Save", class: "save-button" %>
     <% end %>
   </div>
   

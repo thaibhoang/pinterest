@@ -1,5 +1,5 @@
-<% destination = board_id.nil? ? user__saved_index_path(current_user) : user_board_path(current_user, Board.find(board_id)) %>
-<% name = board_id.nil? ? "Unorganized Ideas" : Board.find(board_id).name %>
+<% destination = saved_pin.board.nil? ? user__saved_index_path(current_user) : user_board_path(current_user, saved_pin.board) %>
+<% name = saved_pin.board.nil? ? "Unorganized Ideas" : saved_pin.board.name %>
 <% name_prettier = "#{name.truncate(19)}" %>
 
 <div class="top-left bold">
@@ -9,5 +9,4 @@
   <% end %>
 </div>
 
-<% saved_pin = current_user.saved_pins.find_by(pin: pin, board_id: board_id) %>
 <div class="bottom-left"><%= button_to "Saved", pin_saved_pin_path(pin, saved_pin), method: :delete %></div>
