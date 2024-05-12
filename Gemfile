@@ -67,11 +67,11 @@ group :test do
 end
 
 gem "devise", "~> 4.9"
-
-gem 'pry-rails'
+gem "dockerfile-rails", ">= 1.6", :group => :development
+gem "figaro"
 gem "font-awesome-sass", "~> 6.5"
+
 gem "omniauth"
 gem "omniauth-google-oauth2"
 gem "omniauth-rails_csrf_protection", "~> 1.0"
-gem "figaro"
-gem "dockerfile-rails", ">= 1.6", :group => :development
+gem 'pry-rails'
