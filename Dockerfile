@@ -14,7 +14,7 @@ ENV BUNDLE_DEPLOYMENT="1" \
     BUNDLE_PATH="/usr/local/bundle" \
     BUNDLE_WITHOUT="development:test" \
     RAILS_ENV="production" \
-    SECRET_KEY_BASE="561eeb8d8837715cd970130d42e689898293401374ad7657562968100571d4e1a173f50dcb3f2b8b1c5dd530dde4a67bef42e2251c57240a2d1bfef24da08358"
+    SECRET_KEY_BASE="dummy"
 
 # Update gems and bundler
 RUN gem update --system --no-document && \
