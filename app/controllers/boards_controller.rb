@@ -7,13 +7,14 @@ class BoardsController < ApplicationController
 
   # GET /boards or /boards.json
   def index
-    @boards = @user != current_user ? @user.boards.where(keep_secret: false) : @user.boards
+    @boards = @user.boards.where(keep_secret: false).includes(:saved_pins) if @user != current_user
+    @boards = @user.boards.includes(:saved_pins) if @user == current_user
   end
 
   # GET /boards/1 or /boards/1.json
   def show
     redirect_to user__saved_index_path(@user) if @board.keep_secret && @board.user != current_user
-    @saved_pins = @board.saved_pins
+    @saved_pins = @board.saved_pins.includes({ pin: :saved_pins })
   end
 
   # GET /boards/new

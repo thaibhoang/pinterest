@@ -5,7 +5,7 @@ class SavedController < ApplicationController
 
   def index
     @boards = @user != current_user ? @user.boards.includes(:saved_pins).where(keep_secret: false) : @user.boards.includes(:saved_pins)
-    @unorganized_saved_pins = @user.saved_pins.where(board_id: nil).includes(:pin)
+    @unorganized_saved_pins = @user.saved_pins.where(board_id: nil).includes({ pin: :saved_pins })
 
     respond_to do |format|
       format.turbo_stream

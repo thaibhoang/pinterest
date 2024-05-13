@@ -23,8 +23,8 @@
         <nav class="navbar">
           <%= link_to "New Pin ", new_pin_path, class: "big", style: "--i:0" %>
           <%= link_to "New Board ", new_user_board_path(current_user), class: "big", style: "--i:1" %>
-          <%= link_to "Pins ", user_path(current_user), class: "big", style: "--i:2" %>
-          <%= link_to "Boards ", user__saved_index_path(current_user), class: "big", style: "--i:3" %>
+          <%= link_to "Your Pins ", user__created_index_path(current_user), class: "big", style: "--i:2" %>
+          <%= link_to "Collections ", user__saved_index_path(current_user), class: "big", style: "--i:3" %>
         </nav>
         <%= link_to user_path(current_user), class: "header__user" do %>
           <%= render partial: "shared/user_avatar", locals: {user: current_user, size: 48} %>
