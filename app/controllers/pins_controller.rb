@@ -9,6 +9,7 @@ class PinsController < ApplicationController
   def index
     skip = params[:skip] || 0
     @pins = Pin.skip_some_pins_then_get_some_pins(skip, 30)
+    @end_page = @pins.empty? ? true : false
     @next_skip = skip.to_i + 30
     @saved_pins = current_user.saved_pins.includes(:pin).where(board_id: nil) if user_signed_in?
   end

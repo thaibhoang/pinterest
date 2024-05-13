@@ -1,13 +1,13 @@
-<%= turbo_frame_tag "content" do %>
-  <div class="container" id="pins-container">
-    <% cache @pins do %>
-      <% @pins.each do |pin| %>
-        <% cache pin do %>
-          <%= render partial: "shared/pin", locals: {pin: pin} %>
-        <% end %>
-      <% end %>
+<%= turbo_frame_tag "content_from_#{@next_skip - 30}" do %>
+  <div class="container">
+    <% @pins.each do |pin| %>
+      <%= render partial: "shared/pin", locals: {pin: pin} %>
     <% end %>
-
-    <div id="load-more" data-next-page-url="<%= pins_path(skip: @next_skip) %>"></div>
   </div>
+  
+  <%= turbo_frame_tag "content_from_#{@next_skip}" do %>
+    <div class="text-center">
+      <%= link_to "Load more", pins_path(skip: @next_skip), class: "button" unless @end_page %>
+    </div>
+  <% end %>
 <% end %>
