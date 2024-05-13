@@ -50,7 +50,7 @@ module BoardsHelper
 
   def board_basic_detail(board)
     if board.not_empty?
-      pluralize(board.saved_pins.count, "pin")
+      pluralize(board.saved_pins.size, "pin")
     else
       "Currently empty"
     end

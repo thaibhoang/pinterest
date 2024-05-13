@@ -4,7 +4,7 @@ class SavedController < ApplicationController
   before_action :set_user
 
   def index
-    @boards = @user != current_user ? @user.boards.where(keep_secret: false) : @user.boards
+    @boards = @user != current_user ? @user.boards.includes(:saved_pins).where(keep_secret: false) : @user.boards.includes(:saved_pins)
     @unorganized_saved_pins = @user.saved_pins.where(board_id: nil).includes(:pin)
 
     respond_to do |format|

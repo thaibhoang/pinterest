@@ -19,6 +19,6 @@ class Pin < ApplicationRecord
   end
 
   def image?
-    image.attached? || image_url.present?
+    image_url.present? || image.attached?
   end
 end

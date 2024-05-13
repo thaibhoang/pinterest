@@ -1,10 +1,10 @@
 module ApplicationHelper
   def show_pin_or_saved_pin(saved_pin)
     pin = saved_pin.pin
-    saved_pin_id = saved_pin.id if current_user_is_owner_of?(saved_pin)
-    thumbnail_path = pin_thumbnail_index_path(pin, saved_pin_id: saved_pin_id)
-    turbo_frame_tag "#{dom_id(pin)}_thumbnail", src: thumbnail_path, loading: "lazy" do
-      content_tag(:div, "", class: "pin_thumbnail--placeholder")
+    if current_user_is_owner_of?(saved_pin)
+      render partial: "shared/pin", locals: {pin: pin, saved_pin: saved_pin}
+    else
+      render partial: "shared/pin", locals: {pin: pin}
     end
   end
 
