@@ -14,7 +14,13 @@ ENV BUNDLE_DEPLOYMENT="1" \
     BUNDLE_PATH="/usr/local/bundle" \
     BUNDLE_WITHOUT="development:test" \
     RAILS_ENV="production" \
-    SECRET_KEY_BASE="dummy"
+    SECRET_KEY_BASE="dummy" \
+    RAILS_MAX_THREADS="5" \
+    RACK_ENV="production" \
+    RAILS_ENV="production" \
+    RAILS_MASTER_KEY="dummy" \
+    PORT="3000" \
+    LANG="en_US.UTF-8"
 
 # Update gems and bundler
 RUN gem update --system --no-document && \
