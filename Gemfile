@@ -67,7 +67,7 @@ group :test do
 end
 
 gem "devise", "~> 4.9"
-gem "dockerfile-rails", ">= 1.6", :group => :development
+gem "dockerfile-rails", ">= 1.6", group: :development
 gem "figaro"
 gem "font-awesome-sass", "~> 6.5"
 
@@ -77,3 +77,5 @@ gem "omniauth-rails_csrf_protection", "~> 1.0"
 gem 'pry-rails'
 
 gem "kaminari", "~> 1.2"
+
+gem "rails-erd", "~> 1.7", group: :development
