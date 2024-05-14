@@ -3,3 +3,4 @@ import "@hotwired/turbo-rails"
 import "controllers"
 
 import "load-more-pins"
+import "lazy-load-images"

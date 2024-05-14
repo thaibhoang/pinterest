@@ -1,13 +1,8 @@
-<%= turbo_frame_tag "content_from_#{@next_skip - 30}" do %>
+<%= turbo_frame_tag "pins_display" do %>
   <div class="container">
     <% @pins.each do |pin| %>
       <%= render partial: "shared/pin", locals: {pin: pin} %>
     <% end %>
   </div>
-  
-  <%= turbo_frame_tag "content_from_#{@next_skip}" do %>
-    <div class="text-center">
-      <%= link_to "Load more", pins_path(skip: @next_skip), class: "button" unless @end_page %>
-    </div>
-  <% end %>
+  <div class="page-nav text-center"><%= paginate @pins %></div>
 <% end %>

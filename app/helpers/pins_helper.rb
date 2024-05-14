@@ -23,7 +23,7 @@ module PinsHelper
     destination = user_signed_in? ? pin : new_user_session_path
     data = user_signed_in? ? { turbo_frame: "#{dom_id(pin)}__modal" } : { turbo_frame: "_top" }
     if pin.image_url.present?
-      link_to image_tag(pin.image_url, style: 'width: 100%; height: auto;'), destination,
+      link_to image_tag('img_placeholder.png', data: { src: pin.image_url, style: 'width: 100%; height: auto;' }), destination,
               data: data
     elsif pin.image.attached?
       link_to image_tag(pin.resize_img(pin.image, width, height)), destination, data: data

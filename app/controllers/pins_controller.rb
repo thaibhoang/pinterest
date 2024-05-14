@@ -7,10 +7,8 @@ class PinsController < ApplicationController
 
   # GET /pins or /pins.json
   def index
-    skip = params[:skip] || 0
-    @pins = Pin.skip_some_pins_then_get_some_pins(skip, 30)
-    @end_page = @pins.empty? ? true : false
-    @next_skip = skip.to_i + 30
+    @pins = Pin.includes([:image_attachment, { saved_pins: :board }]).page params[:page]
+
     @saved_pins = current_user.saved_pins.includes(:pin).where(board_id: nil) if user_signed_in?
   end
 

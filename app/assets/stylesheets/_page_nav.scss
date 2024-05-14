@@ -1,0 +1,17 @@
+nav.pagination span a {
+  color: var(--color30);
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+}
+nav.pagination span {
+  margin-left: 1rem;
+  color: var(--color30)
+}
+.page.current {
+  border-radius: 0.25rem;
+  background-color: var(--color10);
+  padding: 0.25rem;
+  font-weight: bold;
+}
+

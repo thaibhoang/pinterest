@@ -1,4 +1,5 @@
 class Pin < ApplicationRecord
+  paginates_per 50
   belongs_to :user
   has_one_attached :image
   has_many :notes, dependent: :destroy
@@ -14,8 +15,16 @@ class Pin < ApplicationRecord
     Pin.order(Arel.sql('RANDOM()')).limit(number)
   end
 
-  def self.skip_some_pins_then_get_some_pins(num1, num2)
-    Pin.includes([:image_attachment, { saved_pins: :board }]).where("id >= ?", num1).limit(num2)
+  def self.skip_some_pins_then_get_some_pins(milestone, next_page, pins_per_page)
+    if next_page
+      Pin.includes([:image_attachment, { saved_pins: :board }]).where("id >= ?", milestone).limit(pins_per_page)
+    else
+      Pin.includes([:image_attachment, { saved_pins: :board }])
+         .where("id < ?", milestone)
+         .order(id: :desc)
+         .limit(pins_per_page)
+         .reverse
+    end
   end
 
   def image?

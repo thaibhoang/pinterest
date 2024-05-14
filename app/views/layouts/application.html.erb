@@ -9,6 +9,8 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= javascript_include_tag 'lazy-load-images' %>
+
   </head>
 
   <body>
@@ -23,10 +25,9 @@
         <nav class="navbar">
           <%= link_to "New Pin ", new_pin_path, class: "big", style: "--i:0" %>
           <%= link_to "New Board ", new_user_board_path(current_user), class: "big", style: "--i:1" %>
-          <%= link_to "Your Pins ", user__created_index_path(current_user), class: "big", style: "--i:2" %>
           <%= link_to "Collections ", user__saved_index_path(current_user), class: "big", style: "--i:3" %>
         </nav>
-        <%= link_to user_path(current_user), class: "header__user" do %>
+        <%= link_to user__created_index_path(current_user), class: "header__user" do %>
           <%= render partial: "shared/user_avatar", locals: {user: current_user, size: 48} %>
         <% end %>
       <% else %>
