@@ -18,12 +18,13 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: thaibhoang # role previously added   
-  password: <%= ENV['DATABASE_PASSWORD'] %> # variable previously added
+
 
 development:
   <<: *default
   database: pinterest_development
+  username: thaibhoang # role previously added   
+  password: <%= ENV['DATABASE_PASSWORD'] %> # variable previously added
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
@@ -80,12 +81,6 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  adapter: postgresql
-  encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  database: railway
-  username: postgres
-  password: <%= ENV['PGPASSWORD'] %>
-  host: roundhouse.proxy.rlwy.net
-  port: 15262
+  <<: *default
+  database: pinterest_production
 
