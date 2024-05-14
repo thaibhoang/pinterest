@@ -14,8 +14,7 @@ class NotesController < ApplicationController
   end
 
   def create
-    @note = @pin.notes.build(note_params)
-    @note.user_id = current_user.id
+    @note = current_user.notes.build(note_params)
     respond_to do |format|
       if @note.save
         format.turbo_stream
@@ -60,6 +59,6 @@ class NotesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def note_params
-    params.require(:note).permit(:content)
+    params.require(:note).permit(:content, :pin_id)
   end
 end

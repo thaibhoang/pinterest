@@ -1,6 +1,6 @@
 <%= form_with(model: [pin, note]) do |form| %>
   <%= render partial: "shared/errors_notification", locals: { resource: note } %>
-
+  <%= form.hidden_field :pin_id, value: pin.id %>
   <div>
     <%= form.label :content, "Note content", style: "display: block" %>
     <%= form.text_area :content %>
