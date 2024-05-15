@@ -4,7 +4,7 @@ module ApplicationHelper
     if current_user_is_owner_of?(saved_pin)
       render partial: "shared/pin", locals: {pin: pin, saved_pin: saved_pin}
     else
-      render partial: "shared/pin", locals: {pin: pin}
+      render partial: "shared/pin", locals: {pin: pin, lazy_load: true}
     end
   end
 

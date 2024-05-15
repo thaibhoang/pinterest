@@ -4,7 +4,7 @@
 <%= turbo_frame_tag "content" do %>
   <div class="container">
     <% @pins.each do |pin| %>
-      <%= render partial: "shared/pin", locals: {pin: pin, edit_pin: true} %>
+      <%= render partial: "shared/pin", locals: {pin: pin, edit_pin: true, lazy_load: true} %>
     <% end %>
   </div>
 
