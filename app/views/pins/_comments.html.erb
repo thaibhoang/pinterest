@@ -13,9 +13,8 @@
       <%= render partial: "comments/no_comment_notice", locals: {pin: pin} %>
 
       <% cache ["pin", pin.id, "comment"] do %>
-        <% pin.root_comments.sort_by{ |comment| comment.id }.reverse_each do |comment| %>
-          <%= render partial: "shared/comment_short", locals: {pin: pin, comment: comment} %>
-        <% end %>
+      <% root_comments = pin.root_comments.sort_by{ |comment| comment.id }.reverse %>
+        <%= render partial: "shared/comment_short", collection: root_comments, as: :comment, locals: {pin: pin} %>
       <% end %>
     <% end %>
   <% end %>

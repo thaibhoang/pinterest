@@ -3,9 +3,7 @@
 <div class="text-center big my-4">All Pins Created</div>
 <%= turbo_frame_tag "content" do %>
   <div class="container">
-    <% @pins.each do |pin| %>
-      <%= render partial: "shared/pin", locals: {pin: pin, edit_pin: true, lazy_load: true} %>
-    <% end %>
+    <%= render partial: "shared/pin", collection: @pins, as: :pin, locals: {edit_pin: true, lazy_load: true} %>
   </div>
 
   <% if @user == current_user && @pins.size == 0 %>

@@ -1,10 +1,12 @@
 module ApplicationHelper
-  def show_pin_or_saved_pin(saved_pin)
-    pin = saved_pin.pin
-    if current_user_is_owner_of?(saved_pin)
-      render partial: "shared/pin", locals: {pin: pin, saved_pin: saved_pin}
+  def show_pin_or_saved_pin(saved_pins)
+    return if saved_pins.count.zero?
+
+    if current_user_is_owner_of?(saved_pins.first)
+      render partial: "shared/pin", collection: saved_pins, as: :saved_pin
     else
-      render partial: "shared/pin", locals: {pin: pin, lazy_load: true}
+      pins = saved_pins.map(&:pin)
+      render partial: "shared/pin", collection: pins, as: :pin, locals: { lazy_load: true }
     end
   end
 

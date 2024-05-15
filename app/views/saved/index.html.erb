@@ -15,9 +15,7 @@
   <div class="text-center big my-4">Unorganized Ideas</div>
 
   <div class="container">
-    <% @unorganized_saved_pins.each do |saved_pin| %>
-      <%= show_pin_or_saved_pin(saved_pin) %>
-    <% end %>
+    <%= show_pin_or_saved_pin(@unorganized_saved_pins) %>
   </div>
 
   <% if @user == current_user && @unorganized_saved_pins.size == 0 && @boards.size == 0 %>

@@ -8,11 +8,5 @@
 <hr>
 
 <div class="container">
-  <% cache @saved_pins do %>
-    <% @saved_pins.each do |saved_pin| %>
-      <% cache saved_pin do %>
-        <%= show_pin_or_saved_pin(saved_pin) %>
-      <% end %>
-    <% end %>
-  <% end %>
+  <%= show_pin_or_saved_pin(@saved_pins) %>
 </div>

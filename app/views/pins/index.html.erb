@@ -1,8 +1,6 @@
 <%= turbo_frame_tag "pins_display" do %>
   <div class="container">
-    <% @pins.each do |pin| %>
-      <%= render partial: "shared/pin", locals: {pin: pin, lazy_load: true} %>
-    <% end %>
+    <%= render partial: "shared/pin", collection: @pins, as: :pin, locals: {lazy_load: true} %>
   </div>
 <% end %>
 <div class="page-nav text-center"><%= paginate @pins %></div>
