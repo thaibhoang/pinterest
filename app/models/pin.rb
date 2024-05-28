@@ -1,5 +1,5 @@
 class Pin < ApplicationRecord
-  paginates_per 50
+  paginates_per 20
   belongs_to :user
   has_one_attached :image
   has_many :notes, dependent: :destroy

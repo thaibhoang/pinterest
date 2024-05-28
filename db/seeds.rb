@@ -401,6 +401,9 @@ end
     user.password_confirmation = "demo#{i}@example"
     user.save!
   end
+end
+
+User.all.each do |user|
   generate_7_boards(user)
   generate_20_pins(user)
   generate_avatar(user)

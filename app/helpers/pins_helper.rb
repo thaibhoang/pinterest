@@ -22,10 +22,9 @@ module PinsHelper
   def render_pin_thumbnail(pin, width, height, lazy_load=False)
     destination = user_signed_in? ? pin : new_user_session_path
     data = user_signed_in? ? { turbo_frame: "#{dom_id(pin)}__modal" } : { turbo_frame: "_top" }
-    url = lazy_load ? 'img_placeholder.png' : pin.image_url
-    img_data = lazy_load ? { src: pin.image_url } : {}
+    url = pin.image_url
     if pin.image_url.present?
-      link_to image_tag(url, data: img_data, style: 'width: 100%; height: auto;', crossorigin: "anonymous"), destination,
+      link_to image_tag(url, style: 'width: 100%; height: auto;', crossorigin: "anonymous"), destination,
               data: data
     elsif pin.image.attached?
       link_to image_tag(pin.resize_img(pin.image, width, height)), destination, data: data
